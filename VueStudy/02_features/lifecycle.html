@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue生命周期</title>
+</head>
+<body>
+    <div id="app">
+        <p>一段文字</p>
+        
+        <keep-alive>
+            <my-view></my-view>
+        </keep-alive>
+    </div> 
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        var MyView = Vue.component('myView', {
+            template: '<div><p>{{a}}</p><button @click="destroy()" /><input v-model="a" /></div>',
+            data() {
+                return {
+                    a: 1
+                }
+            },
+            methods: {
+                destroy() {
+                    this.$destroy();
+                }
+            },
+            beforeCreate() {
+                console.log("beforeCreate：在实例开始初始化时同步调用。此时数据观测、事件等都尚未初始化。");
+            },
+            created() {
+                console.log("created：在实例创建之后调用。此时已完成数据绑定、事件方法，但尚未开始 DOM 编译，即未挂载到 document 中。");
+            },
+            beforeMount() {
+                console.log("beforeMount：在 mounted 之前运行。");
+            },
+            mounted() {
+                console.log("mounted: 在编译结束时调用。此时所有指令已生效，数据变化已能触发 DOM 更新，但不保证 $el 已插入文档。");
+                setTimeout(() => {
+                    this.$destroy(); // 销毁组件
+                }, 3000);
+            },
+            activated() {
+                console.log("activated: 在动态组件初始化渲染的过程中调用该方法。", document.getElementById("app").innerHTML);
+            },
+            deactivated() {
+                console.log("deactivated: 在动态组件移出的过程中调用该方法。")
+            },
+            beforeDestroy() {
+                console.log("beforeDestroy：在开始销毁实例时调用，此刻实例仍然有效。");
+            },
+            destroyed() {
+                console.log("destroyed：在实例被销毁之后调用。此时所有绑定和实例指令都已经解绑，子实例也被销毁。");
+            },
+            updated() {
+                console.log("updated：在实例挂载之后，再次更新实例并更新完 DOM 结构后调用。");
+            },
+            beforeUpdate() {
+                console.log("beforeUpdate：在实例挂载之后，再次更新实例（例如更新data）时会调用该方法，此时尚未更新 DOM 结构。")
+            },
+        });
+
+        var vm = new Vue({
+            el: '#app',
+        });
+    </script>
+</body>
+</html>

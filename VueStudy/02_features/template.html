@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+</head>
+<body>
+    <div id="app">
+        <p>一段文字</p>
+    </div> 
+    <script src="../vue.2.0.1.js"></script>
+    <script id="tpl" type="x-template">
+        <div class="wrapper">
+            <div class="tpl">
+                <p>这是一个模板文字，来自脚本标签的内容</p>
+            </div>
+            <div class="tpl">
+                <p>这是一个模板文字，来自脚本标签的内容</p>
+            </div>
+        </div>
+    </script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            template: "#tpl"
+        });
+    </script>
+</body>
+</html>

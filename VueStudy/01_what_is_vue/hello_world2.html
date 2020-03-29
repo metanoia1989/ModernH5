@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
+</head>
+<body>
+    <div id="app">
+        <message content='Hello World'></message>
+    </div> 
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        var Message = Vue.extend({
+            props: ['content'],
+            template: '<h1>{{content}}</h1>'
+        });
+        Vue.component('message', Message);
+
+        var vm = new Vue({
+            el: '#app',
+        });
+    </script>
+</body>
+</html>

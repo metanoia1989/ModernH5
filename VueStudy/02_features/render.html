@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板渲染</title>
+</head>
+<body>
+    <div id="app">
+        <div v-if="yes">yes</div>
+        <hr>
+
+        <div v-if="yes">yes_1</div>
+        <div v-else>no_1</div>
+        <hr>
+
+        <div v-if="yes">yes_2</div>
+        <p>the v-else div shows</p>
+        <div v-else>no_2</div>
+        <hr>
+
+        <div v-if="yes">
+            <p>yes_3</p>
+            <div v-if="inner">inner</div>
+            <div v-else>else inner</div>
+        </div>
+        <div v-else>no_3</div>
+        <hr>
+
+        <!-- v-if vs v-show -->
+        <div v-if="show">if</div>
+        <div v-show="show">show</div>
+        <hr>
+
+        <!-- v-for -->
+        <ul>
+            <li v-for="item in items">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.description }}</p>
+            </li>
+        </ul>
+        <hr>
+
+        <!-- v-for and $index -->
+        <ul>
+            <li v-for="(item, index) in items">
+                {{index}} - {{item.title}}
+            </li>
+        </ul> 
+        <hr>
+
+        <!-- test v-for track-by -->
+        <ul>
+            <li v-for="item in testTrackBy" track-by="item._id">
+                {{item._id}} - {{item.title}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="(value, key) in objectDemo">
+                {{key}} - {{value}}
+            </li>
+        </ul>
+
+        <ul>
+            <li v-for="n in 5">
+                {{n}}
+            </li>
+        </ul>
+
+        <!-- template -->
+        <template v-if="yes">
+            <p>There is first dom</p>
+            <p>There is second dom</p>
+            <p>There is third dom</p>
+        </template>
+    </div> 
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        var testTrackBy = [], addTest = [], max = 9 , startTime;
+
+        function uuid() {
+            var random;
+            var uuid = '';
+            for (var i = 0; i < 32; i++) {
+                random = Math.random() * 16 | 0;
+                if (i === 8 || i === 12 || i === 16 || i === 20)
+                    uuid += '-';
+                uuid += (i === 12 ? 4 : (i === 16 ? (random & 3 | 8) : random)).toString(16);
+            }
+            return uuid;
+        }
+
+        for (var i = 0; i < max; i++)
+            testTrackBy.push({ _id: uuid(), title: "title-" + i});
+
+        for (var i = 0; i < max; i++)
+            addTest.push({ _id: uuid(), title: "title-" + i});
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                yes: true,
+                inner: true,
+                show: true,
+                items: [
+                    { title: "title-1", description: "description-1" },
+                    { title: "title-2", description: "description-2" },
+                    { title: "title-3", description: "description-3" },
+                    { title: "title-4", description: "description-4" },
+                ],
+                testTrackBy: testTrackBy,
+                objectDemo: {
+                    a: 'a-value',
+                    b: 'b-value',
+                    c: 'c-value',
+                },
+            },
+            methods: {
+                clear() {
+                    this.$set('items[1]', { title: "title-changed"});
+                },
+                testTrack() {
+                    this.testTrackBy = this.testTrackBy.concat(addTest);
+                }
+            },
+            created() {
+                console.log("created");
+                startTime = new Date().getTime();
+            },
+            mounted() {
+                console.log(new Date().getTime() - startTime);
+            },
+        });
+    </script>
+</body>
+</html>
