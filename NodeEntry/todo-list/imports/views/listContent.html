@@ -1,0 +1,9 @@
+<!-- 定义listContent模板 -->
+<template name="listContent">
+    <ul class="listContainer">
+        <!-- 循环lists内容，每项都使用listItem模板 -->
+        {{#each lists}}
+            {{> listItem}}
+        {{/each}}
+    </ul>
+</template>
