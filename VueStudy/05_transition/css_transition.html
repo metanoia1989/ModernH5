@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS过滤</title>
+    <style>
+        .my-startup-transition {
+            transition: all 1s ease;
+            width: 100px; height: 100px;
+            background: black;
+            opacity: 1;
+        }
+        .my-startup-enter-active, .my-startup-leave-active {
+            height: 0px;
+            opacity: 0;
+        }
+
+        .my-animation-transition {
+            animation: increase 1s ease 0s 1;
+            width: 100px; height: 100px;
+            background: black;
+        }
+        .my-animation-enter-active, .my-animation-leave-active {
+            height: 0px;
+        }
+        @keyframes increase {
+            from { height: 0px; } 
+            to { height: 100px; } 
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition name="my-startup">
+            <div v-show="show">hello</div>
+        </transition>
+        <transition name="my-animation">
+            <div v-show="animation">animation</div>
+        </transition>
+    </div> 
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    show: false,
+                    animation: false,
+                }
+            },
+        });
+    </script>
+</body>
+</html>
