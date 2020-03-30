@@ -16,11 +16,14 @@
             <p>{{b}}</p>
             <button v-on:click="alert">alert</button>
             <my-component title="myTitle" content="myContent"></my-component>
+            <div>{{html}}</div>
+            <div v-html="html"></div>
         </div>
     </script>
     <script>
         var data = {
-            a: 1
+            a: 1,
+            html: '<h1>测试html</h1>'
         }
 
         var MyComponent = Vue.component('my-component', {

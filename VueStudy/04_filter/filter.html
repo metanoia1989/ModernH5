@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            {{ date | date('yyyy-MM-dd hh:mm:ss') }}
+        </div>
+        <input type="text" v-model="price">
+        <span>{{ date | dynamic(price) }}</span>
+    </div> 
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        Vue.filter('date', function(value, format) {
+            var o = {
+                "M+": value.getMonth() + 1, // 月份
+                "d+": value.getDate(), // 日
+                "h+": value.getHours(), // 小时
+                "m+": value.getMinutes(), // 分
+                "s+": value.getSeconds(), // 秒
+            };
+
+            if (/(y+)/.test(format))
+                format = format.replace(RegExp.$1, (value.getFullYear() + "").substr(4 - RegExp.$1.length));
+
+            for (let k in o) {
+                if (new RegExp("(" + k + ")").test(format) )
+                    format = format.replace(RegExp.$1, (RegExp.$1.length == 1)
+                        ? (o[k])
+                        : (('00' + o[k]).substr(("" + o[k]).length)));
+            }
+            return format;
+        });
+
+        Vue.filter('dynamic', function(date, price) {
+            return date.toLocaleDateString() + " : " + price;
+        });
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    date: new Date(),
+                    price: 150
+                }
+            },
+        });
+    </script>
+</body>
+</html>

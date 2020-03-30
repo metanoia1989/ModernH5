@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template</title>
+</head>
+<body>
+    <div id="app">
+        <svg width="400" height="300" :view-box.camel="viewBox"
+            style="border:1px solid #cd0000;">
+        </svg>
+        <div v-if="isExist" v-my-directive="param"></div>
+
+        <!-- 字符串字面量 -->
+        <div v-my-directive="'constant string'"></div>
+
+        <!-- JavaScript 表达式 -->
+        <div v-my-directive="{ title : 'Vue.js', author : 'You'}"></div>
+        <div v-my-directive="isExist ? 'yes' : 'no'"></div>
+
+        <div v-if="isMsg" v-my-msg:console.log="content"></div>
+        <message></message>
+
+    </div> 
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        // 局部组件的指令
+        var Message = Vue.extend({
+            props: ['content'],
+            template: '<h1 v-local-directive>{{content}}</h1>',
+            directives: {
+                'localDirective': {}
+            }
+        });
+        Vue.component('message', Message);
+
+        // 全局指令
+        Vue.directive('my-directive', {
+            bind() {
+                console.log("bind", this.arg);
+            },
+            update(newValue, oldValue) {
+                console.log("update", newValue, oldValue);
+            },
+            unbind() {
+                console.log("unbind", this.arg);
+            }
+        });
+
+        // 访问指令的实例属性
+        Vue.directive('my-msg', {
+            bind: function () {
+                console.log('~~~~~~~~~~~~~~bind~~~~~~~~~~~~~~~');
+                console.log('el', this.el);
+                console.log('name', this.name);
+                console.log('vm', this.vm);
+                console.log('expression', this.expression);
+                console.log('arg', this.arg);
+                console.log('modifiers', this.modifiers);
+                console.log('descriptor', this.descriptor);
+            },
+            update(newValue, oldValue) {
+                console.log("update", newValue, oldValue);
+                var keys = Object.keys(this.modifiers);
+                window[this.arg][keys[0]](newValue);
+            },
+            unbind() {
+                console.log('~~~~~~~~~~~~~~unbind~~~~~~~~~~~~~~~');
+                console.log('name', this.name);
+                console.log('expression', this.expression);
+                console.log('arg', this.arg);
+                console.log('modifiers', this.modifiers);
+                console.log('descriptor', this.descriptor);
+            }
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    viewBox: '0,0,40,30',
+                    param: 'first',
+                    content: 'there is the content',
+                    isExist: false,
+                    isMsg: true,
+                    a: 'dynamic data',
+                    i: 0,
+                    obj: {
+                        a: {
+                            b: 'inner'
+                        }
+                    }
+                }
+            },
+        });
+    </script>
+</body>
+</html>
