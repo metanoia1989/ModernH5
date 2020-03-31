@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>keep-alive</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li @click="currentView = 'home'">Home</li>
+            <li @click="currentView = 'list'">List</li>
+            <li @click="currentView = 'detail'">Detail</li>
+        </ul>
+        <keep-alive>
+            <component :is="currentView"></component>
+        </keep-alive>
+    </div> 
+
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    currentView: 'home'
+                }
+            },
+            components: {
+                home: {
+                    data() {
+                        return {
+                            items: []
+                        }
+                    },
+                    template: `<div>
+                        <p>Home</p>
+                        <ul>
+                            <li v-for="item in items">{{ item }}</li>
+                        </ul>
+                    </div>`,
+                    mounted() {
+                        console.log("fetch data");
+                        this.items = [1, 2, 3, 4, 5];
+                    },
+                },
+                list: {
+                    template: '<div>List</div>'
+                },
+                detail: {
+                    template: '<div>Detail</div>'
+                },
+            }
+        });
+    </script>
+</body>
+</html>

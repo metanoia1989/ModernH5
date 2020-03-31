@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.component 语法糖</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="message">
+        <my-component v-bind:message="message"></my-component>
+        <my-num :num="num"></my-num>
+        <div>
+            Parent compoennt: <input type="text" v-model="msg">
+        </div>
+        
+        <my-bind :msg="msg"></my-bind>
+
+    </div> 
+
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        var MyComponent = Vue.extend({
+            props: ['message'],
+            template: '<p>{{ "From parent : " + message }}</p>'
+        });
+        Vue.component('my-component', MyComponent);
+
+        Vue.component('my-num', {
+            props: ['num'],
+            template: '<p>{{ num + " is a " + typeof num }}</p>'
+        });
+
+        Vue.component('my-bind', {
+            props: ['msg'],
+            template: `<div>
+                Child component : 
+                <input type="text" v-model="msg" />
+            </div>`
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'default',
+                num: 1,
+                msg: ''
+            }
+        });
+    </script>
+</body>
+</html>

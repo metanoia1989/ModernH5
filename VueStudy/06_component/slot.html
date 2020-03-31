@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>槽 内容分发</title>
+</head>
+<body>
+    <div id="app">
+        <!-- slot 且均能匹配 -->
+        <my-slot>
+            <p slot="title">{{ title }}</p>
+            <div slot="content">{{ content }}</div>
+        </my-slot>
+        <hr>
+
+        <!-- 匿名slot -->
+        <anonymous-slot>
+            <div>{{ content }}</div>
+            <p slot="title">{{ title }}</p>
+        </anonymous-slot>
+        <hr>
+
+        <!-- 重复slot -->
+        <my-slot>
+            <p slot="title">{{ title + '1' }}</p>
+            <p slot="title">{{ title + '2' }}</p>
+            <div slot="content">{{ content }}</div>
+        </my-slot>
+        <hr>
+
+        <!-- scope -->
+        <my-scope-slot>
+            <p slot="title">{{ childData }}</p>
+        </my-scope-slot>
+    </div> 
+
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        Vue.component('my-slot', {
+            template: `<div>
+                <div class="title">
+                    <slot name="title"></slot>
+                </div>
+                <div class="content">
+                    <slot name="content"></slot>
+                </div>
+            </div>`
+        });
+
+        // 匿名slot
+        Vue.component('anonymous-slot', {
+            template: `<div>
+                <div class="title">
+                    <slot name="title"></slot>
+                </div>
+                <div class="content">
+                    <slot></slot>
+                </div>
+            </div>`
+        });
+
+        // scope 作用域
+        Vue.component('my-scope-slot', {
+            template: `<div>
+                <p>{{ "child: " + childData }}</p>
+                <slot name="title"></slot>
+            </div>`,
+            data() {
+                return {
+                    childData: 'child scope'
+                }
+            },
+        });
+
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    title: 'This is a title', 
+                    content: 'This is the content'
+                }
+            },
+        });
+    </script>
+</body>
+</html>

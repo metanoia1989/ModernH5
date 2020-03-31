@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件注册</title>
+</head>
+<body>
+    <div id="app">
+        <my-component></my-component>
+        <my-parent></my-parent>
+        <!-- <my-child></my-child> -->
+    </div> 
+
+    <script src="../vue.2.0.1.js"></script>
+    <script>
+        var MyComponent = Vue.extend({
+            template: '<p>This is a component</p>'
+        });
+        Vue.component('my-component', MyComponent);
+
+        var Child = Vue.extend({
+            template: '<p>This is a child component</p>'
+        });
+
+        var Parent = Vue.extend({
+            template: `<div>
+                <p>This is a parent component</p>
+                <my-child></my-child>
+            </div>`,
+            components: {
+                'my-child': Child
+            }
+        });
+        Vue.component('my-parent', Parent);
+
+        var vm = new Vue({
+            el: '#app',
+        });
+    </script>
+</body>
+</html>

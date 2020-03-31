@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>modal</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css">
+    <style>
+        .modal {
+            margin: 20px 0;
+        }
+        .modal > div {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="show = !show">toggle</button>
+        <modal :show="show" width="300px" :callback="close">
+            <div slot="modal-header" class="modal-header">Title</div>
+            <div slot="modal-body" class="modal-body">
+                <div class="inner">Content</div>
+            </div>
+        </modal>
+    </div>
+
+    <script src="../vue.2.0.1.js"></script>
+    <script id="modalTpl" type="x-template">
+        <div role="dialog">
+            <div role="document" v-bind:style="{width: optionalWidth}">
+                <div class="modal-content">
+                    <slot name="modal-header">
+                        <div class="modal-header">
+                            <button type="button" class="close" @click="close">
+                                <span>&times;</span>
+                            </button>
+                            <h4 class="modal-title">
+                                <slot name="title">{{title}}</slot>
+                            </h4>
+                        </div>
+                    </slot>
+                    <slot name="modal-body">
+                        <div class="modal-body"></div>
+                    </slot>
+                    <slot name="modal-footer">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" @click="close">取消</button>
+                            <button type="button" class="btn btn-primary" @click="callback">确定</button>
+                        </div>
+                    </slot>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script>
+        // 注册 Modal 组件
+        Vue.component('modal', {
+            template: '#modalTpl',
+            // 获取模板中的 HTML 结构
+            props: {
+                title: {　 // Modal 标题
+                    type: String,
+                    default: ''
+                },
+                show: { // 控制 Modal 是否显示
+                    required: true,
+                    type: Boolean,
+                },
+                width: {　 // Modal 宽度
+                    default: null
+                },
+                callback: {　 // 点击确定按钮的回调函数
+                    type: Function,
+                    default: function () { }
+                }
+            },
+            computed: {　 // 计算属性
+                optionalWidth() {　 // 处理 props 的 width 属性
+                    if (this.width === null) {
+                        return null;
+                    } else if (Number.isInteger(this.width)) {
+                        return this.width + 'px';
+                    }
+                    return this.width;
+                }
+            },
+            watch: {
+                show(val) { // show 值变化时调用该函数
+                    var el = this.$el;
+                    if (val) {
+                        el.style.display = 'block';　 //show 值为 true 时，显示根元素
+
+                    } else {
+                        el.style.display = 'none';　 //show 值为 false 时，隐藏根元素
+                    }
+                }
+            },
+            methods: {
+                close() {
+                    this.show = false;
+                }
+            }
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    show: false
+                }
+            },
+            methods: {
+                close() {
+                    alert("save");
+                    this.show = false;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

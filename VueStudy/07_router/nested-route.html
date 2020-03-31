@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嵌套路由使用</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <router-link to="/home">Home</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/business">Business</router-link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <router-view></router-view>
+        </div>
+    </div> 
+
+    <script src="../vue.2.6.11.js"></script>
+    <script src="../vue-router.3.1.6.js"></script>
+    <script>
+        const Home = Vue.extend({
+            template: '<h1>This is the home page</h1>'
+        });
+        const Business = Vue.extend({
+            template: `<div>
+                <h1>This is the some business channel</h1>
+                <div class="container">
+                    <ul class="nav navbar-nav">
+                        <ul>
+                            <li><router-link to="/business/list">List</router-link></li>
+                            <li><router-link to="/business/detail">Detail</router-link></li>
+                        </ul>
+                    </ul>
+                </div>
+                <router-view></router-view>
+            </div>`
+        });
+        const routes = [
+            { path: '/home', component: Home, alias: '/' },
+            { path: '/business', component: Business, children: [
+                { path: 'list', component: { template: '<h2>This is the business list page</h2>' } },
+                { path: 'detail', component: { template: '<h2>This is the business detail page</h2>' } },
+            ]},
+        ];
+        const router = new VueRouter({ routes });
+
+        var vm = new Vue({
+            router,
+            el: '#app'
+        });
+    </script>
+</body>
+</html>
