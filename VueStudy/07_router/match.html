@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由简单使用</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <router-link to="/home">Home</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/list">List</router-link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <router-view></router-view>
+        </div>
+    </div> 
+
+    <script src="../vue.2.6.11.js"></script>
+    <script src="../vue-router.3.1.6.js"></script>
+    <script>
+        const Home = Vue.extend({
+            template: '<h1>This is the home page</h1>'
+        });
+
+        const List = Vue.extend({
+            template: `<div>
+                <h1>This is the list page1</h1>
+                <li><router-link to="/list/profile/1">list page 1</router-link></li>
+                <li><router-link :to="{ path: '/list/register', query: { plan: 'private' }}"> list register</router-link></li>
+                <li><router-link :to="{ name: 'profile', params: { userId: 1244 }}">list profile</router-link></li> 
+                <li><router-link :to="{ path: '/list/news/12345' }">list news</router-link></li> 
+                <li><router-link to="/replace" replace>Replace current page</router-link></li>
+                <li><span @click.nati="back">go back</span></li>
+                <li><router-link to="/go-home">Go Home</router-link></li>
+                <li><router-link to="/user/55">user details</router-link></li>
+                <li><router-link :to="{ path: '/search', query: { q: '贤圣'}}">search user</router-link></li>
+            </div>`,
+            methods: {
+                back() {
+                    this.$router.go(-1);
+                },
+            }
+        });
+
+        const User = Vue.extend({
+            props: ['id'],
+            template: '<div>User {{ id }}</div>'
+        });
+
+        const SearchUser = Vue.extend({
+            props: ['query'],
+            template: '<div>User {{ query }}</div>'
+        });
+
+        const routes = [
+            { path: '/', component: {
+                template: '<h1>首页</h1>'
+            }},
+            { path: '/go-home', redirect: '/home' },
+            { path: '/home', component: Home},
+            { path: '/list', component: List },
+            { 
+                path: '/list/register', 
+                component: {
+                template: '<h1>This is a register Page # {{ $route.query.plan}}</h1>'
+            }},
+            { 
+                path: '/list/profile/:userId', 
+                name: 'profile',
+                component: {
+                template: '<h1>This is a profile Page # {{ $route.params.userId}}</h1>'
+            }},
+            { 
+                path: '/list/news/:newId', 
+                component: {
+                template: '<h1>This is a new Page # {{ $route.params.newId}}</h1>'
+            }},
+            { 
+                path: '/replace', 
+                component: {
+                template: '<h1>Prev Page been replace</h1>'
+            }},
+            {
+                path: '/user/:id', component: User, props: true
+            },
+            {
+                path: '/search', component: SearchUser, props: (route)  => ({ query: route.query.q})
+            },
+            { 
+                path: '*', 
+                component: {
+                template: '<h1>404 PAGE NOT FOUND</h1>'
+            }},
+        ];
+        const router = new VueRouter({ routes });
+
+        var vm = new Vue({
+            router,
+            el: '#app',
+        });
+    </script>
+</body>
+</html>

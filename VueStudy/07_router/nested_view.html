@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嵌套命名视图</title>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <style>
+        .us {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: 
+            "header header"
+            "nav content"
+            "nav helper"
+            ;
+        }
+
+        h2 {
+        grid-area: header;
+        }
+
+        .us__nav {
+        grid-area: nav;
+        border: 1px dotted;
+        margin-right: .75rem;
+        padding: .3rem;
+        }
+        .us__content {
+        grid-area: content;
+        }
+        .us__content--helper {
+        grid-area: helper;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Nested Named Views</h1>
+            <router-view></router-view>
+        </div>
+    </div> 
+
+    <script src="../vue.2.6.11.js"></script>
+    <script src="../vue-router.3.1.6.js"></script>
+    <script>
+        const UserSettingsNav = {
+            template: `<div class="us__nav">
+                <router-link to="/settings/emails">emails</router-link>
+                <br>
+                <router-link to="/settings/profile">profile</router-link>
+            </div>`
+        };
+
+        const UserSettings = {
+            template: `<div class="us">
+                <h2>User Settings</h2>
+                <UserSettingsNav />
+                <router-view class="us__content"></router-view>
+                <router-view name="helper" class="us__content us__content--helper"></router-view>
+            </div>`,
+            components: { UserSettingsNav }
+        };
+
+        const UserEmailsSubscriptions = {
+            template: `<div>
+                <h3>Email Subscriptions</h3>
+            </div>`
+        };
+
+        const UserProfile = {
+            template: `<div>
+                <h3>Edit your profile</h3>
+            </div>`
+        };
+
+        const UserProfilePreview = {
+            template: `<div>
+                <h3>Preview of your profile</h3>
+            </div>`
+        };
+
+        const routes = [
+            {
+                path: '/settings',
+                component: UserSettings,
+                children: [
+                    { path: 'emails', component: UserEmailsSubscriptions },
+                    { 
+                        path: 'profile', 
+                        components: {
+                            default: UserProfile,
+                            helper: UserProfilePreview
+                        } 
+                    }
+                ],
+                alias: '/',
+            }
+        ];
+        const router = new VueRouter({ routes });
+
+        var vm = new Vue({
+            router,
+            el: '#app'
+        });
+    </script>
+</body>
+</html>
