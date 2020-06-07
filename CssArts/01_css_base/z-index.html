@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重叠 z-index</title>
+    <style>
+        /* 元素之间的重叠关系 */
+        .container {
+            height: 20em;
+            font-size: 6px;
+            display: flex;
+            margin: 4em;
+            position: relative;
+        }
+        .container span {
+            display: block;
+            width: 20em;
+            height: 20em;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .container span:nth-child(1) { left: 0; background-color: hsl(0, 90%, 70%); z-index: 1; }
+        .container span:nth-child(2) { left: 10em; background-color: hsl(30, 90%, 70%); z-index: auto; }
+        .container span:nth-child(3) { left: 20em; background-color: hsl(60, 90%, 70%); z-index: auto; }
+        .container span:nth-child(4) { left: 30em; background-color: hsl(90, 90%, 70%); z-index: 1; }
+
+        /* 含有子元素的容器之间的重叠关系 */
+        .container2 {
+            width: 10em;
+            height: 10em;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1em;
+        }
+        .container2:nth-child(2) {
+            top: -6em;
+            left: 4em;
+        }
+        .sub {
+            width: 7em;
+            height: 7em;
+            border-radius: 0.5em;
+        }
+        .container2:nth-child(1) { background-color: lightgreen; z-index: 2; }
+        .container2:nth-child(2) { background-color: moccasin; z-index: 1; }
+        .container2:nth-child(1) .sub { background-color: green; z-index: 3; }
+        .container2:nth-child(2) .sub { background-color: orange; z-index: 4; }
+
+        /* 主元素与子元素（伪元素）之间的重叠关系 */
+        .main, .main::before, .main::after {
+            width: 10em;
+            height: 10em;
+            border-radius: 50%;
+        }
+        .main {
+            font-size: 10px;
+            margin: 4em;
+            position: relative;
+            background-color: lightgreen;
+            z-index: 1;
+        }
+        .main::before, .main::after {
+            content: ' ';
+            position: absolute;
+            top: 5em;
+        }
+        .main::before {
+            background-color: gold;
+            right: 3em;
+            z-index: -1;
+        }
+        .main::after {
+            background-color: skyblue;
+            left: 3em;
+            z-index: -2;
+        }
+    </style>
+</head>
+<body>
+    <h1>元素之间的重叠关系</h1>
+    <div class="container">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div> 
+
+    <h1>含有子元素的容器之间的重叠关系</h1>
+    <figure>
+        <div class="container2">
+            <div class="sub"></div>
+        </div>
+        <div class="container2">
+            <div class="sub"></div>
+        </div>
+    </figure>
+
+    <h1>主元素与子元素（伪元素）之间的重叠关系</h1>
+    <h2>默认顺序为 主元素、::before、::after</h2>
+    <div class="main"></div>
+</body>
+</html>
