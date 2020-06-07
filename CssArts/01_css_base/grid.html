@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grid布局</title>
+    <style>
+        .container {
+            font-size: 10px;
+            display: grid;
+            grid-gap: 0.5em; /* 子元素间的间隔 */
+            background-color: lightblue;
+        }
+        .container span {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+            background-color: darkcyan;
+        }
+        /* 设置子元素的行列阵列 */
+        /* repeat(4, 1fr) 4 表示一行平均4份，1fr是一个长度单位，表示平分之后的1分的宽度 */
+        .container:nth-child(1) { grid-template-columns: repeat(4, 1fr); }
+        .container:nth-child(2) { grid-template-columns: repeat(3, 1fr); }
+        .container:nth-child(3) { grid-template-columns: repeat(2, 1fr); }
+    </style>
+</head>
+<body>
+    <div style="display: flex; justify-content: space-around;">
+        <div class="container">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div> 
+        <div class="container">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div> 
+        <div class="container">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div> 
+    </div>
+</body>
+</html>

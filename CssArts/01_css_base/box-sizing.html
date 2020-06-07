@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盒模型</title>
+    <style>
+        .container {
+            background-color: moccasin;
+            display: flex;
+        }
+
+        .box {
+            font-size: 20px;
+            width: 10em;
+            height: 6em;
+            background-color: mediumaquamarine;
+            padding: 1em;
+            border: 1em solid lightyellow;
+            margin: 2em;
+        }
+        .box .inner {
+            background-color: steelblue;
+            width: 100%;
+            height: 100%;
+        }
+        .box:nth-child(1) { box-sizing: content-box; }
+        .box:nth-child(2) { box-sizing: border-box; }
+    </style>
+</head>
+<body>
+    <h1>box-sizing 属性</h1> 
+    <h2>content-box 表示盒模型的width和height以content的边界计算</h2>
+    <h2>border-box 表示盒模型的width和height以border的边界计算</h2>
+    <div class="container">
+        <div class="box">
+            <div class="inner"></div>
+        </div>
+        <div class="box">
+            <div class="inner"></div>
+        </div>
+    </div>
+</body>
+</html>
