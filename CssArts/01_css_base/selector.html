@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择器</title>
+    <style>
+        /* 标签选择器 */
+        .label-selector figure {
+            background-color: silver;
+            width: 350px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .label-selector div {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            border-radius: 50%;
+        }
+
+        /* 类选择器 */
+        .traffic-lights {
+            background-color: silver;
+            width: 350px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .light {
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            border-radius: 50%;
+        }
+        .red { background-color: coral; }
+        .yellow { background-color: gold; }
+        .green { background-color: lightgreen; }
+
+        /* 后代选择器 - 语义清晰 保持与DOM结构相同的层级 */
+        .tree {
+            width: 30px;
+            height: 300px;
+            background-color: saddlebrown;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+        .tree .branch {
+            width: 160px;
+            height: 20px;
+            background-color: peru;
+            border-radius: 10px;
+            display: flex;
+            justify-content: flex-end;
+            transform: rotate(-30deg);
+        }
+        .tree .branch .leaf {
+            width: 40px;
+            height: 40px;
+            border-radius: 100% 0 100% 0;
+            background-color: green;
+            transform: translateY(-100%);
+        }
+
+        /* 伪类选择器 */
+        /* :first-child :last-child - 绘制由原点堆叠的三角形 */
+        .triangle {
+            width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .triangle div {
+            height: 50px;
+            margin: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .triangle div span {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            background-color: lightgreen;
+            border-radius: 50%;
+        }
+        .triangle div span:first-child,
+        .triangle div span:last-child {
+            background-color: lightcoral;
+        }
+        /* :nth-child() 绘制有木色背景的棋盘 */
+        .chessboard {
+            width: 400px;
+            background-color: burlywood;
+            border: 10px solid darkgray;
+        }
+        .chessboard div {
+            display: flex;
+        }
+        .chessboard div span {
+            width: 100px;
+            height: 100px;
+        }
+        .chessboard div:nth-child(odd) span:nth-child(even),
+        .chessboard div:nth-child(even) span:nth-child(odd) {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        /* .nth-child(an+b)选择器 */
+        .nth {
+            display: flex;
+            justify-content: space-between;
+        }
+        .nth div {
+            width: 3vw;
+            height: 3vw;
+            background-color: lightgreen;
+            border-radius: 50%;
+            margin: 0.2vw;
+        }
+        .nth-b div:nth-child(0n+7) {
+            background-color: peru;
+        }
+        .nth-c div:nth-child(1n+3) {
+            background-color: peru;
+        }
+        .nth-d div:nth-child(2n+1) {
+            background-color: peru;
+        }
+        .nth-e div:nth-child(2n+0) {
+            background-color: peru;
+        }
+        .nth-f div:nth-child(5n) {
+            background-color: peru;
+        }
+        .nth-g div:nth-child(6n+3) {
+            background-color: peru;
+        }
+
+        /* 绘制100以内的素数 */
+        .prime-numbers {
+            width: 400px;
+            height: 400px;
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            counter-reset: n;
+        }
+        .prime-numbers div {
+            counter-increment: n;
+            position: relative;
+            width: 30px;
+            height: 30px;
+        }
+        .prime-numbers div::before {
+            content: counter(n);
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            background-color: lightgreen;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+        }
+        .prime-numbers div:nth-child(2)::before,
+        .prime-numbers div:nth-child(3)::before,
+        .prime-numbers div:nth-child(5)::before,
+        .prime-numbers div:nth-child(7)::before,
+        .prime-numbers div:not(:nth-child(1)):not(:nth-child(2n)):not(:nth-child(3n)):not(:nth-child(5n)):not(:nth-child(7n))::before {
+            background-color: orange;
+        }
+
+        /* :hover 绘制ELEMENTS字母 */
+        .word {
+            display: flex;
+        }
+        .word div {
+            width: 50px;
+            height: 50px;
+            background-color: lightgreen;
+            border-radius: 50%;
+            color: darkgreen;
+            border: 1px dashed;
+            font-size: 35px;
+            font-family: sans-serif;
+            text-align: center;
+            line-height: 50px;
+            transition: 0.5s 0.4s ease-out;
+        }
+        .word div:hover {
+            background-color: gold;
+            transform: scale(1.5);
+            transition: 0.5s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>标签选择器</h1> 
+    <div class="label-selector">
+        <figure>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h1>类选择器 - 绘制红绿灯</h1> 
+    <figure class="traffic-lights">
+        <div class="light red"></div>
+        <div class="light yellow"></div>
+        <div class="light green"></div>
+    </figure>
+
+    <h1>后代选择器 - 绘制一棵树</h1>
+    <figure class="tree">
+        <div class="branch">
+            <span class="leaf"></span>
+            <span class="leaf"></span>
+            <span class="leaf"></span>
+        </div>
+        <div class="branch">
+            <span class="leaf"></span>
+            <span class="leaf"></span>
+        </div>
+    </figure>
+    <h1>伪类选择器</h1>
+    <h2>:first-child :last-child - 绘制由原点堆叠的三角形</h2>
+    <figure class="triangle">
+        <div>
+            <span></span>
+        </div>
+        <div>
+            <span></span>
+            <span></span>
+        </div>
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+    <h2>:nth-child() 绘制有木色背景的棋盘</h2>
+    <p>:nth-child(odd) 选择所有第奇数个元素</p>
+    <p>:nth-child(even) 选择所有第偶数个元素</p>
+    <figure class="chessboard">
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </figure>
+    <h2>:nth-child(an+b)选择器，n是从0开始的自然数列，计算的值为被选中元素的下标，从0开始</h2>
+    <figure class="nth">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div>
+    </figure>
+    <figure class="nth nth-b">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div>
+    </figure>
+    <figure class="nth nth-c">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div>
+    </figure>
+    <figure class="nth nth-d">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div>
+    </figure>
+    <figure class="nth nth-e">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div>
+    </figure>
+    <figure class="nth nth-f">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div>
+    </figure>
+    <figure class="nth nth-g">
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div>
+        <div></div><div></div>
+    </figure>
+
+    <h2>标注出100以内的素数</h2>
+    <figure class="prime-numbers">
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </figure>
+
+    <h2>:hover 绘制ELEMENTS字母</h2>
+    <figure class="word">
+        <div>E</div>
+        <div>L</div>
+        <div>E</div>
+        <div>M</div>
+        <div>E</div>
+        <div>N</div>
+        <div>T</div>
+        <div>S</div>
+    </figure>
+</body>
+</html>

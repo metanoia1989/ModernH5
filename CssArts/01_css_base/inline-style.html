@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面中应用CSS</title>
+    <link rel="stylesheet" href="./css/link.css">
+    <style>
+        .div1 {
+            width: 50px; 
+            height: 50px; 
+            background-color: orange; 
+            border-radius: 50%; 
+            margin-bottom: 10px;
+        }
+        .div2 {
+            width: 50px; 
+            height: 100px; 
+            background-color: gold; 
+            border-radius: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>内联样式</h1> 
+    <figure>
+        <div class="text" style="letter-spacing: 1.1rem;">
+            文字间距 letter-space 演示
+        </div>
+        <div style="width: 50px; height: 50px; background-color: orange; border-radius: 50%; margin-bottom: 10px;"></div>
+        <div style="width: 50px; height: 100px; background-color: gold; border-radius: 10px; "></div>
+    </figure>
+    <h1>style元素</h1> 
+    <figure>
+        <div class="div1"></div>
+        <div class="div2"></div>
+    </figure>
+    <h1>link标记</h1> 
+    <figure>
+        <div class="link-div1"></div>
+        <div class="link-div2"></div>
+    </figure>
+</body>
+</html>
