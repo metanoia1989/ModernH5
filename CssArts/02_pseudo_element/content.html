@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>content属性</title>
+    <style>
+        .web-development {
+            width: 12em;
+            padding: 0 1em;
+            border-radius: 1em;
+            background-color: lavender;
+            box-shadow: 0.3em 0.3em 1em hsla(0, 0%, 70%, 0.8);
+        }
+        .web-development p {
+            font-size: 30px;
+            font-family: sans-serif;
+            font-weight: bold;
+            color: slateblue;
+        }
+        /* 定义伪元素的样式为红色文字，并定义每个段落的引用内容 */
+        .web-development p::before, .web-development p::after {
+            color: tomato;
+        }
+        .web-development .html::before { content: '<' }
+        .web-development .html::after { content: '/>' }
+        .web-development .css::before { content: '.' }
+        .web-development .css::after { content: '::' }
+        .web-development .js::before { content: '{' }
+        .web-development .js::after { content: '}' }
+        /* 使用content: attr(DOM-property-name)形式引用DOM元素的属性 */
+        .web-development .attr-p::before { content: attr(data-before); }
+        .web-development .attr-p::after { content: attr(data-after); }
+    </style>
+</head>
+<body>
+    <div class="web-development">
+        <p class="html">html</p>
+        <p class="css">css</p>
+        <p class="js">javascirpt</p>
+    </div> 
+    <div class="web-development">
+        <p class="attr-p" data-before="&lt;" data-after="/&gt;">html</p>
+        <p class="attr-p" data-before="." data-after="::">css</p>
+        <p class="attr-p" data-before="{" data-after="}">javascirpt</p>
+    </div> 
+</body>
+</html>

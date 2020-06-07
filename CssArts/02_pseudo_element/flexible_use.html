@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>灵活使用伪元素</title>
+    <style>
+        /* 用伪元素拼接造型 */
+        .box {
+            background-color: slategray;
+            display: flex;
+            position: relative;
+            z-index: -2;
+        }
+        .content {
+            font-size: 30px;
+            width: 5.6em;
+            color: whitesmoke;
+            font-family: sans-serif;
+            font-weight: bold;
+            position: relative;
+            padding: 0.6em 0.4em;
+            white-space: nowrap;
+        }
+        .content::before, .content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0.2em solid orange;
+            box-sizing: border-box;
+            transform: rotate(45deg);
+            box-shadow: 0.3em 0.3em 0.3em hsla(0, 0%, 35%, 0.8);
+        }
+        .content:nth-child(2)::before { border-style: solid solid none none; z-index: -1;}
+        .content:nth-child(2)::after { border-style: none none solid solid; }
+
+        /* 用主元素和伪元素拼接圆环 */
+        .circle, .circle::before, .circle::after {
+            width: 10em;
+            height: 10em;
+            box-sizing: border-box;
+            border-top: 0.3em solid currentColor;
+            border-radius: 50%;
+            position: relative;
+        }
+        .circle::before, .circle::after {
+            content: '';
+            position: absolute;
+            top: -0.2em;
+        }
+        .circle { color: hotpink; }
+        .circle::before { color: dodgerblue; transform: rotate(120deg); }
+        .circle::after { color: gold; transform: rotate(240deg); }
+
+        /* 绘制摆球 */
+        .pendulums {
+            font-size: 10px;
+            width: 30em;
+            height: 30em;
+            border-top: 0.3em solid cadetblue;
+            position: relative;
+        }
+        /* 绘制线段 */
+        .pendulums div {
+            position: absolute;
+            width: 0.2em;
+            background-color: cadetblue;
+            left: 50%;
+            transform-origin: 50% top;
+        }
+        /* 绘制摆线底部的小球和阴影 */
+        .pendulums div::before {
+            content: '';
+            position: absolute;
+            width: 1.5em;
+            height: 1.5em;
+            background: radial-gradient(
+                circle at 70% 35%,
+                white,
+                darkturquoise 30%,
+                steelblue 50%
+            );
+            border-radius: 50%;
+            top: 100%;
+            left: -0.75em;
+            box-shadow: -1em 4em 1em rgba(0, 0, 0, 0.1);
+        }
+        /* 为5根摆线设置不同的长度和不同的摇摆角度 */
+        .pendulums div:nth-child(1) { height: 15em; transform: rotate(30deg); }
+        .pendulums div:nth-child(2) { height: 17em; transform: rotate(20deg); }
+        .pendulums div:nth-child(3) { height: 19em; transform: rotate(10deg); }
+        .pendulums div:nth-child(4) { height: 21em; transform: rotate(0deg); }
+        .pendulums div:nth-child(5) { height: 23em; transform: rotate(-10deg); }
+
+        /* 用主元素和伪元素实现电脑及主机 */
+        .computer {
+            font-size: 10px;
+            width: 25em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: darkorange;
+        }
+        .computer > * {
+            position: relative;
+            box-sizing: border-box;
+        }
+        .computer > *::before, .computer > *::after {
+            content: '';
+            position: absolute;
+            box-sizing: border-box;
+        }
+        /* 绘制屏幕，::before绘制支架竖着的部分，::after绘制支架横着的部分 */
+        .monitor {
+            width: 17em;
+            height: 10em;
+            border: 0.5em solid;
+            border-radius: 0.5em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: -4em;
+        }
+        .monitor::before {
+            width: 1.5em;
+            height: 3em;
+            background-color: currentColor;
+            top: 9.5em;
+        }
+        .monitor::after {
+            width: 5em;
+            height: 1em;
+            background-color: currentColor;
+            top: 12.5em;
+        }
+        /* 绘制主机，主元素绘制机箱，::before绘制两个驱动器，::after绘制两个按钮 */
+        .host {
+            width: 7em;
+            height: 14em;
+            border: 0.5em solid;
+            border-radius: 0.5em;
+        }
+        .host::before {
+            width: 5em;
+            height: 1em;
+            background-color: currentColor;
+            border-radius: 0.2em;
+            top: 8em;
+            left: 0.5em;
+            box-shadow: 0 1.5em 0;
+        }
+        .host::after {
+            width: 0.6em;
+            height: 0.6em;
+            background-color: currentColor;
+            border-radius: 50%;
+            right: 1.5em;
+            bottom: 0.5em;
+            box-shadow: 1em 0 0 0.1em;
+        }
+
+        /* 绘制成对元素 一颗心 */
+        .heart {
+            font-size: 10px;
+            width: 12em;
+            position: relative;
+            display: flex;
+        }
+        .heart::before, .heart::after {
+            content: '';
+            position: relative;
+            width: 6em;
+            height: 10em;
+            border-radius: 3em 3em 0 0;
+        }
+        .heart::before { 
+            background-color: hsla(0, 79%, 72%, 0.8); 
+            transform-origin: right bottom;
+            transform: rotate(45deg);
+        }  
+        .heart::after { 
+            background-color: hsla(90, 79%, 72%, 0.8); 
+            transform-origin: left bottom;
+            transform: rotate(-45deg);
+        }  
+    </style>
+</head>
+<body>
+    <h1>用伪元素拼接造型</h1> 
+    <div class="box">
+        <p class="content">ERROR 404</p>
+        <p class="content">ERROR 404</p>
+    </div>
+    <br>
+
+    <h1>用主元素和伪元素拼接造型</h1>
+    <figure class="circle"></figure>
+
+    <h1>用伪元素表现造型的一部分</h1>
+    <figure class="pendulums">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </figure>
+
+    <h1>用主元素和伪元素表现造型的3个部分</h1>
+    <figure class="computer">
+        <div class="monitor"></div>
+        <div class="host"></div>
+    </figure>
+
+    <h1>用伪元素表现成对的元素 - 心</h1>
+    <figure class="heart"></figure>
+</body>
+</html>

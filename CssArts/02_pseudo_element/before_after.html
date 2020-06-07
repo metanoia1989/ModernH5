@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>::before 和 ::after伪元素</title>
+    <style>
+        .squares {
+            font-size: 10px;
+            width: 15em;
+            height: 15em;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .squares div {
+            position: absolute;
+            box-sizing: border-box;
+            border: 1em solid dimgrey;
+        }
+        .squares div:nth-child(1) { width: 100%; height: 100%; }
+        .squares div:nth-child(2) { width: 70%; height: 70%; }
+        .squares div:nth-child(3) { width: 40%; height: 40%; }
+        .squares div::after, .squares div::before {
+            content: '';
+            position: absolute;
+            width: 1em;
+            height: calc(50% + 1em);
+            background-color: gold;
+        }
+        /* .squares div::before { top: 0; left: 0; }
+        .squares div::after { bottom: 0; right: 0; } */
+        .squares div::before { top: -1em; left: -1em; }
+        .squares div::after { bottom: -1em; right: -1em; }
+    </style>
+</head>
+<body>
+    <h1>用::before和after装饰元素的边框</h1>
+    <figure class="squares">
+        <div></div>
+        <div></div>
+        <div></div>
+    </figure> 
+</body>
+</html>
