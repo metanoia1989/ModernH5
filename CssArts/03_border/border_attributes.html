@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>边框属性</title>
+    <style>
+        /* 边框样式 */
+        .box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .box div {
+            width: 15vmin;
+            height: 15vmin;
+            background-image: linear-gradient(
+                45deg,
+                skyblue 50%,
+                deepskyblue 50%
+            );
+            border-width: 1vmin;
+            margin: 2vmin 0;
+            text-align: center;
+            line-height: 15vmin;
+            font-size: 30px;
+        }
+        .box .div1 { border-style: solid; }
+        .box .div2 { border-style: dashed; }
+        .box .div3 { border-style: dotted; }
+        .box .div4 { border-style: double; }
+        .box .div5 { border-style: groove; }
+        .box .div6 { border-style: ridge; }
+        .box .div7 { border-style: inset; }
+        .box .div8 { border-style: outset; }
+
+        /* 边框宽度 */
+        .box2 {
+            box-sizing: border-box;
+            width: 20em;
+            height: 16em;
+            font-size: 10px;
+            border-color: black;
+            border-style: solid;
+            border-width: 0.4em 0.1em 4em 0.1em;
+            padding: 0 4em 2em 4em;
+            display: flex;
+            justify-content: space-between;
+            margin-left: 5em;
+        }
+        .box2 span {
+            position: relative;
+            background-color: black;
+            width: 0.2em;
+            height: 10em;
+        }
+        .box2 span::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            background-color: black;
+            width: 3em;
+            height: 3em;
+            border-radius: 50%;
+            left: -1.5em;
+        }
+        .box2 span:nth-child(1) {
+            transform-origin: top;
+            transform: rotate(45deg);
+        }
+
+        /* 边框颜色 */
+        .box3 {
+            display: flex;
+            justify-content: space-around;
+        }
+        .box3 div {
+            box-sizing: border-box;
+            width: 4em;
+            height: 4em;
+            background-color: #333;
+            border: 0.2em solid;
+            font-size: 50px;
+            text-align: center;
+            line-height: 3.6em;
+        }
+        .box3 .div1 { color: orange; }
+        .box3 .div2 { color: hotpink; }
+        .box3 .div3 { color: dodgerblue; }
+
+        /* 分别设置每条边框 */
+        .box4 {
+            display: flex;
+            margin: 3em;
+        }
+        .box4 div {
+            font-size: 20px;
+            width: 5em;
+            height: 5em;
+            margin: 0 0.5em;
+            outline: 1px dashed black;
+        }
+        .box4:nth-child(1) div { color: lightgreen; }
+        .box4:nth-child(2) div { color: lightcoral; border-radius: 50%; }
+        .box4 div:nth-child(1) { align-items: center; border: none;}
+        .box4 div:nth-child(2) { border: 1em solid currentColor; }
+        .box4 div:nth-child(3) { 
+            border-width: 1em;
+            border-style: solid;
+            border-color: currentColor transparent transparent transparent; 
+        }
+        .box4 div:nth-child(4) { 
+            border-width: 1em;
+            border-style: solid none none none;
+            border-color: currentColor; 
+        }
+        .box4 div:nth-child(5) { 
+            border-width: 1em 0 0 0;
+            border-style: solid; 
+            border-color: currentColor; 
+        }
+
+        /* 边框圆角 */
+        .box5, .box6, .box7 {
+            display: flex;
+            justify-content: space-around;
+        }
+        .box5 div, .box6 div, .box7 div {
+            width: 12vw;
+            height: 12vw;
+            border: 0.5vw solid dodgerblue;
+            background-color: #eee;
+            margin-top: 1vw;
+        }
+        .box5 .div1 { border-radius: 10%; }
+        .box5 .div2 { border-radius: 20%; }
+        .box5 .div3 { border-radius: 30%; }
+        .box5 .div4 { border-radius: 40%; }
+        .box5 .div5 { border-radius: 50%; }
+
+        .box6 .div1 { border-radius: 50% / 10%; }
+        .box6 .div2 { border-radius: 50% / 20%; }
+        .box6 .div3 { border-radius: 50% / 30%; }
+        .box6 .div4 { border-radius: 50% / 40%; }
+        .box6 .div5 { border-radius: 50% /50%; }
+
+        .box7 div { width: 20em; height: 10em; }
+        .box7 .div1 { border-top-left-radius: 50%; }
+        .box7 .div2 { border-top-left-radius: 5em; }
+
+        /* 轮郭线 outline */
+        .box8 {
+            display: flex;
+            justify-content: space-around;
+        }
+        .box8 .div1, .box8 .div2 {
+            width: 10em;
+            height: 10em;
+            background-color: #ccc;
+            border: 0.5em solid dodgerblue;
+            outline: 0.5em solid orange;
+        }
+        .box8 .div2 { border-radius: 50%; }
+        .box8 .div3 {
+            width: 0;
+            height: 0;
+            border: 5em solid;
+            border-color: transparent dodgerblue dodgerblue transparent;
+            border-radius: 50%;
+            transform: rotate(45deg);
+            outline: 1px dashed black;
+        }
+    </style>
+</head>
+<body>
+    <h1>边框样式 border-style</h1> 
+    <div class="box">
+        <div class="div1">solid</div>
+        <div class="div2">dashed</div>
+        <div class="div3">dotted</div>
+        <div class="div4">double</div>
+        <div class="div5">groove</div>
+        <div class="div6">ridge</div>
+        <div class="div7">inset</div>
+        <div class="div8">outset</div>
+    </div>
+
+    <h1>边框宽度 border-width</h1>
+    <div class="box2">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <h1>边框颜色 border-color</h1>
+    <div class="box3">
+        <div class="div1">design</div>
+        <div class="div2">design</div>
+        <div class="div3">design</div>
+    </div>
+
+    <h1>分别设置每条边框</h1>
+    <div>
+        <figure class="box4">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="box4">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h1>边框圆角 border-radius</h1>
+    <section class="box5">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+        <div class="div5"></div>
+    </section>
+    <section class="box6">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+        <div class="div5"></div>
+    </section>
+    <section class="box7">
+        <div class="div1"></div>
+        <div class="div2"></div>
+    </section>
+
+    <h1>轮郭线 outline</h1>
+    <section class="box8">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+    </section>
+</body>
+</html>
