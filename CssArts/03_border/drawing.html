@@ -4,12 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>描边造型</title>
+    <style>
+        body {
+            margin-top: 5em;
+        }
+        /* 同心正方形 */
+        .box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 20em;
+            background-color: black;
+        }
+        .box1 div {
+            position: absolute;
+            box-sizing: border-box;
+            background-color: darkblue;
+            border: 0.8em solid;
+            border-color: white rgba(100%, 100%, 100%, 0.2);
+        }
+        .box1 .div1 { width: 18em;  height: 18em;}
+        .box1 .div2 { width: 15em;  height: 15em;}
+        .box1 .div3 { width: 12em;  height: 12em;}
+        .box1 .div4 { width: 9em;  height: 9em;}
+        .box1 .div5 { width: 6em;  height: 6em;}
+
+        /* 同心圆 */
+        .box2 div {
+            position: absolute;
+            box-sizing: border-box;
+            border-style: solid;
+            border-color: lime;
+            border-radius: 50%;
+        }
+        .box2 .div1 { width: 4em; height: 4em; background-color: lime; }
+        .box2 .div2 { width: 7em; height: 7em; border-width: 0.5em;  }
+        .box2 .div3 { width: 10em; height: 10em; border-width: 0.3em; filter: opacity(0.6);}
+        .box2 .div4 { width: 13em; height: 13em; border-width: 0.1em; filter: opacity(0.3);}
+        /* 圆弧 */
+        .box3 div {
+            position: absolute;
+            box-sizing: border-box;
+            border: 1em solid transparent;
+            border-radius: 50%;
+        }
+        .box3 .div1 { width: 1.5em; height: 1.5em; background-color: dodgerblue; }
+        .box3 .div2 { width: 6em; height: 6em; border-top-color: red;  }
+        .box3 .div3 { width: 10em; height: 10em; border-top-color: orange; }
+        .box3 .div4 { width: 14em; height: 14em; border-top-color: yellow; }
+    </style>
 </head>
 <body>
     <h1>同心正方形</h1> 
+    <div class="box box1">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+        <div class="div5"></div>
+    </div>
 
     <h1>同心圆</h1> 
+    <div class="box box2">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+    </div>
 
     <h1>圆弧</h1> 
+    <div class="box box3">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+    </div>
 </body>
 </html>

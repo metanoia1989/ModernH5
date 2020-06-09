@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>几何造型</title>
+    <style>
+        /* 圆形 */
+        .sky {
+            width: 100vw;
+            height: 30vw;
+            background-color: #555;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .moon {
+            width: 25vmin;
+            height: 25vmin;
+            border-radius: 50%;
+            background-color: gold;
+            box-shadow: 0 0 10vmin 1vmin white;
+        }
+        /* 半圆形 */
+        .box-a, .box-b {
+            background-color: #eee;
+            margin: 1em 0;
+            padding: 1em;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .box-a div, .box-b div {
+            box-sizing: border-box;
+            width: 0;
+            height: 0;
+            border: 4em solid;
+            outline: 1px dashed black;
+        }
+        .box-a .div1, .box-b .div1 { border-color: lightgreen deepskyblue transparent transparent; }
+        .box-a .div2, .box-b .div2 { border-color: transparent deepskyblue mediumpurple transparent; }
+        .box-a .div3, .box-b .div3 { border-color: transparent transparent mediumpurple coral; }
+        .box-a .div4, .box-b .div4 { border-color: lightgreen transparent transparent coral; }
+
+        .box-b div { border-radius: 50%; }
+
+        /* 卡通狐狸 */
+        .box1 {
+            width: 100vw;
+            height: 30vw;
+            background-color: teal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: -99;
+            position: relative;
+        }
+        .fox {
+            width: 7em; 
+            height: 9em;
+            font-size: 30px;
+            position: relative;
+            color: chocolate;
+            transition: 1s;
+            /* outline: dashed 1px black; */
+        }
+        .fox *::before, .fox *::after {
+            content: '';
+            position: absolute;
+        }
+        /* 头 */
+        .fox .head {
+            position: absolute;
+            width: 6em;
+            height: 6em;
+            background-color: currentColor;
+            border-radius: 50%;
+            right: 0;
+        }
+        /* 脸 */
+        .fox .faces::before, .fox .faces::after {
+            width: 3em;
+            height: 3em;
+            background-color: white;
+            border-radius: 0 100%;
+            top: 3em;
+        }
+        /* 耳朵 */
+        .fox .ears::before, .fox .ears::after {
+            width: 3em;
+            height: 3em;
+            background-color: currentColor;
+            filter: brightness(1.25);
+            border-radius: 0 100% 0 0;
+            z-index: -1;
+        }
+        .fox .faces::after, .fox .ears::after {
+            right: 0;
+            transform: rotate(-90deg);
+        }
+        /* 眼睛 */
+        .fox .eyes::before, .fox .eyes::after {
+            border: 0.3em solid;
+            border-radius: 50%;
+            top: 4.5em;
+        }
+        .fox .eyes::before {
+            left: 1em;
+            border-color: black black transparent transparent;
+        }
+        .fox .eyes::after{
+            right: 1em;
+            border-color: black transparent transparent black;
+        }
+        /* 鼻子 */
+        .fox .nose {
+            position: absolute;
+            width: 1em;
+            height: 1em;
+            background-color: black;
+            border-radius: 50%;
+            top: calc(6em - 1em / 2);
+            right: calc((6em - 1em) / 2);
+            transform: scale(0.9);
+        }
+
+        /* 扇形 */
+        .box2 {
+            background-color: #eee;
+            margin: 1em 0;
+            padding: 1em;
+            display: flex;
+            justify-content: space-around;
+        }
+        .box2 div { 
+            width: 8em;
+            height: 8em;
+            background-color: dodgerblue;
+        }
+        .box2 .div1 { border-radius: 100% 0 0 0; }
+        .box2 .div2 { border-radius: 0 100% 0 0; }
+        .box2 .div3 { border-radius: 0 0 100% 0; }
+        .box2 .div4 { border-radius: 0 0 0 100%; }
+
+        /* 抽象的鸭子 */
+        .box {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: gold;
+            height: 20em;
+        }
+        .duck {
+            width: 10em;
+            height: 10em;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            transform: rotate(-45deg);
+        }
+        .duck .div1 {
+            background-color: seagreen;
+            border-radius: 100% 0 0 0;
+        }
+        .duck .div2 {
+            background-color: seagreen;
+            border-radius: 0 100% 0 0;
+            background-image: radial-gradient(
+                black 0.5em,
+                transparent 0.5em
+            );
+        }
+        .duck .div3 {
+            background-color: seagreen;
+            border-radius: 0 0 100% 0;
+        }
+        .duck .div4 {
+            background-color: coral;
+            border-radius: 0 0 0 100%;
+        }
+
+        /* 三角形 */
+        .section {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            background-color: #eee;
+            padding: 1em;
+            width: 80vw;
+        }
+        .section div {
+            width: 0;
+            height: 0;
+            outline: 1px dashed black;
+            border-style: solid;
+            border-color: transparent transparent dodgerblue transparent;
+        }
+        .section .div1 { border-width: 5em; }
+        .section .div2 { border-width: 0 5em 10em 5em; }
+        .section .div3 { border-width: 0 5em calc(5em * 1.732) 5em; }
+    </style>
+</head>
+<body>
+    <h1>圆形 - 中秋月圆</h1> 
+    <div class="sky">
+        <div class="moon"></div>
+    </div>
+
+    <h1>半圆形</h1>
+    <section class="box-a">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+    </section>
+    <section class="box-b">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+    </section>
+
+    <h1>卡通狐狸</h1>
+    <div class="box1">
+        <div class="fox">
+            <div class="head">
+                <span class="faces"></span>
+                <span class="eyes"></span>
+                <span class="ears"></span>
+                <span class="nose"></span>
+            </div>
+        </div>
+    </div>
+
+    <h1>扇形</h1>
+    <section class="box2">
+        <div class="div1"></div>
+        <div class="div2"></div>
+        <div class="div3"></div>
+        <div class="div4"></div>
+    </section>
+
+    <h1>抽象的鸭子</h1>
+    <div class="box">
+        <figure class="duck">
+            <div class="div1"></div>
+            <div class="div2"></div>
+            <div class="div3"></div>
+            <div class="div4"></div>
+        </figure>
+    </div>
+
+    <h1>三角形</h1>
+    <div class="box">
+        <section class="section">
+            <div class="div1"></div>
+            <div class="div2"></div>
+            <div class="div3"></div>
+        </section>
+    </div>
+
+    <h1>Vue Logo</h1>
+    <div class="box">
+        <section class="section1">
+            <div class="div1"></div>   
+            <div class="div2"></div>   
+            <div class="div3"></div>   
+        </section>
+        <section class="section2">
+            <div class="div1"></div>   
+            <div class="div2"></div>   
+            <div class="div3"></div>   
+        </section>
+    </div>
+</body>
+</html>
