@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>背景属性</title>
+    <style>
+        /* 白云 */
+        .box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            height: 20em;
+            background-color: lightskyblue;
+        }
+        .cloud {
+            width: 2em;
+            height: 2em;
+            font-size: 50px;
+            color: whitesmoke;
+            background-color: currentColor;
+            border-radius: 100% 100% 0 0;
+            position: relative;
+        }
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background-color: currentColor;
+            bottom: 0;
+        } 
+        .cloud::before {
+            width: 1.25em;
+            height: 1.25em;
+            border-radius: 100% 100% 0 100%;
+            left: -30%;
+        }
+        .cloud::after {
+            width: 1.25em;
+            height: 1.25em;
+            border-radius: 100% 100% 100% 0;
+            right: -30%;
+        }
+
+        /* CSS3 背景图片 */
+        .container {
+            width: 500px;
+            height: 375px;
+            background-image: 
+                url(./images/css3.png),
+                url(./images/background.png);
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* 背景图片位置 */
+        .container2 {
+            width: 500px;
+            height: 400px;
+            background-color: pink;
+            background-image: 
+                url(./images/fruit-mango.png),
+                url(./images/fruit-strawberry.png),
+                url(./images/fruit-banana.png);
+            background-position: 
+                center,
+                top left,
+                350px 250px;
+            background-size: 
+                30%,
+                5em,
+                100px;
+            background-repeat: no-repeat;
+        }
+
+        /* 背景平铺 */
+        .ruler {
+            position: relative;
+            width: 45em;
+            height: 6em;
+            font-size: 10px;
+            background-image: linear-gradient(
+                peru 45%,
+                sandybrown 45%
+            );
+            margin: 5em;
+        }
+        .ruler::before, .ruler::after {
+            content: '';
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            background-image: linear-gradient(
+                to right,
+                transparent 1em,
+                darkslategray 1em, darkslategray 2em,
+                transparent 2em
+            );
+            background-repeat: repeat-x;
+        }
+        .ruler::before {
+            background-size: 4em 2em; /* 宽和高 */
+        }
+        .ruler::after {
+            background-size: 4em 1em; /* 宽和高 */
+            left: 2em;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>背景颜色 background-color 白云</h1> 
+    <div class="box">
+        <div class="cloud"></div>
+    </div>
+
+    <h1>背景图片 background-image CSS3标志</h1>
+    <div class="container"></div>
+
+    <h1>背景位置 background-position</h1>
+    <div class="container2"></div>
+
+    <h1>背景平铺 background-repeat</h1>
+    <div class="box">
+        <div class="ruler"></div>
+    </div>
+</body>
+
+</html>
