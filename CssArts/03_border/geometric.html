@@ -197,6 +197,66 @@
         .section .div1 { border-width: 5em; }
         .section .div2 { border-width: 0 5em 10em 5em; }
         .section .div3 { border-width: 0 5em calc(5em * 1.732) 5em; }
+
+        /* Vue Logo */
+        .box3 {
+            justify-content: center;
+        }
+        .section1 div {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-color: currentColor transparent transparent transparent;
+            border-width: 20em 12.5em 0 12.5em;
+        }
+        .section1 .div1 {
+            color: #42b883;
+        }
+        .section1 .div2 {
+            color: #35495e;
+            transform-origin: top;
+            transform: scale(0.65);
+        }
+        .section1 .div3 {
+            color: white;
+            transform-origin: top;
+            transform: scale(calc(0.65 * 0.5));
+        }
+
+        /* 组合的花形 */
+        .section-flower {
+            display: flex;
+            justify-content: space-around;
+        }
+        .section-flower div {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 0.2em;
+            padding: 0.1em;
+            outline: dashed 1px black;
+        }
+        .section-flower span {
+            border: 2.5em solid transparent;
+            color: #ddd;
+            /* background-color: currentColor; */
+        }
+        .section-flower div:nth-child(2) span {
+            border-radius: 50%;
+        }
+        .section-flower div:nth-child(3) span {
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+        .section-flower span:nth-child(1),
+        .section-flower span:nth-child(4) {
+            border-color: currentColor transparent;
+        }
+        .section-flower span:nth-child(2),
+        .section-flower span:nth-child(3) {
+            border-color: transparent currentColor;
+        }
+
     </style>
 </head>
 <body>
@@ -259,17 +319,25 @@
     </div>
 
     <h1>Vue Logo</h1>
-    <div class="box">
+    <div class="box box3">
         <section class="section1">
             <div class="div1"></div>   
             <div class="div2"></div>   
             <div class="div3"></div>   
         </section>
-        <section class="section2">
-            <div class="div1"></div>   
-            <div class="div2"></div>   
-            <div class="div3"></div>   
-        </section>
+    </div>
+
+    <h1>组合的花形</h1>
+    <div class="box section-flower">
+        <div>
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <div>
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <div>
+            <span></span><span></span><span></span><span></span>
+        </div>
     </div>
 </body>
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>铅笔</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* background-color: gold; */
+        }
+        /* 容器 */
+        .pencil {
+            display: flex;
+            width: 50em;
+            height: 3.5em;
+            font-size: 12px;
+            filter: drop-shadow(0.4em 0.8em 0.3em gray);
+        }
+        /* 笔头 */
+        .taper {
+            width: 4em;
+            /* background-color: burlywood; */
+        }
+        .taper::before, .taper::after{
+            content: '';
+            position: absolute;
+            border-style: solid;
+            border-width: calc(3.5em / 2) 4em calc(3.5em / 2) 0;
+            border-color: transparent;
+        }
+        .taper::before {
+            border-right-color: burlywood;
+        }
+        .taper::after{
+            border-right-color: black;
+            transform-origin: left;
+            transform: scale(0.3);
+        }
+        /* 笔杆 */
+        .barrel {
+            width: 40em;
+            background-color: green;
+            border-top: 1em solid forestgreen;
+            border-bottom: 1em solid darkgreen;
+            color: silver;
+            line-height: 1.5em;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        /* 橡皮 */
+        .eraser {
+            position: relative;
+            width: 6em;
+            background-color: lightpink;
+            border-top: 1em solid pink;
+            border-bottom: 1em solid lightcoral;
+            border-radius: 0 0.5em 0.5em 0;
+        }
+        .eraser::before {
+            content: '';
+            position: absolute;
+            width: 1.5em;
+            height: 1.5em;
+            background-color: silver;
+            border-top: 1em solid lightgray;
+            border-bottom: 1em solid gray;
+            top: -1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="pencil">
+        <span class="taper"></span>
+        <span class="barrel">Think Different</span>
+        <span class="eraser"></span>
+    </div> 
+</body>
+</html>
