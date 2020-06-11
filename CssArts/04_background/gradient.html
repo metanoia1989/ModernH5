@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渐变色背景</title>
+    <style>
+        .container {
+            width: 50em;
+            height: 20em;
+            font-size: 12px;
+            background-image: linear-gradient(
+                to right,
+                orangered,
+                orange,
+                gold,
+                lightgreen,
+                cyan
+            );
+        }
+
+        .container2 {
+            width: 50em;
+            height: 20em;
+            font-size: 10px;
+            background-image: linear-gradient(
+                to right,
+                orangered 0%,
+                orange 10%,
+                gold 20%,
+                lightgreen 30%,
+                cyan 40%
+            );
+        }
+
+        .container3 {
+            width: 500px;
+            height: 200px;
+            background-image: linear-gradient(
+                to right,
+                orangered 10%,
+                orange 10%, orange 20%,
+                gold 20%, gold 30%,
+                lightgreen 30%, lightgreen 40%,
+                cyan 40%
+            );
+        }
+
+        .container4 {
+            width: 50em;
+            height: 20em;
+            font-size: 10px;
+            background-image: linear-gradient(
+                /* to right top, */
+                45deg,
+                orangered,
+                orange,
+                gold,
+                lightgreen,
+                cyan
+            );
+        }
+
+        .box {
+            background-color: lightyellow;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 10em;
+            width: 32em;
+        }
+        .line {
+            width: 32em;
+            height: 0.5em;
+            font-size: 10px;
+            background-image: linear-gradient(
+                to right,
+                black 0, black 4em,
+                transparent 4em, transparent 5em,
+                black 5em, black 7em,
+                transparent 7em, transparent 8em
+            );
+            background-size: 8em;
+            margin: 3em;
+        }
+
+        .container5 {
+            width: 50em;
+            height: 50em;
+            font-size: 10px;
+            background-image: radial-gradient(
+                orangered,
+                orange,
+                gold,
+                lightgreen,
+                cyan
+            );
+        }
+
+        .container6 {
+            width: 50em;
+            height: 50em;
+            font-size: 10px;
+            background-image: radial-gradient(
+                orangered 15%,
+                orange 15%, orange 30%,
+                gold 30%, gold 45%,
+                lightgreen 45%, lightgreen 60%,
+                cyan 60%
+            );
+        }
+
+        /* 正圆和椭圆 */
+        .container7 div {
+            width: 500px;
+            height: 300px;
+            margin: 50px;
+        }
+        .container7 div:nth-child(1) {
+            background-image: radial-gradient(
+                orangered 15%,
+                orange 15%, orange 30%,
+                gold 30%, gold 45%,
+                lightgreen 45%, lightgreen 60%,
+                cyan 60%
+            );
+        }
+        .container7 div:nth-child(2) {
+            background-image: radial-gradient(
+                circle,
+                orangered 15%,
+                orange 15%, orange 30%,
+                gold 30%, gold 45%,
+                lightgreen 45%, lightgreen 60%,
+                cyan 60%
+            );
+        }
+
+        /* 有透明度的径向渐变 */
+        .container8 {
+            width: 9em;
+            height: 9em;
+            font-size: 32px;
+            background-color: black;
+            border-radius: 50%;
+            margin: 2em;
+            /* 重复的径向渐变 */
+            background-image: repeating-radial-gradient(
+                transparent 0,
+                transparent 0.95em,
+                darkgreen 0.95em,
+                darkgreen 1em
+            );
+        }
+    </style>
+</head>
+<body>
+    <h1>线性渐变生成彩虹背景图</h1> 
+    <div class="container"></div>
+
+    <h1>渐变背景加上停止位置</h1>
+    <div class="container2"></div>
+
+    <h1>锐利的线性渐变</h1>
+    <div class="container3"></div>
+
+    <h1>线性渐变的角度</h1>
+    <div class="container4"></div>
+
+    <h1>有透明度的线性渐变</h1>
+    <div class="box">
+        <div class="line"></div>
+    </div>
+
+    <h1>径向渐变 radial-gradient</h1>
+    <div class="container5"></div>
+
+    <h1>锐利的径向渐变</h1>
+    <div class="container6"></div>
+
+    <h1>椭圆和正圆</h1>
+    <div class="container7">
+        <div></div>
+        <div></div>
+    </div>
+
+    <h1>有透明度的径向渐变</h1>
+    <div class="container8"></div>
+</body>
+</html>

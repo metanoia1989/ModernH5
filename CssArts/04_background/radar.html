@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷达</title>
+    <style>
+        .radar {
+            position: relative;
+            width: calc(8em + 1.5em);
+            height: calc(8em + 1.5em);
+            font-size: 30px;
+            border-radius: 50%;
+            background-color: black;
+            background-image: 
+                linear-gradient(
+                    90deg,
+                    transparent 49.75%,
+                    darkgreen 49.75%,
+                    darkgreen 50.25%,
+                    transparent 50.25%
+                ),
+                linear-gradient(
+                    transparent 49.75%,
+                    darkgreen 49.75%,
+                    darkgreen 50.25%,
+                    transparent 50.25%
+                ),
+                repeating-radial-gradient(
+                    transparent 0,
+                    transparent 0.95em,
+                    darkgreen 0.95em,
+                    darkgreen 1em,
+                    transparent 1em
+                );
+        }
+        .radar::before {
+            content: '';
+            position: absolute;
+            left: calc(1.5em / 2);
+            top: calc(1.5em / 2);
+            width: calc(8em / 2);
+            height: calc(8em / 2);
+            /* border: 1px dashed white; */
+            border-radius: 100% 0 0 0;
+            background-image: linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0) 50%,
+                rgba(0, 192, 0, 1) 100%
+            );
+            animation: scaning 5s linear infinite;
+            transform-origin: right bottom;
+        }
+        @keyframes scaning {
+            to {
+                transform: rotate(1turn);
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <figure class="radar"></figure> 
+</body>
+</html>
