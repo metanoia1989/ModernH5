@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>盒阴影 box-shadow</title>
+    <style>
+        /* 两个长度参数 */
+        .box {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .container, .container2, .container3, .container4, .container5 {
+            width: 15em;
+            height: 12em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1em;
+        }
+        .container .inner {
+            width: 10em;
+            height: 6.5em;
+            border: 1px solid black;
+            background-color: white;
+            box-shadow: 1em 1em gray;
+        }
+        .container:nth-child(1) { background-color: #eee; }
+        .container:nth-child(2) { background-color: #333; }
+        .container:nth-child(3) { background-color: #eee; }
+        .container:nth-child(3) .inner { 
+            border-radius: 50%;
+        }
+
+        /* 3个长度参数 */
+        .container2 .inner {
+            width: 10em;
+            height: 6.5em;
+            border: 1px solid black;
+            background-color: white;
+        }
+        .container2:nth-child(1), .container2:nth-child(2) {
+            background-color: #eee;
+        }
+        .container2:nth-child(3), .container2:nth-child(4) 
+        {
+            background-image: linear-gradient(
+                60deg,
+                lightgreen 50%,
+                lightcoral 50%
+            );
+        }
+        .container2:nth-child(1) .inner {
+            box-shadow: 1em 1em gray;
+        }
+        .container2:nth-child(2) .inner {
+            box-shadow: 1em 1em 1em gray;
+        }
+        .container2:nth-child(3) .inner {
+            box-shadow: 1em 1em 1em gray;
+        }
+        .container2:nth-child(4) .inner {
+            box-shadow: 1em 1em 1em hsla(0, 0%, 0%, 0.3);
+        }
+
+        /* 4个长度参数 */
+        .container3 .inner {
+            width: 8em;
+            height: 5.5em;
+            border: 1px solid black;
+            background-color: white;
+        }
+        .container3:nth-child(-n+3) {
+            background-color: #eee;
+        }
+        .container3:nth-child(1) .inner {
+            box-shadow: 1em 1em 0 0 gray;
+        }
+        .container3:nth-child(2) .inner {
+            box-shadow: 1em 1em 0 0.5em gray;
+        }
+        .container3:nth-child(3) .inner {
+            box-shadow: 0 0 0 1em gray;
+        }
+        .container3:nth-child(n+4):nth-child(even) {
+            background-image: linear-gradient(
+                60deg,
+                lightgreen 50%,
+                lightcoral 50%
+            );
+        }
+        .container3:nth-child(5) {
+            background-image: linear-gradient(
+                60deg,
+                darkolivegreen 50%,
+                sienna 50%
+            );
+        }
+        .container3:nth-child(4) .inner {
+            box-shadow: 0 0 0 1em hsla(0, 0%, 0%, 0.3);
+        }
+        .container3:nth-child(5) .inner {
+            box-shadow: 0 0 0 1em hsla(0, 0%, 100%, 0.3);
+        }
+        .container3:nth-child(6) .inner {
+            box-shadow: 0 0 1em 0.3em hsla(0, 0%, 0%, 0.3);
+        }
+
+        /* 内部阴影 */
+        .container4 {
+            background-color: #eee;
+        }
+        .container4 .inner {
+            width: 8em;
+            height: 5.5em;
+            border: 1px solid black;
+            background-color: #eee;
+        }
+        .container4:nth-child(1) .inner {
+            box-shadow: inset 0.5em 0.5em gray;
+        }
+        .container4:nth-child(2) .inner {
+            box-shadow: inset 0 0 1em gray;
+        }
+        .container4:nth-child(3) .inner {
+            box-shadow: inset 0 0 0 0.5em gray;
+        }
+
+        .container5 {
+            background-color: #eee;
+        }
+        .container5 .inner {
+            font-size: 10px;
+            width: 10em;
+            height: 10em;
+            box-shadow: inset 0.2em 0.2em 0.5em hsla(0, 0%, 0%, 0.2);
+        }
+        .container5 .circle {
+            border-radius: 50%;
+        } 
+        .container5:nth-child(odd) .inner { background-color: lightgray; }
+        .container5:nth-child(even) .inner { background-color: darkgray; }
+
+        /* 多重阴影 */
+        .frame {
+            margin: 5em;
+            font-size: 10px;
+            width: 30em;
+            height: 30em;
+            background-color: lightyellow;
+            border: 2em solid burlywood;
+            /* border-radius: 3em; */
+            border-radius: 50%;
+            box-shadow: 
+                inset 0.4em 0.4em 0.5em 0.5em hsla(0, 0%, 0%, 0.4),
+                0 0.3em 2em 0.4em hsla(0, 0%, 0%, 0.3);
+        }
+
+        /* 复制自身的阴影 */
+        .cross {
+            font-size: 60px;
+            width: 1em;
+            height: 1em;
+            color: orange;
+            border-radius: 50%;
+            border: 1px dashed black;
+            margin: 3em;
+        }
+        .cross:nth-child(1) {
+            box-shadow: 
+                1.1em 0em,
+                0em 1.1em, 
+                1.1em 1.1em, 
+                2.2em 1.1em, 
+                1.1em 2.2em;
+        }
+        .cross:nth-child(2) {
+            background-color: currentColor;
+            box-shadow: 
+                0em -1.1em 0 -0.1em tomato,
+                -1.1em 0em 0 0.2em gold, 
+                1.1em 0em 0 0.2em gold, 
+                0em 1.1em 0 0.1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>外部阴影</h1> 
+    <h2>两个长度参数 offset-x offset-y</h2>
+    <div class="box">
+        <figure class="container">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container">
+            <div class="inner"></div>
+        </figure>
+    </div>
+
+    <h2>3个长度参数 blur-radius</h2>
+    <div class="box">
+        <figure class="container2">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container2">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container2">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container2">
+            <div class="inner"></div>
+        </figure>
+    </div>
+
+    <h2>4个长度参数 spread-radius</h2>
+    <div class="box">
+        <figure class="container3">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container3">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container3">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container3">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container3">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container3">
+            <div class="inner"></div>
+        </figure>
+    </div>
+
+    <h1>内部阴影 inset</h1>
+    <h2>方形内嵌</h2>
+    <div class="box">
+        <figure class="container4">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container4">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container4">
+            <div class="inner"></div>
+        </figure>
+    </div>
+    <h2>圆形内嵌</h2>
+    <div class="box">
+        <figure class="container5">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container5">
+            <div class="inner"></div>
+        </figure>
+        <figure class="container5">
+            <div class="inner circle"></div>
+        </figure>
+        <figure class="container5">
+            <div class="inner circle"></div>
+        </figure>
+    </div>
+
+    <h1>多重阴影</h1>
+    <div class="box">
+        <div class="frame"></div>
+    </div>
+
+    <h1>复制自身的阴影</h1>
+    <div class="box">
+        <figure class="cross"></figure>
+        <figure class="cross"></figure>
+    </div>
+</body>
+</html>
