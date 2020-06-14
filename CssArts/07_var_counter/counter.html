@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计数器 counter</title>
+    <style>
+        * { margin: 0 }
+    
+        .box {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center; 
+            padding: 3em;
+            background-color: lightyellow;
+            /* height: 15em; */
+        }
+        /* 计数器的声明、累加和读取 */
+        .container {
+            width: 40vw;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1em;
+        }
+        .container div {
+            width: 3em;
+            height: 3em;
+            background-color: royalblue;
+            border-radius: 50%;
+            position: relative;
+        }
+        .container div::before {
+            content: 'x';
+            position: absolute;
+            font-size: 1.5em;
+            font-family: sans-serif;
+            width: inherit;
+            line-height: 2em;
+            text-align: center;
+            color: white;
+        }
+        .container:nth-child(2) { counter-reset: n; }
+        .container:nth-child(2) div { counter-increment: n; }
+        .container:nth-child(2) div::before { content: counter(n); }
+
+        /* 计数器初始值和步长 */
+        .container2 {
+            width: 40vw;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1em;
+        }
+        .container2 div {
+            width: 3em;
+            height: 3em;
+            background-color: royalblue;
+            border-radius: 50%;
+            position: relative;
+        }
+        .container2 div::before {
+            content: counter(n);
+            position: absolute;
+            font-size: 1.5em;
+            font-family: sans-serif;
+            width: inherit;
+            line-height: 2em;
+            text-align: center;
+            color: white;
+        }
+        .container2:nth-child(1) { counter-reset: n;  }
+        .container2:nth-child(2) { counter-reset: n 10;  }
+        .container2:nth-child(3) { counter-reset: n;  }
+        .container2:nth-child(4) { counter-reset: n 11;  }
+        .container2:nth-child(1) div { counter-increment: n; background-color: royalblue; }
+        .container2:nth-child(2) div { counter-increment: n; background-color: seagreen;}
+        .container2:nth-child(3) div { counter-increment: n 3; background-color: orange;}
+        .container2:nth-child(4) div { counter-increment: n -1; background-color: palevioletred;}
+
+        /* 计数器的序列值 */
+        .container3 {
+            width: 40vw;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1em;
+        }
+        .container3 div {
+            width: 3em;
+            height: 3em;
+            background-color: royalblue;
+            border-radius: 50%;
+            position: relative;
+        }
+        .container3 div::before {
+            content: counter(n, var(--list-type));
+            position: absolute;
+            font-size: 1.5em;
+            font-family: sans-serif;
+            width: inherit;
+            line-height: 2em;
+            text-align: center;
+            color: white;
+        }
+        .container3 { counter-reset: n; }
+        .container3 div { counter-increment: n; }
+
+        .container3:nth-child(1) { --list-type: upper-roman; }
+        .container3:nth-child(2) { --list-type: trad-chinese-formal; }
+        .container3:nth-child(3) { --list-type: trad-chinese-informal; }
+        .container3:nth-child(4) { --list-type: hiragana; }
+        .container3:nth-child(5) { --list-type: korean-hangul-formal; }
+
+        /* 计数器设计字母表 */
+        .alphabet {
+            font-size: 10px;
+            width: 50em;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-gap: 1em;
+        }
+        .alphabet div {
+            width: 6em;
+            height: 5em;
+            border-radius: 1em;
+            background-color: lightyellow;
+            font-family: sans-serif;
+            box-shadow: 0.5em 0.5em 0.5em hsla(0, 0%, 0%, 0.3);
+            position: relative;
+        }
+        .alphabet div::before {
+            content: 'A';
+            position: absolute;
+            left: 30%;
+            top: 15%;
+            font-size: 25px;
+            color: indianred;
+        }
+        .alphabet div::after {
+            content: 'a';
+            position: absolute;
+            left: 70%;
+            top: 35%;
+            font-size: 20px;
+            color: orange;
+        }
+        .alphabet { counter-reset: n; }
+        .alphabet div { counter-increment: n; }
+        .alphabet div::before { content: counter(n, upper-alpha); }
+        .alphabet div::after { content: counter(n, lower-alpha); }
+    </style>
+</head>
+<body>
+    <h1>计数器的声明、累加和读取</h1> 
+    <div class="box">
+        <figure class="container">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="container">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h1>计数器的初始值和步长</h1>
+    <div class="box">
+        <figure class="container2">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+
+        <figure class="container2">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+
+        <figure class="container2">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+
+        <figure class="container2">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h1>计数器的序列值</h1>
+    <div class="box">
+        <figure class="container3">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="container3">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="container3">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="container3">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="container3">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h1>计数器设计字母表</h1>
+    <div class="box">
+        <div class="alphabet">
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div>
+        </div>
+    </div>
+</body>
+</html>
