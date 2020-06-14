@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彭罗斯三角形</title>
+    <style>
+        * { margin: 0 }
+        .box {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: lightyellow;
+        }
+        .penrose {
+            position: relative;
+            width: 20em;
+            height: 20em;
+            /* outline: 1px dashed black; */
+            top: -1em;
+            left: -3em;
+        }
+        .penrose div {
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            background-color: limegreen;
+            clip-path: polygon(
+                57% 0,
+                75% 0,
+                26% 85%,
+                89.5% 85%,
+                98.4% 100%,
+                0 100%
+            );
+        }
+        .penrose div:nth-child(2) { 
+            transform: rotate(120deg); filter: brightness(0.66);
+            top: 18.3%;
+            left: 43.3%;
+        }
+        .penrose div:nth-child(3) { 
+            transform: rotate(240deg); filter: brightness(0.33);
+            top: 46.5%;
+            left: 5.9%;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <figure class="penrose">
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>    
+</body>
+</html>

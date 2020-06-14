@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滤镜filter</title>
+    <style>
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 透明度滤镜 */
+        .container, 
+        .container2
+        {
+            font-size: 10px;
+            justify-content: flex-start;
+        }
+        .container div,
+        .container2 div 
+        {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+            margin: 0.5em;
+            background-image: linear-gradient(
+                to right bottom,
+                lightcoral 50%,
+                lightgreen 50%
+            );
+        }
+        .container div:nth-child(1) { filter: opacity(1); }
+        .container div:nth-child(2) { filter: opacity(0.8); }
+        .container div:nth-child(3) { filter: opacity(0.6); }
+        .container div:nth-child(4) { filter: opacity(0.4); }
+        .container div:nth-child(5) { filter: opacity(0.2); }
+
+        /* 模糊滤镜 */
+        .container2 div:nth-child(1) { filter: blur(0px); }
+        .container2 div:nth-child(2) { filter: blur(2px); }
+        .container2 div:nth-child(3) { filter: blur(4px); }
+        .container2 div:nth-child(4) { filter: blur(6px); }
+        .container2 div:nth-child(5) { filter: blur(8px); }
+
+        /* 色相滤镜 */
+        .box2 {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .container3,
+        .container4 
+        {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .container3 div {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+            background-color: lightcoral;
+            margin: 0.5em;
+        }
+        .container3:nth-child(1) div:nth-child(1) { filter: hue-rotate(0deg); }
+        .container3:nth-child(1) div:nth-child(2) { filter: hue-rotate(20deg); }
+        .container3:nth-child(1) div:nth-child(3) { filter: hue-rotate(40deg); }
+        .container3:nth-child(1) div:nth-child(4) { filter: hue-rotate(60deg); }
+        .container3:nth-child(1) div:nth-child(5) { filter: hue-rotate(80deg); }
+        .container3:nth-child(2) div:nth-child(1) { filter: hue-rotate(0deg); }
+        .container3:nth-child(2) div:nth-child(2) { filter: hue-rotate(-20deg); }
+        .container3:nth-child(2) div:nth-child(3) { filter: hue-rotate(-40deg); }
+        .container3:nth-child(2) div:nth-child(4) { filter: hue-rotate(-60deg); }
+        .container3:nth-child(2) div:nth-child(5) { filter: hue-rotate(-80deg); }
+
+        /* 亮度滤镜 */
+        .container4 div {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+            background-image: linear-gradient(
+                to right bottom,
+                lightcoral 50%,
+                lightgreen 50%
+            );
+            margin: 0.5em;
+        }
+        .container4:nth-child(1) div:nth-child(1) { filter: brightness(1); }
+        .container4:nth-child(1) div:nth-child(2) { filter: brightness(1.1); }
+        .container4:nth-child(1) div:nth-child(3) { filter: brightness(1.2); }
+        .container4:nth-child(1) div:nth-child(4) { filter: brightness(1.3); }
+        .container4:nth-child(1) div:nth-child(5) { filter: brightness(1.4); }
+        .container4:nth-child(2) div:nth-child(1) { filter: brightness(1); }
+        .container4:nth-child(2) div:nth-child(2) { filter: brightness(90%); }
+        .container4:nth-child(2) div:nth-child(3) { filter: brightness(80%); }
+        .container4:nth-child(2) div:nth-child(4) { filter: brightness(70%); }
+        .container4:nth-child(2) div:nth-child(5) { filter: brightness(60%); }
+
+        /* 同心圆 */
+        .box3 {
+            background-color: #222;
+        }
+        .container5 {
+            width: 20em;
+            height: 20em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .container5 div {
+            position: absolute;
+            border-radius: 50%;
+            background-color: hsl(336, 100%, 20%);
+            border: 3px solid  hsl(336, 100%, 30%);
+            box-shadow: 0 0 33px rgba(0, 0, 0, 0.3);
+        }
+        .container5 div:nth-child(1) { width: 100%; height: 100%; }
+        .container5 div:nth-child(2) { width: 80%; height: 80%; }
+        .container5 div:nth-child(3) { width: 60%; height: 60%; }
+        .container5 div:nth-child(4) { width: 40%; height: 40%; }
+        .container5 div:nth-child(5) { width: 20%; height: 20%; }
+        .container5:nth-child(2) div:nth-child(1) { filter: brightness(1.0); }
+        .container5:nth-child(2) div:nth-child(2) { filter: brightness(1.2); }
+        .container5:nth-child(2) div:nth-child(3) { filter: brightness(1.4); }
+        .container5:nth-child(2) div:nth-child(4) { filter: brightness(1.6); }
+        .container5:nth-child(2) div:nth-child(5) { filter: brightness(1.8); }
+
+        /* 对比度滤镜 constrast */
+        .box4 {
+            margin: 2em;
+            background-color: darkslategray;
+        }
+        .container6 div {
+            width: 60vw;
+            height: 5em;
+            outline: 1px dashed lime;
+            background-image: linear-gradient(
+                to right,
+                #ddd 10%,
+                #ccc 10%, #ccc 20%,
+                #bbb 20%, #bbb 30%,
+                #aaa 30%, #aaa 40%,
+                #999 40%, #999 50%,
+                #888 50%, #888 60%,
+                #777 60%, #777 70%,
+                #666 70%, #666 80%,
+                #555 80%, #555 90%,
+                #444 90%
+            );
+        }
+        .container6 div:nth-child(1) { filter: contrast(1); }
+        .container6 div:nth-child(2) { filter: contrast(1.2); }
+        .container6 div:nth-child(3) { filter: contrast(2); }
+        .container6 div:nth-child(4) { filter: contrast(3); }
+        .container6 div:nth-child(5) { filter: contrast(10); }
+
+        /* 多重滤镜 */
+        .container7 { justify-content: flex-start; }
+        .container7 div {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+            background-color: hsl(0, 100%, 70%);
+            margin: 0.5em;
+        }
+        .container7 div:nth-child(1) { filter: blur(0px) hue-rotate(0deg); }
+        .container7 div:nth-child(2) { filter: blur(2px) hue-rotate(20deg); }
+        .container7 div:nth-child(3) { filter: blur(4px) hue-rotate(40deg); }
+        .container7 div:nth-child(4) { filter: blur(6px) hue-rotate(60deg); }
+        .container7 div:nth-child(5) { filter: blur(8px) hue-rotate(80deg); }
+    </style>
+</head>
+<body>
+    <h1>透明度滤镜 opacity()</h1>
+    <div class="box container">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <h1>模糊滤镜 blur()</h1>
+    <div class="box container2">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+     
+    <h1>色相滤镜</h1>
+    <div class="box box2">
+        <figure class="container3">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="container3">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h1>亮度滤镜</h1>
+    <div class="box box2">
+        <figure class="container4">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="container4">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h2>亮度滤镜绘制同心圆</h2>
+    <div class="box box3">
+        <figure class="container5">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="container5">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h1>对比度滤镜 contrast()</h1>
+    <div class="box box4">
+        <div class="container6">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <h1>多重滤镜</h1>
+    <div class="box container7">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>

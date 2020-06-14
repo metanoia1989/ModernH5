@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剪切 clip-path</title>
+    <style>
+        .box {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        /* 矩形剪切 */
+        .container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .container div {
+            font-size: 25px;
+            width: 10em;
+            height: 10em;
+            outline: 1px solid gray;
+            position: relative;
+            margin: 2em 0 0 2em;
+        }
+        .container div:nth-child(1) {
+            background-image: 
+                linear-gradient(gray 1px, transparent 1px),
+                linear-gradient(to right, gray 1px, transparent 1px),
+                linear-gradient(to right bottom, lightskyblue, lightyellow, lightpink);
+        }
+        .container div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: inherit;
+            height: inherit;
+            clip-path: inset(1em 2em 3em 4em);
+        }
+        .container div:nth-child(1)::before {
+            background-color: hsla(0, 0%, 0%, 0.5);
+        }
+        .container div:nth-child(2)::before {
+            background-image: linear-gradient(to right bottom, lightskyblue, lightyellow, lightpink);
+        }
+        /* 均衡器 */
+        .container2 {
+            background-color: black;
+        }
+        .equalizer {
+            width: 10em;
+            height: 10em;
+            display: flex;
+            justify-content: space-between;
+        }
+        .equalizer div {
+            width: 1.5em;
+            background-image: linear-gradient(red, yellow, green);
+        }
+        .equalizer:nth-child(2) div:nth-child(1) { clip-path: inset(50% 0 0 0); }
+        .equalizer:nth-child(2) div:nth-child(2) { clip-path: inset(20% 0 0 0); }
+        .equalizer:nth-child(2) div:nth-child(3) { clip-path: inset(38% 0 0 0); }
+        .equalizer:nth-child(2) div:nth-child(4) { clip-path: inset(80% 0 0 0); }
+        .equalizer:nth-child(2) div:nth-child(5) { clip-path: inset(13% 0 0 0); }
+
+        /* 圆形剪切 */
+        .container3 div, 
+        .container4 div,
+        .container5 div,
+        .container6 div 
+        {
+            font-size: 25px;
+            width: 10em;
+            height: 10em;
+            outline: 1px solid gray;
+            position: relative;
+            margin: 2em 0 1em 2em;
+        }
+        .container3 div:nth-child(1),
+        .container4 div:nth-child(1),
+        .container5 div:nth-child(1),
+        .container6 div:nth-child(1)
+        {
+            background-image: 
+                linear-gradient(gray 1px, transparent 1px),  /* 结合下面的site 绘制从上到下的线 太精妙了！ */
+                linear-gradient(to right, gray 1px, transparent 1px),
+                linear-gradient(to right bottom, lightskyblue, lightyellow, lightpink);
+            background-size: 1em 1em, 1em 1em, 100% 100%;
+        }
+
+        .container3 div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: inherit;
+            height: inherit;
+            clip-path: circle(8em at 0% 50%);
+        }
+        .container3 div:nth-child(1)::before {
+            background-color: hsla(0, 0%, 0%, 0.5);
+        }
+        /* 左侧原点 */
+        .container3 div:nth-child(1)::after {
+            content: '';
+            position: absolute;
+            left: -0.5em;
+            top: 4.5em;
+            width: 1em;
+            height: 1em;
+            background-color: orange;
+            border-radius: 50%;
+        }
+        .container3 div:nth-child(2)::before {
+            background-image: linear-gradient(
+                to right bottom,
+                lightskyblue,
+                lightyellow,
+                lightpink
+            );
+        }
+
+        /* 椭圆形剪切 */
+        .container4 div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: inherit;
+            height: inherit;
+            clip-path: ellipse(5em 10em at 50% 100%);
+        }
+        .container4 div:nth-child(1)::before {
+            background-color: hsla(0, 0%, 0%, 0.5);
+        }
+        /* 左侧原点 */
+        .container4 div:nth-child(1)::after {
+            content: '';
+            position: absolute;
+            left: 4.5em;
+            bottom: -0.5em;
+            width: 1em;
+            height: 1em;
+            background-color: orange;
+            border-radius: 50%;
+        }
+        .container4 div:nth-child(2)::before {
+            background-image: linear-gradient(
+                to right bottom,
+                lightskyblue,
+                lightyellow,
+                lightpink
+            );
+        }
+
+        /* 多边形剪切 polygon() */
+        .container5 div::before, 
+        .container6 div::before 
+        {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: inherit;
+            height: inherit;
+        }
+        .container5 div::before {
+            clip-path: polygon(5em 1em, 9em 9em, 1em 9em);
+        }
+        .container6 div::before {
+            clip-path: polygon(
+                0% 20%,
+                60% 20%,
+                60% 0%,
+                100% 50%,
+                60% 100%,
+                60% 80%,
+                0% 80%
+            );
+        }
+        .container5 div:nth-child(1)::before,
+        .container6 div:nth-child(1)::before 
+        {
+            background-color: hsla(0, 0%, 0%, 0.5);
+        }
+        .container5 div:nth-child(2)::before,
+        .container6 div:nth-child(2)::before 
+        {
+            background-image: linear-gradient(
+                to right bottom,
+                lightskyblue,
+                lightyellow,
+                lightpink
+            );
+        }
+    </style>
+</head>
+<body>
+    <h1>矩形剪切 inset()</h1> 
+    <div class="box">
+        <div class="container">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <h2>均衡器</h2>
+    <div class="box container2">
+        <figure class="equalizer">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="equalizer">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h1>圆形剪切 circle()</h1>
+    <div class="box container3">
+        <div></div>
+        <div></div>
+    </div>
+
+    <h1>椭圆形剪切</h1>
+    <div class="box container4">
+        <div></div>
+        <div></div>
+    </div>
+
+    <h1>多边形剪切 polygon()</h1>
+    <div class="box container5">
+        <div></div>
+        <div></div>
+    </div>
+    <div class="box container6">
+        <div></div>
+        <div></div>
+    </div>
+
+</body>
+</html>
