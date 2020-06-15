@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>更多的效果</title>
+    <style>
+        .container {
+            display: flex;
+        }
+        .container div {
+            font-size: 10px;
+            width: 10em;
+            height: 10em;
+            background-color: lightgreen;
+            margin: 1em;
+        }
+        .container div:hover {
+            border-radius: 50%;
+            background-color: lightcoral;
+        }
+        .container div:nth-child(1) { transition: 0.5s; }
+        .container div:nth-child(2):hover { transition: 0.5s; }
+
+        .container div:nth-child(3) { transition: 0.5s; }
+        .container div:nth-child(3):hover { transition: 1s steps(3); }
+
+        /* 令一组元素缓动 */
+        .container2 {
+            font-size: 10px;
+            width: 60em;
+            height: 5em;
+            display: flex;
+            justify-content: space-between;
+            background-color: #eee;
+            padding: 1em;
+            position: relative;
+            margin-bottom: 12em;
+        }
+        .container2::before {
+            content: '';
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            background-color: inherit;
+            padding: inherit;
+            top: 8em;
+            left: 0;
+        }
+        .container2 div {
+            width: 5em;
+            height: 5em;
+            background-color: lightgreen;
+        }
+        .container2:hover div {
+            transform: translateY(8em) scale(0.6);
+            background-color: lightcoral;
+            border-radius: 50%;
+        }
+        .container2:nth-child(1) div {
+            transition: 0.5s;
+        }
+        .container2:nth-child(2) div {
+            transition: 0.5s;
+            transition-delay: calc((var(--n) - 1) * 0.1s);
+        }
+        .container2:nth-child(3) div {
+            transition: 0.5s;
+            transition-delay: calc((var(--n) - 1) * 0.05s);
+        }
+        .container2 div:nth-child(1) { --n: 1; }
+        .container2 div:nth-child(2) { --n: 2; }
+        .container2 div:nth-child(3) { --n: 3; }
+        .container2 div:nth-child(4) { --n: 4; }
+        .container2 div:nth-child(5) { --n: 5; }
+        .container2 div:nth-child(6) { --n: 6; }
+        .container2 div:nth-child(7) { --n: 7; }
+        .container2 div:nth-child(8) { --n: 8; }
+        .container2 div:nth-child(9) { --n: 9; }
+        .container2 div:nth-child(10) { --n: 10; }
+
+        /* 表单控件状态 */
+        /* 获得焦点:focus */
+        .container3 {
+            display: flex;
+            flex-direction: column;
+            margin: 5em;
+        }
+        .container3 input {
+            font-size: 30px;
+            width: 12em;
+            height: 1.5em;
+            margin: 0.5em;
+            padding: 0.1em 0.5em;
+            color: dimgray;
+            border-style: solid;
+            border-style: solid;
+            border-width: 0 0 0.2em 0;
+            border-color: transparent;
+            box-sizing: border-box;
+            box-shadow: 0 0 0 1em #eee;
+            transition: 0.5s;
+        }
+        .container3 input:focus {
+            outline: none;
+        }
+        .container3 input:nth-child(1):focus { border-color: skyblue; }
+        .container3 input:nth-child(2):focus { border-color: lightgreen; }
+        .container3 input:nth-child(3):focus { border-color: lightcoral; }
+
+        /* 选择选项 :checked */
+        .container4 {
+            background-color: #eee;
+            padding: 1em;
+            margin: 2em;
+            font-size: 1.5em;
+            width: 15em;
+            display: flex;
+            justify-content: space-between;
+            box-shadow: 0 0.5em 1em hsla(0, 0%, 0%, 0.2);
+        }
+        .container4 input {
+            position: absolute;
+            visibility: hidden;
+        }
+        .container4 label {
+            color: dodgerblue;
+            border: solid transparent 0 0 0.2em 0;
+            transition: 0.3em;
+        }
+        input:checked + label {
+            border-color: lightcoral;
+        }
+        /* 页面跳转:target */
+        .message {
+            position: relative;
+            font-size: 30px;
+            letter-spacing: 0.05em;
+            width: 10em;
+            height: 3em;
+            top: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: orangered;
+            background-color: lightyellow;
+            border: 1px solid lightgray;
+            filter: opacity(0);
+            transition: 0.5s;
+        }
+        .message .close {
+            font-size: 30px;
+            font-family: sans-serif;
+            text-decoration: none;
+            position: absolute;
+            right: 0.2em;
+            top: -0.2em;
+            color: gray;
+        }
+        .message:target {
+            filter: opacity(1);
+        }
+    </style>
+</head>
+<body>
+    <h1>设置恢复效果</h1> 
+    <figure class="container">
+        <div></div>
+        <div></div>
+        <div></div>
+    </figure>
+
+    <h1>令一组元素缓动</h1>
+    <div>
+        <figure class="container2">
+            <div></div><div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div><div></div>
+        </figure>
+        <figure class="container2">
+            <div></div><div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div><div></div>
+        </figure>
+        <figure class="container2">
+            <div></div><div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div><div></div>
+        </figure>
+    </div>
+
+    <h1>对元素不同状态进行交互设计</h1>
+    <h2>获得焦点:focus</h2>
+    <div class="container3">
+        <input type="text">
+        <input type="text">
+        <input type="text">
+    </div>
+    <h2>选择选项:checked - 好像无效</h2>
+    <div class="container4">
+        <input type="radio" name="radio-group" id="a">
+        <label for="a">OptionA</label>
+        <input type="radio" name="radio-group" id="b">
+        <label for="b">OptionB</label>
+        <input type="radio" name="radio-group" id="c">
+        <label for="c">OptionC</label>
+    </div>
+    <h2>页内跳转:target</h2>
+    <div class="box">
+        <a href="#message">click to open popup</a>
+        <div class="message" id="message">
+            Think Different
+            <a href="#" class="close">x</a>
+        </div>
+    </div>
+</body>
+</html>

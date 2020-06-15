@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>缓动属性</title>
+    <style>
+        .box {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        /* transition-duration */
+        .container,
+        .container2
+        {
+            display: flex;
+            justify-content: space-around;
+            background-color: #eee;
+            font-size: 10px;
+            width: 50em;
+            padding: 2em;
+            margin: 2em;
+        }
+        .container div {
+            width: 10em;
+            height: 10em;
+            background-color: lightgreen;
+        }
+
+        .container div:nth-child(1):hover { background-color: lightcoral; }
+        .container div:nth-child(2):hover { border-radius: 50%; }
+        .container div:nth-child(3):hover { transform: scale(0.5); }
+        .container div:nth-child(4):hover { box-shadow: 0 0 2em 0.5em hsla(0, 0%, 0%, 0.3); }
+
+        .container div:nth-child(1) { transition-duration: 0.5s; }
+        .container div:nth-child(2) { transition-duration: 1s; }
+        .container div:nth-child(3) { transition-duration: 2s; }
+        .container div:nth-child(4) { transition-duration: 3s; }
+
+        .container:nth-child(2) div:nth-child(1) { background-color: lightcoral; }
+        .container:nth-child(2) div:nth-child(2) { border-radius: 50%; }
+        .container:nth-child(2) div:nth-child(3) { transform: scale(0.5); }
+        .container:nth-child(2) div:nth-child(4) { box-shadow: 0 0 2em 0.5em hsla(0, 0%, 0%, 0.3); }
+
+        /* 延时启动时长 transition-delay */
+        .container2 div {
+            width: 10em;
+            height: 10em;
+            background-color: lightgreen;
+            transition: 5s;
+        }
+        .container2 div:hover {
+            background-color: lightcoral;
+            border-radius: 50%;
+        }
+        .container2 div:nth-child(1) { transition-delay: 0.5s; }
+        .container2 div:nth-child(2) { transition-delay: 1s; }
+        .container2 div:nth-child(3) { transition-delay: 2s; }
+        .container2 div:nth-child(4) { transition-delay: 3s; }
+
+        /* 参与缓动的属性 transition-property */
+        .container3 {
+            display: flex;
+            justify-content: space-around;
+            font-size: 10px;
+            width: 50em;
+            padding: 2em;
+            margin: 2em;
+        }
+        .container3 div {
+            width: 10em;
+            height: 10em;
+            background-color: lightgreen;
+        }
+        .container3 div:first-child:hover,
+        .container3 div:nth-child(3) {
+            background-color: lightcoral;
+            border-radius: 50%;
+        }
+        .container3 div:first-child {
+            transition: 
+                background-color 1s,
+                border-radius 1s 1s;
+        }
+        .container3 div:nth-child(2) {
+            background-color: lightcoral;
+        }
+
+        /* 时间函数 transition-timing-function */
+        .container4 {
+            width: 600px;
+            background-color: #eee;
+            border: 1px solid gray;
+            padding: 1em;
+        }
+        .container4 div {
+            font-size: 10px;
+            width: 6em;
+            height: 6em;
+            outline: 1px dashed gray;
+            margin: 1em;
+            position: relative;
+        }
+        .container4 div::before {
+            content: '';
+            position: absolute;
+            width: inherit;
+            height: inherit;
+            background-color: lightgreen;
+            top: 0;
+            left: 0;
+            transition: 1.5s;
+        }
+        .container4 div:hover::before {
+            left: 500px;
+        }
+        .container4 div.ease::before { transition-timing-function: ease; }
+        .container4 div.linear::before { transition-timing-function: linear; }
+        .container4 div.ease-in::before { transition-timing-function: ease-in; }
+        .container4 div.ease-out::before { transition-timing-function: ease-out; }
+        .container4 div.ease-in-out::before { transition-timing-function: ease-in-out; }
+
+        .container4 div.bezier1::before { transition-timing-function: cubic-bezier(0.215, 0.61, 0.335, 1); }
+        .container4 div.bezier2::before { transition-timing-function: cubic-bezier(0.75, -0.5, 0.25, 1.5); }
+        .container4 div.bezier3::before { transition-timing-function: cubic-bezier(0.5, -0.25, 0.5, 1.25); }
+        .container4 div.bezier4::before { transition-timing-function: cubic-bezier(0.5, 1.7, 0.5, 1.2); }
+        .container4 div.bezier5::before { transition-timing-function: cubic-bezier(0.8, 0.2, 0, 1.2); }
+
+        /* 充电电池  */
+        .battery {
+            font-size: 30px;
+            width: 6em;
+            height: 3em;
+            color: midnightblue;
+            border: 0.5em solid;
+            border-radius: 0.2em;
+            position: relative;
+            background-image: linear-gradient(to right, whitesmoke, whitesmoke);
+            background-repeat: no-repeat;
+            background-size: 10% 80%;
+            background-position: 0.3em 0.3em;
+            transition: 5s steps(6);
+        }
+        .battery:hover {
+            background-size: 90% 80%;
+        }
+        .battery::after {
+            content: '';
+            position: absolute;
+            width: 0.5em;
+            height: 2em;
+            background-color: currentColor;
+            top: 0.5em;
+            right: -1em;
+            border-radius: 0 0.2em 0.2em 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>持续时长 transition-duration</h1> 
+    <div class="">
+        <figure class="container">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+        <figure class="container">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </figure>
+    </div>
+
+    <h1>延时启动时长 transition-delay</h1>
+    <figure class="container2">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </figure>
+
+    <h1>参与缓动的属性 transition-property</h1>
+    <figure class="container3">
+        <div></div>
+        <div></div>
+        <div></div>
+    </figure>
+
+    <h1>时间函数 transition-timing-function</h1>
+    <figure class="container4">
+        <div class="ease"></div>
+        <div class="linear"></div>
+        <div class="ease-in"></div>
+        <div class="ease-out"></div>
+        <div class="ease-in-out"></div>
+        <div class="bezier1"></div>
+        <div class="bezier2"></div>
+        <div class="bezier3"></div>
+        <div class="bezier4"></div>
+        <div class="bezier5"></div>
+    </figure>
+
+    <h1>steps() 定义起止状态之间要经过几步变化</h1>
+    <div style="background-color: lightblue; padding: 2em; width: 50em;">
+        <div class="battery"></div>
+    </div>
+</body>
+</html>
