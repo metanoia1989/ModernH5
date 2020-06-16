@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画属性</title>
+    <style>
+        /* 基础造型 */
+        .container, 
+        .container2,
+        .container3,
+        .container4,
+        .container5 
+        {
+            font-size: 30px;
+            width: 9em;
+            height: 3em;
+            border: 0.3em solid silver;
+            border-radius: 2em;
+        }
+        .container .ball,
+        .container2 .ball, 
+        .container3 .ball,
+        .container4 .ball,
+        .container5 .ball 
+        {
+            width: 3em;
+            height: 3em;
+            border-radius: 50%;
+            background-color: dodgerblue;
+        }
+
+        .container .ball {
+            font-size: 30px;
+            animation: shift 1s linear infinite alternate; 
+        }
+        @keyframes shift {
+            to {
+                transform: translateX(6em);
+            }
+        }
+        /* 持续时长 animation-duration */
+        .container2:nth-child(1) .ball {
+            transition: transform 1s; /* 利用缓动实现交互效果 */
+            transition-delay: 0.5s;
+        }
+        .container2:nth-child(1):hover .ball {
+            transform: translateX(6em);
+            background-color: lightcoral;
+        }
+        .container2:nth-child(2):hover .ball {
+            animation: shift2 1s forwards;
+            animation-delay: 0.5s;
+        }
+        @keyframes shift2 {
+            to {
+                transform: translateX(6em);
+            } 
+            0%, 100% {
+                background-color: lightcoral;
+            }
+        }
+
+        /* 延时启动时长 animation-delay */
+        .container3 .ball {
+            font-size: 30px;
+            animation: shift3 1s linear infinite alternate;
+        }
+        .container3:nth-child(1) .ball { animation-delay: 0s; }
+        .container3:nth-child(2) .ball { animation-delay: -0.1s; }
+        .container3:nth-child(3) .ball { animation-delay: -0.2s; }
+        .container3:nth-child(4) .ball { animation-delay: -0.3s; }
+        .container3:nth-child(5) .ball { animation-delay: -0.4s; }
+        @keyframes shift3 {
+            to {
+                transform: translateX(6em);
+            } 
+        }
+
+        /* 时间函数 animation-timing-function */
+        .container4 .ball {
+            font-size: 30px;
+            animation: shift4 4s cubic-bezier(0.75, -0.5, 0.25, 1.5) infinite alternate;
+        }
+        @keyframes shift4 {
+            33% { transform: translateX(2em); } 
+            66% { transform: translateX(4em); } 
+            100% { transform: translateX(6em); } 
+        }
+
+        /* 播放次数 animation-iteration-count */
+        .container5 .ball {
+            font-size: 30px;
+            animation: shift5 1s linear forwards;
+        }
+        .container5:nth-child(1) .ball { animation-iteration-count: 3; }
+        .container5:nth-child(2) .ball { animation-iteration-count: 2.5; }
+        @keyframes shift5 {
+            to {
+                transform: translateX(6em);
+            } 
+        }
+    </style>
+</head>
+<body>
+    <h1>基础造型</h1> 
+    <figure class="container">
+        <div class="ball"></div>
+    </figure>
+
+    <h1>持续时长 animation-duration</h1>
+    <div>
+        <figure class="container2">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container2">
+            <div class="ball"></div>
+        </figure>
+    </div>
+
+    <h1>延时启动时长 animation-delay</h1>
+    <div>
+        <figure class="container3">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container3">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container3">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container3">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container3">
+            <div class="ball"></div>
+        </figure>
+    </div>
+
+    <h1>时间函数 animation-timing-function</h1>
+    <figure class="container4">
+        <div class="ball"></div>
+    </figure>
+
+    <h1>播放次数 animation-iteration-count</h1>
+    <div>
+        <figure class="container5">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container5">
+            <div class="ball"></div>
+        </figure>
+    </div>
+
+</body>
+</html>

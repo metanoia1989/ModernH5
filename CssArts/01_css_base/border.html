@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>边框测试</title>
+    <style>
+        .box {
+            background-color: lightyellow;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .box div {
+            background-color: lightcoral;
+            width: 5em;
+            height: 5em;
+            margin: 1em;
+        }
+        .box div:nth-child(1) {
+            border-style: solid;
+            border-width: 0 0 1em 0;
+            border-color: transparent transparent lightblue transparent;
+            border-radius: 0 0 50% 50%;
+        }
+        .box div:nth-child(2) {
+            border-style: solid;
+            border-width: 0 1em 0 0;
+            border-color: transparent lightblue transparent transparent;
+            border-radius: 0% 50% 50% 0; /* 优先在前一个转弯 这里第一个50%为右边框，所以右边框变圆 */
+        }
+        .box div:nth-child(3) {
+            border-top-style: solid;
+            border-top-width: 1em;
+            border-top-color: lightblue;
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+        }
+        .box div:nth-child(4) {
+            border-left-style: solid;
+            border-left-width: 1em;
+            border-left-color: lightblue;
+            border-top-left-radius: 100%;
+            /* border-bottom-left-radius: 100%; */
+        }
+    </style>
+</head>
+<body>
+    <h1>测试边框</h1> 
+    <div class="box">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</body>
+</html>
