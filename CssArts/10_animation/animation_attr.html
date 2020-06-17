@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>动画属性</title>
     <style>
         /* 基础造型 */
-        .container, 
+        
+        .container,
         .container2,
         .container3,
         .container4,
-        .container5 
+        .container5,
+        .container6,
+        .container7,
+        .container8,
+        .container9, 
+        .container10,
+        .container11
         {
             font-size: 30px;
             width: 9em;
@@ -18,92 +26,270 @@
             border: 0.3em solid silver;
             border-radius: 2em;
         }
+        
         .container .ball,
-        .container2 .ball, 
+        .container2 .ball,
         .container3 .ball,
         .container4 .ball,
-        .container5 .ball 
+        .container5 .ball,
+        .container6 .ball,
+        .container7 .ball,
+        .container8 .ball,
+        .container9 .ball, 
+        .container10 .ball, 
+        .container11 .ball
         {
             width: 3em;
             height: 3em;
             border-radius: 50%;
             background-color: dodgerblue;
         }
-
+        
         .container .ball {
             font-size: 30px;
-            animation: shift 1s linear infinite alternate; 
+            animation: shift 1s linear infinite alternate;
         }
+        
         @keyframes shift {
             to {
                 transform: translateX(6em);
             }
         }
         /* 持续时长 animation-duration */
+        
         .container2:nth-child(1) .ball {
-            transition: transform 1s; /* 利用缓动实现交互效果 */
+            transition: transform 1s;
+            /* 利用缓动实现交互效果 */
             transition-delay: 0.5s;
         }
+        
         .container2:nth-child(1):hover .ball {
             transform: translateX(6em);
             background-color: lightcoral;
         }
+        
         .container2:nth-child(2):hover .ball {
             animation: shift2 1s forwards;
             animation-delay: 0.5s;
         }
+        
         @keyframes shift2 {
             to {
                 transform: translateX(6em);
-            } 
-            0%, 100% {
+            }
+            0%,
+            100% {
                 background-color: lightcoral;
             }
         }
-
         /* 延时启动时长 animation-delay */
+        
         .container3 .ball {
             font-size: 30px;
             animation: shift3 1s linear infinite alternate;
         }
-        .container3:nth-child(1) .ball { animation-delay: 0s; }
-        .container3:nth-child(2) .ball { animation-delay: -0.1s; }
-        .container3:nth-child(3) .ball { animation-delay: -0.2s; }
-        .container3:nth-child(4) .ball { animation-delay: -0.3s; }
-        .container3:nth-child(5) .ball { animation-delay: -0.4s; }
+        
+        .container3:nth-child(1) .ball {
+            animation-delay: 0s;
+        }
+        
+        .container3:nth-child(2) .ball {
+            animation-delay: -0.1s;
+        }
+        
+        .container3:nth-child(3) .ball {
+            animation-delay: -0.2s;
+        }
+        
+        .container3:nth-child(4) .ball {
+            animation-delay: -0.3s;
+        }
+        
+        .container3:nth-child(5) .ball {
+            animation-delay: -0.4s;
+        }
+        
         @keyframes shift3 {
             to {
                 transform: translateX(6em);
-            } 
+            }
         }
-
         /* 时间函数 animation-timing-function */
+        
         .container4 .ball {
             font-size: 30px;
             animation: shift4 4s cubic-bezier(0.75, -0.5, 0.25, 1.5) infinite alternate;
         }
+        
         @keyframes shift4 {
-            33% { transform: translateX(2em); } 
-            66% { transform: translateX(4em); } 
-            100% { transform: translateX(6em); } 
+            33% {
+                transform: translateX(2em);
+            }
+            66% {
+                transform: translateX(4em);
+            }
+            100% {
+                transform: translateX(6em);
+            }
         }
-
         /* 播放次数 animation-iteration-count */
+        
         .container5 .ball {
             font-size: 30px;
             animation: shift5 1s linear forwards;
         }
-        .container5:nth-child(1) .ball { animation-iteration-count: 3; }
-        .container5:nth-child(2) .ball { animation-iteration-count: 2.5; }
+        
+        .container5:nth-child(1) .ball {
+            animation-iteration-count: 3;
+        }
+        
+        .container5:nth-child(2) .ball {
+            animation-iteration-count: 2.5;
+        }
+        
         @keyframes shift5 {
+            to {
+                transform: translateX(6em);
+            }
+        }
+        /* 填充模式 animation-fill-mode */
+        
+        .container6 .ball {
+            font-size: 30px;
+            animation: shift6 1s;
+        }
+        
+        .container6:nth-child(1) .ball {
+            animation-fill-mode: none;
+        }
+        
+        .container6:nth-child(2) .ball {
+            animation-fill-mode: forwards;
+        }
+        
+        @keyframes shift6 {
+            to {
+                transform: translateX(6em);
+            }
+        }
+        
+        .container8:nth-child(1) .ball {
+            transform: scale(0);
+            filter: opacity(0);
+            animation: show 1s 3;
+        }
+        
+        .container8:nth-child(2) .ball {
+            animation: show 1s 3;
+            animation-fill-mode: backwards;
+        }
+        
+        @keyframes show {
+            from {
+                transform: scale(0);
+                filter: opacity(0);
+            }
+            to {
+                transform: scale(1);
+                filter: opacity(1);
+            }
+        }
+        /* 变化方向 animation-direction */
+        
+        .container7 .ball {
+            font-size: 30px;
+            animation: shift7 2s infinite forwards;
+        }
+        
+        .container7:nth-child(1) .ball {
+            animation-direction: normal;
+        }
+        
+        .container7:nth-child(2) .ball {
+            animation-direction: alternate;
+        }
+        
+        .container7:nth-child(3) .ball {
+            animation-direction: reverse;
+        }
+        
+        .container7:nth-child(4) .ball {
+            animation-direction: alternate-reverse;
+        }
+        
+        @keyframes shift7 {
+            to {
+                transform: translateX(6em) scale(0.5);
+                background-color: lightcoral;
+            }
+        }
+        /* 播放状态 animation-play-state */
+        
+        .container9 .ball {
+            font-size: 30px;
+            animation: shift8 1s linear infinite alternate;
+        }
+        
+        .container9:hover .ball {
+            animation-play-state: paused;
+        }
+        
+        @keyframes shift8 {
+            to {
+                transform: translateX(6em);
+            }
+        }
+        /* 多个动画效果叠加 */
+        /* 一个元素多个动画 */
+        .container10 {
+            border-color: silver dodgerblue silver hotpink;
+        }
+        .container10 .ball {
+            font-size: 30px;
+            animation: 
+                shift10 1s linear infinite alternate,
+                change-color 2s linear infinite;
+        }
+        @keyframes shift10 {
             to {
                 transform: translateX(6em);
             } 
         }
+        @keyframes change-color {
+            55% {
+                background-color: dodgerblue;
+            } 
+            5%, 50% {
+                background-color: hotpink;
+            }
+        }
+        /* 多个元素一个动画 */
+        .box {
+            height: 22em;
+            width: 25em;
+            display: flex;
+            align-items: center;
+        }
+        .container11 {
+            border-color: silver dodgerblue silver hotpink;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(1turn);
+            }
+        }
+        .container11 .ball {
+            font-size: 30px;
+            animation: 
+                shift10 1s linear infinite alternate,
+                change-color 2s linear infinite;
+        }
     </style>
 </head>
+
 <body>
-    <h1>基础造型</h1> 
+    <h1>基础造型</h1>
     <figure class="container">
         <div class="ball"></div>
     </figure>
@@ -152,5 +338,57 @@
         </figure>
     </div>
 
+    <h1>填充模式 animation-fill-mode</h1>
+    <div>
+        <figure class="container6">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container6">
+            <div class="ball"></div>
+        </figure>
+    </div>
+    <h2>backwards用法</h2>
+    <div>
+        <figure class="container8">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container8">
+            <div class="ball"></div>
+        </figure>
+    </div>
+
+    <h1>变化方向 animation-direction</h1>
+    <div>
+        <figure class="container7">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container7">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container7">
+            <div class="ball"></div>
+        </figure>
+        <figure class="container7">
+            <div class="ball"></div>
+        </figure>
+    </div>
+
+    <h1>播放状态 animation-play-state</h1>
+    <figure class="container9">
+        <div class="ball"></div>
+    </figure>
+
+    <h1>多个动画效果叠加</h1>
+    <h2>小球同时执行两组动画</h2>
+    <figure class="container10">
+        <div class="ball"></div>
+    </figure>
+    <h2>多个元素同时播放动画</h2>
+    <div class="box">
+        <figure class="container11">
+            <div class="ball"></div>
+        </figure>
+    </div>
 </body>
+
 </html>
