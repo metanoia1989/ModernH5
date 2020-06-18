@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卓别林形象</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .chaplin {
+            position: relative;
+            font-size: 10px;
+            color: #333;
+            width: 40em;
+            height: 34em;
+            background-color: #eee;
+            border-radius: 0.5em;
+            display: flex;   
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 0 4em 1em rgba(0, 0, 0, 0.2);
+            padding-top: 2em;
+            padding-bottom: 2em;
+        }
+        /* 帽子 */
+        .hat { 
+            position: absolute;
+            width: 6.4em;
+            height: 4.6em;
+            background-color: currentColor;
+            border-radius: 2.3em 2.3em 0 0;
+            display: flex;
+            justify-content: center;
+        }
+        .hat::before {
+            content: '';
+            position: absolute;
+            width: 10em;
+            height: 0.8em;
+            background-color: currentColor;
+            border-radius: 0.4em;
+            top: calc(100% + 0.4em);
+        }
+        /* 胡子 */
+        .beard {
+            position: absolute;
+            width: 1.5em;
+            height: 0;
+            border-bottom: 1em solid currentColor;
+            border-left: 0.4em solid transparent;
+            border-right: 0.4em solid transparent;
+            top: 11.6em;
+        }
+        /* 拐杖 */
+        .stick {
+            position: absolute;
+            width: 5.6em;
+            height: 3em;
+            box-sizing: border-box;
+            border: 0.8em solid;
+            border-radius: 5.6em 5.6em 0 0;
+            border-bottom: none;
+            bottom: 10.5em;
+        }
+        .stick::before {
+            content: '';
+            /* 伪元素必须要有 absolute 定位，不然会没有高度和宽度 */
+            position: absolute;
+            width: 0.8em;
+            height: 10.5em;
+            background-color: currentColor;
+            left: -0.8em;
+            bottom: -10.5em;
+        }
+        .stick::after {
+            content: '';
+            position: absolute;
+            width: 0.8em;
+            height: 0.8em;
+            background-color: currentColor;
+            border-radius: 50%;
+            right: -0.8em;
+            bottom: calc(0.8em / 2 * -1);
+        }
+        /* 没有欢笑的一天是虚度的一天 */
+        .quote {
+            position: absolute;
+            left: 50%;
+            bottom: 2.5em;
+            font-family: sans-serif;
+            text-transform: uppercase;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+        }
+        .quote span:nth-child(1) { letter-spacing: 0.05em; }
+        .quote span:nth-child(2) { font-size: 1.6em; }
+    </style>
+</head>
+<body>
+    <figure class="chaplin">
+        <div class="hat"></div>
+        <div class="beard"></div>
+        <div class="stick"></div>
+        <p class="quote">
+            <span>a day without</span>
+            <span>laughter</span>
+            <span>is a day wasted</span>
+        </p>
+    </figure> 
+</body>
+</html>
