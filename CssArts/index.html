@@ -7,37 +7,136 @@
     <link rel="stylesheet" href="../assets/css/common.css">
 </head>
 <body>
-    <h1 class="title">第1章 CSS基础</h1>
-    <div class="link">
-        <a href="./01_css_base/border.html" class="line">border</a>
-    </div>
-    <div class="link">
-        <a href="./01_css_base/box-sizing.html" class="line">box-sizing</a>
-    </div>
-    <div class="link">
-        <a href="./01_css_base/flex.html" class="line">flex</a>
-    </div>
-    <div class="link">
-        <a href="./01_css_base/grid.html" class="line">grid</a>
-    </div>
-    <div class="link">
-        <a href="./01_css_base/inherit_quote.html" class="line">inhert quote</a>
-    </div>
-    <div class="link">
-        <a href="./01_css_base/inline-style.html" class="line">inline style</a>
-    </div>
-    <div class="link">
-        <a href="./01_css_base/position.html" class="line">position</a>
-    </div>
-    <div class="link">
-        <a href="./01_css_base/selector.html" class="line">selector</a>
-    </div>
-    <div class="link">
-        <a href="./01_css_base/unit.html" class="line">unit</a>
-    </div>
-    <div class="link">
-        <a href="./01_css_base/z-index.html" class="line">z-index</a>
-    </div>
+    <div id="app"></div>
+
+    <script>
+        function renderList(title, items) {
+            if(!Array.isArray(items)) {
+                throw new Error('items必须为数组');
+            }
+            var links = items.map((item) => {
+                const { name, link } = item;                
+                let html = `
+                    <div class="link">
+                        <a href="${link}" class="line">${name}</a>
+                    </div>
+                `;
+                return html;
+            });
+
+            return `<h1 class="title">${title}</h1>` + links.join('\n');
+        }
+        var data = [
+            { 
+                title: "第一章 CSS基础", 
+                items: [
+                    { name: "border", link: "./01_css_base/border.html" },
+                    { name: "box-sizing", link: "./01_css_base/box-sizing.html" },
+                    { name: "flex", link: "./01_css_base/flex.html" },
+                    { name: "grid", link: "./01_css_base/grid.html" },
+                    { name: "inherit_quote", link: "./01_css_base/inherit_quote.html" },
+                    { name: "inline-style", link: "./01_css_base/inline-style.html" },
+                    { name: "position", link: "./01_css_base/position.html" },
+                    { name: "selector", link: "./01_css_base/selector.html" },
+                    { name: "unit", link: "./01_css_base/unit.html" },
+                    { name: "z-index", link: "./01_css_base/z-index.html" },
+                ], 
+            },
+            { 
+                title: "第二章 伪元素", 
+                items: [
+                    { name: "border_after伪元素", link: "./02_pseudo_element/before_after.html" },
+                    { name: "content属性", link: "./02_pseudo_element/content.html" },
+                    { name: "flexible_use 灵活运用", link: "./02_pseudo_element/content.html" },
+                    { name: "monster 怪兽", link: "./02_pseudo_element/monster.html" },
+                    { name: "steamer 蒸锅", link: "./02_pseudo_element/steamer.html" },
+                ], 
+            },
+            { 
+                title: "第三章 边框", 
+                items: [
+                    { name: "border_attributes 边框属性", link: "./03_border/border_attributes.html" },
+                    { name: "drawing 描边造型", link: "./03_border/drawing.html" },
+                    { name: "geometric 几何造型", link: "./03_border/geometric.html" },
+                    { name: "pencil 铅笔", link: "./03_border/pencil.html" },
+                ], 
+            },
+            { 
+                title: "第四章 背景", 
+                items: [
+                    { name: "background_attributes 背景属性", link: "./04_background/background_attributes.html" },
+                    { name: "gradient 渐变", link: "./04_background/gradient.html" },
+                    { name: "radar 雷达扫描", link: "./04_background/radar.html" },
+                ], 
+            },
+            { 
+                title: "第五章 阴影", 
+                items: [
+                    { name: "box-shadow 盒阴影", link: "./05_box_shadow/box-shadow.html" },
+                    { name: "drop-shadow 形状阴影函数", link: "./05_box_shadow/drop-shadow.html" },
+                    { name: "calendar 日历", link: "./05_box_shadow/calendar.html" },
+                ], 
+            },
+            { 
+                title: "第六章 剪切、滤镜和色彩混合", 
+                items: [
+                    { name: "clip-path 剪切路径", link: "./06_clip_filter/clip-path.html" },
+                    { name: "filter 滤镜", link: "./06_clip_filter/filter.html" },
+                    { name: "mix-blend 色彩混合", link: "./06_clip_filter/mix-blend.html" },
+                    { name: "lotus 莲花", link: "./06_clip_filter/lotus.html" },
+                    { name: "penrose 彭斯三角形", link: "./06_clip_filter/penrose.html" },
+                ], 
+            },
+            { 
+                title: "第七章 变量和计数器", 
+                items: [
+                    { name: "var 变量", link: "./07_var_counter/var.html" },
+                    { name: "counter 计数器", link: "./07_var_counter/counter.html" },
+                    { name: "cranes 纸鹤", link: "./07_var_counter/cranes.html" },
+                ], 
+            },
+            { 
+                title: "第八章 变换", 
+                items: [
+                    { name: "alternate 变换函数", link: "./08_transform/alternate.html" },
+                    { name: "transform-origin 变换原点", link: "./08_transform/transform-origin.html" },
+                    { name: "spiral_arms 炫彩炫臂", link: "./08_transform/spiral_arms.html" },
+                ], 
+            },
+            { 
+                title: "第九章 缓动", 
+                items: [
+                    { name: "transition-attr 缓动属性", link: "./09_transition/transition-attr.html" },
+                    { name: "transition-another", link: "./09_transition/transition-another.html" },
+                    { name: "rainbow 彩虹", link: "./09_transition/rainbow.html" },
+                ], 
+            },
+            { 
+                title: "第十章 动画", 
+                items: [
+                    { name: "animation_attr 动画属性", link: "./10_animation/animation_attr.html" },
+                    { name: "animation_more 不同属性的动画效果", link: "./10_animation/animation_more.html" },
+                    { name: "keyframes 关键帧", link: "./10_animation/keyframes.html" },
+                ], 
+            },
+            { 
+                title: "第十一章 创意造型", 
+                items: [
+                    { name: "chaplin 卓别林", link: "./11_originality/chaplin.html" },
+                    { name: "sea 海浪", link: "./11_originality/sea.html" },
+                    { name: "sun 天梯运转模型", link: "./11_originality/sun.html" },
+                ], 
+            },
+        ];
+        window.addEventListener('DOMContentLoaded', () => {
+            var html = data.map((value) => {
+                const { title, items } = value;
+                return renderList(title, items);
+            });
+            var app = document.getElementById('app');
+            app.innerHTML = html;
+        });
+    </script>
 
 </body>
 </html>
