@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>滚动的波浪</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            font: 300 16px/1.8 -apple-system,PingFang SC,Verdana,Helvetica Neue,Microsoft Yahei,Hiragino Sans GB,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
+            font-size: 62.5%;
+            background: #fafafa;
+            text-rendering: optimizelegibility;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            /* background-color: #ff8c94; */
+            animation: colorful 10s linear infinite;
+        }
+        .ocean, .wave {
+            position: absolute;
+        }
+        .ocean {
+            height: 1%;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            background: #fff;
+            opacity: .7;
+            pointer-events: none;
+        }
+
+        .wave {
+            background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjE5OCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSI1MCUiIHgyPSI1MCUiIHkxPSItMTAuOTU5JSIgeTI9IjEwMCUiPgogICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjZmZmZmZmIiBzdG9wLW9wYWNpdHk9Ii4yNSIgb2Zmc2V0PSIwJSIvPgogICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjZmZmZmZmIiBvZmZzZXQ9IjEwMCUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxwYXRoIGZpbGw9InVybCgjYSkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTS4wMDUgMTIxQzMxMSAxMjEgNDA5Ljg5OC0uMjUgODExIDBjNDAwIDAgNTAwIDEyMSA3ODkgMTIxdjc3SDBzLjAwNS00OCAuMDA1LTc3eiIgdHJhbnNmb3JtPSJtYXRyaXgoLTEgMCAwIDEgMTYwMCAwKSIvPgo8L3N2Zz4K) repeat-x;
+            top: -198px;
+            width: 6400px;
+            height: 198px;
+            animation: wave 7s cubic-bezier(.36,.45,.63,.53) infinite;
+            transform: translateZ(0);
+        }
+
+        .wave:nth-of-type(2) {
+            top: -175px;
+            animation: wave 7s cubic-bezier(.36,.45,.63,.53) -.125s infinite, swell 7s ease -1.25s infinite;
+            opacity: 1;
+        }
+
+        @keyframes wave {
+            0% {
+                margin-left: 0;
+            }
+
+            100% {
+                margin-left: -1600px;
+            }
+        }
+
+        @keyframes swell {
+            0%, 100% {
+                transform: translate3d(0,-25px,0);
+            }
+            50% {
+                transform: translate3d(0,5px,0);
+            }
+        }
+
+        @keyframes colorful {
+            0% {
+                background-color: #2196f3;
+            }
+            20% {
+                background-color: #ff8c94;
+            }
+            40% {
+                background-color: #ffd460;
+            }
+            60% {
+                background-color: #a1d9ff;
+            }
+            80% {
+                background-color: #c5e763;
+            }
+            90% {
+                background-color: #17b978;
+            }
+            100% {
+                background-color: #1e56a0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+        <div class="ocean">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
+        </div>
+</body>
+
+</html>
