@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彩色文字</title>
+    <style>
+        .color-text {
+            text-align: center;
+            font-size: 22px;
+            line-height: 28px;
+            font-weight: bold;
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-image: -webkit-linear-gradient(left, #129835, #fffc00 25%, #129835 50%, #fffc00 75%, #129835 100%);
+            background-image: -ms-linear-gradient(left, #129835, #fffc00 25%, #129835 50%, #fffc00 75%, #129835 100%);
+            background-image: -moz-linear-gradient(left, #129835, #fffc00 25%, #129835 50%, #fffc00 75%, #129835 100%);
+            background-image: -o-linear-gradient(left, #129835, #fffc00 25%, #129835 50%, #fffc00 75%, #129835 100%);
+            background-image: linear-gradient(left, #129835, #fffc00 25%, #129835 50%, #fffc00 75%, #129835 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr='#129835', endcolorstr='#F9E92B', gradientType=1);
+            background-size: 200%, 100%;
+            animation: word 1s linear infinite;
+        }
+
+
+        @keyframes word {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -100% 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="color-text">彩色文字</h1> 
+</body>
+</html>
