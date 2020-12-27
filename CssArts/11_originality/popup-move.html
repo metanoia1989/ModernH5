@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>弹窗移动效果</title>
+    <style>
+        .box {
+            width: 100vw;
+            height: 100vh;
+            background-color: lightyellow;
+        }
+        .popup {
+            position: fixed; 
+            left: 20px;
+            top: 100px;
+            display: flex;
+            background-color: #5261f0;
+            flex-direction: column;
+            color: white;
+            width: 300px;
+            height: 160px;
+            overflow: hidden;
+            justify-content: space-around;
+        }
+        .popup .header {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .popup .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding-left: 10px;
+        }
+        .popup .footer .qrcode {
+            width: 30%;
+            padding-right: 10px;
+        }
+        .popup .footer .qrcode img {
+            width: 100%;
+        }
+        .popup .footer .tips {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="popup">
+            <div class="header">2020年省级人民政府<br>履行教育职责情况满意度调查</div>
+            <div class="footer">
+                <div class="qrcode">
+                    <img src="./qrcode.png" alt="" srcset="">
+                </div>
+                <div class="tips">微信扫描关注公众号<br>互动平台-政府履职情况调查</div>
+            </div>
+        </div> 
+    </div>
+    
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+        
+        $(function () {
+            // 文字走马灯
+            var popupWidth = $('.popup').width();
+            var width = 500; // 活动的区域宽度 必须大于 文字走马灯的宽度 300px
+            var direction = 1;
+            setInterval(function () {
+                var left = parseInt($('.popup').css('left').replace('px', '')); 
+                if (left <= 0) { // 到达了左侧
+                    direction = 1;
+                } else if (left >= width - popupWidth) { // 到达了右侧
+                    direction = -1;
+                }
+                left += direction;
+                $(".popup").css('left', left + "px");
+            }, 10);
+        });
+    </script>
+</body>
+</html>
