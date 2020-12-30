@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>走马灯</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 120px;
+        }  
+        .box {
+            background-color: lightblue;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="content">您好，欢迎访问江西机电职业技术学院！</div>
+    </div> 
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+        $(function () {
+            // 文字走马灯
+            var width = $('.box .content').width();
+            $(".box").width(width);
+            $(".box").height($('.box .content').height());
+            setInterval(function () {
+                var marginLeft = $('.box .content').css('margin-left').replace('px', ''); 
+                console.log(marginLeft, "-" + width, marginLeft <= -width);
+                if (marginLeft <= -width) {
+                    $(".box .content").css('margin-left', width + "px");
+                    marginLeft = width;
+                } 
+                marginLeft -= 1;
+                $(".box .content").css('margin-left', marginLeft + "px");
+            }, 10);
+        });
+    </script>
+</body>
+</html>
