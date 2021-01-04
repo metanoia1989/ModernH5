@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手机 transform 属性支持测试</title>
+    <style>
+        .box {
+            display: flex;
+            margin-top: 100px;
+            margin-left: 100px;
+        }
+        .item {
+            background-color: lightyellow;
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+            /* color: white; */
+            text-align: center;
+            line-height: 200px;
+        }
+        .item:nth-child(2) {
+            transform: scale(1.2);
+            -webkit-transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="item">第一项</div>
+        <div class="item">第二项</div>
+        <div class="item">第三项</div>
+    </div> 
+</body>
+</html>
