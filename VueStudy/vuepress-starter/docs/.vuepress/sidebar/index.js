@@ -15,6 +15,7 @@ module.exports = [
           '/foo/two.md',
           '/bar/three.md',
           '/bar/four.md',
+          '/bar/pure-js-css.md',
         ]
     }
 ]

@@ -15,7 +15,7 @@ module.exports = {
     configureWepack: {
         resolve: {
             alias: {
-                '@images': 'docs/assets/images'
+                '@images': '/docs/assets/images' 
             }
         }
     },

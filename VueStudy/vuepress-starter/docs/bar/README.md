@@ -112,12 +112,19 @@ export default { // Highlighted
 ## 相对路径加载
 
 相对当前 Markdown 文件的路径加载
-![女性视力表](./assets/images/woman-vision.jpg)
 
 <!-- 使用 Webpack 别名加载资源   
 ![微软的软件战争](~@images/software-war.jpg) -->
 
+**绝对路径加载资源**        
+![百度logo](https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png)
 
+**相对路径加载**        
+![软件战争](../assets/images/software-war.jpg)
+![安卓Logo](../assets/images/logo.png)
+
+**Webpack别名**     
+<!-- ![安卓Logo](~@images/logo.png) -->
 
 Vue 模板语法
 =====================
@@ -137,3 +144,25 @@ Vue 模板语法
 ::: v-pre
 `{{ This will be displayed as-is }}`
 :::
+
+
+VuePress内置组件
+=====================
+
+**外部链接** [百度一下](https://www.baidu.com)       
+
+**Badge 角标**  
+内置组件Badge有三个属性需要传递 
+* text：它指明了角标的内容
+* type：同自定义容器类似，它有三种不同的类型，分别是tip、warn和error，默认是tip
+* vertical：它指明了角标同内容的对齐方式，有两个值，分别是top和middle，默认是top
+
+慎莫念過去<Badge text="亦勿願未來" />       
+過去事已滅<Badge text="未來復未至" type="warn" vertical="top" />        
+現在所有法<Badge text="彼亦當為思" type="error" vertical="middle" />        
+
+
+使用自定义Vue组件
+======================
+
+<CustomerComponent />   
