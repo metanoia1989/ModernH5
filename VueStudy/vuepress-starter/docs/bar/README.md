@@ -1,3 +1,7 @@
+---
+pageClass: customer-page-class
+---
+
 # Bar Index
 
 GitHub 风格的表格

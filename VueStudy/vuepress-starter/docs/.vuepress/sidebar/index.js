@@ -16,6 +16,7 @@ module.exports = [
           '/bar/three.md',
           '/bar/four.md',
           '/bar/pure-js-css.md',
+          '/bar/customer-layout.md',
         ]
     }
 ]

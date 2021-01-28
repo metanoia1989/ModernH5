@@ -4,19 +4,20 @@ module.exports = [
         text:"Foo",
         ariLabel:"Foo",
         items:[
-            { text: "index", link:"/foo/index" },
-            { text: "one", link:"/foo/one.html" },
-            { text: "two", link:"/foo/two.html" },
+            { text: "index", link:"/foo/index.md" },
+            { text: "one", link:"/foo/one.md" },
+            { text: "two", link:"/foo/two.md" },
         ]
     },
     {
         text:"Bar",
         ariLabel:"Bar",
         items:[
-            { text: "index", link:"/bar/index.html" },
-            { text: "three", link:"/bar/three.html" },
-            { text: "four", link:"/bar/four.html" },
-            { text: "pure-js-css", link:"/bar/pure-js-css.html" },
+            { text: "index", link:"/bar/index.md" },
+            { text: "three", link:"/bar/three.md" },
+            { text: "four", link:"/bar/four.md" },
+            { text: "pure-js-css", link:"/bar/pure-js-css.md" },
+            { text: "customer-layout", link:"/bar/customer-layout.md" },
         ]
     },
 ]
