@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStore 做数据库来处理</title>
+</head>
+<body>
+    <div id="app">
+        <div v-for="item in list">
+            <p>{{ item.title  }}</p>
+            <p>{{ item.content }}</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <script src="./bin.min.js"></script> 
+    <script>
+        var db = new Bin('blog-data');
+        var initData = [
+            {
+                title: "第一篇博客",
+                content: "士大夫士大夫士大夫士大夫士大夫士大夫士大夫士大夫士大夫撒旦发射点发",
+            },
+            {
+                title: "第二篇博客",
+                content: "士大夫士大夫士大夫士大夫士大夫士大夫士大夫士大夫士大夫撒旦发射点发",
+            },
+        ];
+        db.set(initData)
+        new Vue({
+            el: '#app',
+            data: {
+                list: initData
+            },
+            mounted: function () {
+                var newBlog = {
+                    title: "第三篇博客",
+                    content: "士大夫士大夫士大夫士大夫士大夫士大夫士大夫士大夫士大夫撒旦发射点发",
+                }
+                this.list.push(newBlog)
+                // db.set(this.list)
+                var data = db.get([])
+                console.log(data)
+            },
+            methods: {
+
+            },
+        })
+    </script>
+</body>
+</html>
