@@ -156,7 +156,9 @@
             margin-top: 30px;
             margin-bottom: 30px;
         }
-        
+        .radio-label {
+            margin-right: 15px;
+        } 
         
     </style>
 </head>
@@ -166,10 +168,10 @@
         <div class="container col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
             <div class="title">渲染出像freecodecamp.org网站的引用名言那样的效果</div>
             <div class="text-center quote-partial">
-                <blockquote class="blockquote">
+                <blockquote :style="{ textAlign: align }" class="blockquote">
                     <span>
-                        <q>{{ content }}</q>
-                        <footer class="quote-author blockquote-footer">
+                        <q v-html="html"></q>
+                        <footer class="quote-author blockquote-footer text-center">
                             <cite>{{ author }}</cite>
                         </footer>
                     </span>
@@ -185,6 +187,19 @@
                     <label for="content">内容：</label>
                     <textarea name="content" cols="30" rows="10" v-model="content"></textarea>
                 </div>
+                <div class="input-line">
+                    <label for="content">对齐方式：</label>
+                    <label class="radio-label" style="margin-right: 30px;">{{ align }}</label><br>
+                </div>
+                <div class="input-line">
+                    <label for="content">请选择：</label>
+                    <input type="radio" name="align" value="left" v-model="align" >
+                    <label class="radio-label">left</label><br>
+                    <input type="radio" name="align" value="center" v-model="align" >
+                    <label class="radio-label">center</label><br>
+                    <input type="radio" name="align" value="right" v-model="align" >
+                    <label class="radio-label">right</label><br>
+                </div>
             </div>
         </div>
     </div>
@@ -194,9 +209,14 @@
             el: '#app',
             data: {
                 content: "'I must be brave,' she said. 'Father always wanted me to be brave. And I have a bed to sleep in, and something to eat every day. Lots of people don't have that.'",
-                author: "A Little Princess"
+                author: "A Little Princess",
+                align: 'center',
             },
-
+            computed: {
+                html() {
+                    return this.content.replaceAll('\n', "<br/>")
+                }
+            },
         })
     </script>
 </body>
