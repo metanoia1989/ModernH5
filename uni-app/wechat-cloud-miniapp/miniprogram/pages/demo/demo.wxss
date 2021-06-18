@@ -1,4 +1,6 @@
 /* miniprogram/pages/demo/demo.wxss */
+@import "../../style/demo.wxss";
+
 page {
     background-color: #f5f5f5;
 }

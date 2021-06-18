@@ -156,32 +156,3 @@ page {
 }
 
 /* 测试 */
-page {
-  background-color: #f5f5f5;
-}
-.container {
-  background-color: white;
-}
-
-.grid-title {
-    font-size: 40rpx; 
-    font-weight: bold;
-}  
-
-.grid {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  border-top: 1rpx solid #ddd;
-  border-left: 1rpx solid #ddd;
-}
-.grid .item {
-  box-sizing: border-box;
-  width: 33.3%;
-  height: 200rpx;
-  border-right: 1rpx solid #ddd;
-  border-bottom: 1rpx solid #ddd;
-}
-.item:last-child {
-  /* border-bottom: 1rpx solid #ddd; */
-}
