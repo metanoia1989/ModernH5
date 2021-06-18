@@ -1,0 +1,30 @@
+{
+    "_id": "Wzh76lk5_O_dt0vO",
+    "title": "The Catcher in the Rye",
+    "author": "J. D. Salinger",
+    "characters": [
+        "Holden Caulfield",
+        "Stradlater",
+        "Mr. Antolini"
+    ],
+    "publishInfo": {
+        "year": 1951,
+        "country": "United States"
+    }
+}
+{
+    "_id": "Wzia0lk5_O_dt0vR",
+    "_openid": "ohl4L0Rnhq7vmmbT_DaNQa4ePaz0",
+    "title": "The Lady of the Camellias",
+    "author": "Alexandre Dumas fils",
+    "characters": [
+        "Marguerite Gautier",
+        "Armand Duval",
+        "Prudence",
+        "Count de Varville"
+    ],
+    "publishInfo": {
+        "year": 1848,
+        "country": "France"
+    }
+}

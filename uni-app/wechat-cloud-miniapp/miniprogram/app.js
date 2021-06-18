@@ -1,4 +1,9 @@
 //app.js
+
+import { promisifyAll, promisify } from 'wx-promise-pro'
+// promisify all wx‘s api
+promisifyAll()
+
 App({
   onLaunch: function () {
     if (!wx.cloud) {

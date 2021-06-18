@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/demo/demo",
+    "pages/demo/cloud-develop-ability/cloud-develop-ability",
+     
+
     "pages/article/article",
 
     "pages/index/index",
