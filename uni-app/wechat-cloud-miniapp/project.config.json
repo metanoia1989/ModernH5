@@ -39,6 +39,7 @@
   "appid": "wxb2fe0367be35c7fa",
   "projectname": "wechat-cloud-miniapp",
   "libVersion": "2.14.1",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
   "condition": {
     "search": {
       "list": []

@@ -1,6 +1,9 @@
 {
   "pages": [
+    "pages/demo/demo",
+    "pages/article/article",
     "pages/index/index",
+
     "pages/userConsole/userConsole",
     "pages/storageConsole/storageConsole",
     "pages/databaseGuide/databaseGuide",
@@ -13,6 +16,7 @@
     "pages/openapi/cloudid/cloudid",
     "pages/im/im",
     "pages/im/room/room"
+
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -20,6 +24,30 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#d4237a",
+    "list": [
+      {
+        "pagePath": "pages/demo/demo",
+        "text": "demo操作",
+        "selectedIconPath": "images/tabbar/demo_sel.png",
+        "iconPath": "images/tabbar/demo_nor.png"
+      },
+      {
+        "pagePath": "pages/article/article",
+        "text": "文章列表",
+        "selectedIconPath": "images/tabbar/article_sel.png",
+        "iconPath": "images/tabbar/article_nor.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "云开发示例",
+        "selectedIconPath": "images/tabbar/market_sel.png",
+        "iconPath": "images/tabbar/market_nor.png"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2"

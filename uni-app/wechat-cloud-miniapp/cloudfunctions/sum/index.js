@@ -7,7 +7,10 @@ cloud.init()
 exports.main = async (event, context) => {
   console.log(event)
   console.log(context)
+  let { OPENID, APPID } = context
   return {
-    sum: event.a + event.b
+    OPENID,
+    APPID,
+    sum: event.a + event.b,
   }
 }
