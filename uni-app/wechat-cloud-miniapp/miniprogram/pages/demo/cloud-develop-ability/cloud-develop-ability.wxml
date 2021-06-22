@@ -1,3 +1,41 @@
 <!--miniprogram/pages/demo/cloud-develop-ability/cloud-develop-ability.wxml-->
-<text>miniprogram/pages/demo/cloud-develop-ability/cloud-develop-ability.wxml</text>
-	
+<view class="container">
+    <view class="block">
+        <text class="block-title">云存储调用</text>
+        <text class="block-desc">
+            在小程序端可以分别调用 wx.cloud.uploadFile 和 wx.cloud.downloadFile 完成上传和下载云文件操作。 
+        </text>
+        <button bindtap="uploadFile">点击我上传图片</button>
+    </view>
+      
+    <view class="block">
+        <text class="block-title">数据库</text>
+        <text class="block-desc">
+            云开发提供了一个 JSON 数据库，顾名思义，数据库中的每条记录都是一个 JSON 格式的对象。一个数据库可以有多个集合（相当于关系型数据中的表），集合可看做一个 JSON 数组，数组中的每个对象就是一条记录，记录的格式是 JSON 对象。
+        </text>
+        <button bindtap="fetchData">获取云数据库数据</button>
+    </view>
+
+    <view class="block">
+        <text class="block-title">云函数</text>
+        <text class="block-desc">
+                云函数是一段运行在云端的代码，无需管理服务器，在开发工具内编写、一键上传部署即可运行后端代码。
+                小程序内提供了专门用于云函数调用的 API。开发者可以在云函数内使用 wx-server-sdk 提供的 getWXContext 方法获取到每次调用的上下文（appid、openid 等），无需维护复杂的鉴权机制，即可获取天然可信任的用户登录态（openid）。
+        </text>
+        <button bindtap="callAdd">调用云函数 add</button>
+    </view>
+    
+    <view class="block">
+        <text class="block-title">云调用</text>
+        <text class="block-desc">
+            云调用是云开发提供的基于云函数使用小程序开放接口的能力，支持在云函数调用服务端开放接口，如发送模板消息、获取小程序码等操作都可以在云函数中完成
+        </text>
+    </view> 
+
+    <view class="block">
+        <text class="block-title">HTTP API</text>
+        <text class="block-desc">
+            云开发资源也可以通过 HTTP 接口访问，即在小程序外访问
+        </text>
+    </view> 
+</view>

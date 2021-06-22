@@ -1,4 +1,5 @@
 /**app.wxss**/
+@import "./style/demo.wxss";
 
 .container {
   display: flex;

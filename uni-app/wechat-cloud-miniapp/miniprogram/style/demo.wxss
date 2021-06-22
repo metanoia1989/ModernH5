@@ -44,3 +44,22 @@ page {
     color: white;
     border-color: var(--primary-color);
 }
+
+button {
+  font-weight: 100!important;
+
+}
+
+/* 页面块 - 用来测试文档中各个功能的 */  
+.block {
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.block-title {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  font-size: 50rpx;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
