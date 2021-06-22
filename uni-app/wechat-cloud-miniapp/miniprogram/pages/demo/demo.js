@@ -10,6 +10,10 @@ Page({
 			{ 
 				title: "云开发能力",
 				path: "/pages/demo/cloud-develop-ability/cloud-develop-ability"
+			},
+			{ 
+				title: "增删改查SDK",
+				path: "/pages/demo/curd-sdk/curd-sdk"
 			}
 		],
 	},

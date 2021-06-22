@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -20,6 +21,12 @@
         {
           "name": "demo/云存储调用",
           "pathName": "pages/demo/cloud-develop-ability/cloud-develop-ability",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "demo/curd-sdk",
+          "pathName": "pages/demo/curd-sdk/curd-sdk",
           "query": "",
           "scene": null
         }

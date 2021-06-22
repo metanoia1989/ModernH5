@@ -1,0 +1,12 @@
+/* /E:/WorkSpace/ModernH5/uni-app/wechat-cloud-miniapp/miniprogram/pages/demo/curd-sdk/curd-sdk.wxss */
+
+.todoList {
+    margin-bottom: 40rpx;
+}
+
+.todo {
+    padding: 20rpx;
+    border: 1px solid #ddd;
+    width: 80%;
+    margin: 10rpx auto 0 auto;
+}

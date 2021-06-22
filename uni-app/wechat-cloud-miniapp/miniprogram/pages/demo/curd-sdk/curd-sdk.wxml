@@ -1,0 +1,42 @@
+<!--/E:/WorkSpace/ModernH5/uni-app/wechat-cloud-miniapp/miniprogram/pages/demo/curd-sdk/curd-sdk.wxml-->
+	
+<div class="container">
+    <view class="block">
+        <text class="block-title">插入数据</text>
+        <button bindtap="insertTodo">db.collection('todos').add</button>
+    </view>
+    <view class="block">
+        <text class="block-title">查询数据</text>
+        <button bindtap="selectTodo">db.collection('todos').get</button>
+    </view>
+
+    <view class="block">
+        <text class="block-title">加载分页数据</text>
+        <text class="block-desc">db.collection('todos').skip(i * MAX_LIMIT).limit(MAX_LIMIT)</text>
+        <slider bindchange="sliderChange" min="1" max="10" value="{{page}}" show-value/>
+        <button bindtap="queryPage">skip+limit</button>
+    </view>
+
+
+    <view class="block">
+        <text class="block-title">TodoList</text>
+        <view class="todoList"> 
+            <view class="empty" wx:if="{{todos.length == 0}}">
+                暂无内容
+            </view>
+              
+            <view class="todo" wx:for="{{todos}}" wx:key="_id">
+                <view>id: {{ item._id }}</view>
+                <view>description: {{ item.description  }}</view>
+                <view>due: {{ item.due }}</view>
+                <view wx:for="{{item.tags}}" wx:key="index" wx:item="tag">{{tag}}</view>
+                <view>location: {{ item.location }}</view>
+                <view>done: {{ item.done ? '已完成' : '未完成' }}</view>
+                <view bindtap="deleteTodo" data-id="{{item._id}}" class="red-color">
+                    点我删除 
+                </view>
+            </view>
+        </view>
+    </view>
+
+</div>

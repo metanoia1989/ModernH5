@@ -47,13 +47,15 @@ page {
 
 button {
   font-weight: 100!important;
-
+  border: 1rpx solid #ddd;
+  padding: 10rpx 20rpx;
 }
 
 /* 页面块 - 用来测试文档中各个功能的 */  
 .block {
   padding-bottom: 20rpx;
   border-bottom: 1rpx solid #ddd;
+  width: 100%;
 }
 .block-title {
   padding-top: 20rpx;
@@ -62,4 +64,22 @@ button {
   text-align: center;
   display: inline-block;
   width: 100%;
+}
+
+.block-desc {
+  width: 100%;
+  padding: 10rpx;
+}
+
+.empty {
+  text-align: center;
+  color: #666;
+}
+
+.red-color {
+  color: red;
+}
+
+.text-center {
+  text-align: center;
 }

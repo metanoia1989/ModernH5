@@ -2,7 +2,7 @@
   "pages": [
     "pages/demo/demo",
     "pages/demo/cloud-develop-ability/cloud-develop-ability",
-     
+    "pages/demo/curd-sdk/curd-sdk",
 
     "pages/article/article",
 
