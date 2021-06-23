@@ -35,13 +35,24 @@ Page({
 	 * 获取 todo 列表
 	 */
 	fetchTodoList: function() {
-		db.collection('todos').get().then(res => {
-			let todos = res.data.map(item => {
-				item.due = item.due.toString()	
-				return item
+		wx.cloud.callFunction({
+			name: 'todolist',
+			data: { 
+				page: this.data.page, 
+				perSize: 1 
+			}
+		}).then(res => {
+			this.setData({
+				todos: res.result.data
 			})	
-			this.setData({ todos })	
 		})
+		// db.collection('todos').get().then(res => {
+		// 	let todos = res.data.map(item => {
+		// 		item.due = item.due.toString()	
+		// 		return item
+		// 	})	
+		// 	this.setData({ todos })	
+		// })
 	},
 	/**
 	 * 插入数据
@@ -86,9 +97,46 @@ Page({
 			}
 		})
 	},
-	slideChange(event) {
-		this.setData({
-			page: event.detail.value
+	sliderChange(event) {
+		let page = event.detail.value 
+		this.setData({ page })
+		wx.cloud.callFunction({
+			name: 'todolist',
+			data: { page, perSize: 1 }
+		}).then(res => {
+			this.setData({
+				todos: res.result.data
+			})	
 		})
+	},
+	/**
+	 * 获取作者信息及他们分别发表的书籍
+	 */
+	lookupQuery() {
+		wx.cloud.callFunction({
+			name: 'lookup',
+			data: { action: 'lookupQuery' }
+		}).then(res => {
+			console.log("查询结果", res.result.list)	
+		})
+		.catch(error => console.log(error))
+	},
+	/**
+	 * 组合 mergeObjects 应用相等匹配
+	 */
+	lookupQuery2() {
+
+	},
+	/**
+	 * 指定多个连接条件
+	 */
+	lookupQuery3() {
+
+	},
+	/**
+	 * 拼接被连接集合的子查询
+	 */
+	lookupQuery4() {
+
 	},
 })

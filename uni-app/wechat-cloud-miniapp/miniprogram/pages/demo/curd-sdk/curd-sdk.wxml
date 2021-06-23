@@ -17,6 +17,14 @@
         <button bindtap="queryPage">skip+limit</button>
     </view>
 
+    <view class="block">
+        <text class="block-title">lookup</text>
+        <text class="block-desc">联表查询</text>
+        <button bindtap="lookupQuery">获取作者信息及他们分别发表的书籍</button>
+        <button bindtap="lookupQuery2">组合 mergeObjects 应用相等匹配</button>
+        <button bindtap="lookupQuery3">指定多个连接条件</button>
+        <button bindtap="lookupQuery4">拼接被连接集合的子查询</button>
+    </view>
 
     <view class="block">
         <text class="block-title">TodoList</text>
