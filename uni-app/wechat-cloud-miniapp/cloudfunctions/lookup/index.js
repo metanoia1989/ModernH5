@@ -6,6 +6,7 @@ const db = cloud.database({
   env: 'cloud-study-9gfse8a97faca715',
   regin: 'ap-shanghai',
 })
+const $ = db.command.aggregate
 
 var functions = {
   /**
@@ -22,7 +23,22 @@ var functions = {
 			})
 			.end()
 	},
-
+  mergeObject: async function () {
+    return await db.collection('orders').aggregate()
+      .lookup({
+        from: 'books',
+        localField: 'book',
+        foreignField: 'title',
+        as: 'bookList'
+      })
+      .replaceRoot({
+        newRoot: $.mergeObjects([ $.arrayElemAt(['$bookList', 0]), '$$ROOT' ])
+      })
+      .project({
+        bookList: 0,
+      })
+      .end()
+  },
 }
 
 

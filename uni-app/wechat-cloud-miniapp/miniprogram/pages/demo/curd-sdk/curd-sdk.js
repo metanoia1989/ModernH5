@@ -125,7 +125,13 @@ Page({
 	 * 组合 mergeObjects 应用相等匹配
 	 */
 	lookupQuery2() {
-
+		wx.cloud.callFunction({
+			name: 'lookup',
+			data: { action: 'mergeObject' }
+		}).then(res => {
+			console.log("查询结果", res.result.list)	
+		})
+		.catch(error => console.log(error))
 	},
 	/**
 	 * 指定多个连接条件
