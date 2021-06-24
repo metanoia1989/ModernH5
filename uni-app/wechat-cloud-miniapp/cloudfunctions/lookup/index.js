@@ -7,6 +7,7 @@ const db = cloud.database({
   regin: 'ap-shanghai',
 })
 const $ = db.command.aggregate
+const _ = db.command
 
 var functions = {
   /**
@@ -23,6 +24,9 @@ var functions = {
 			})
 			.end()
 	},
+  /**
+   * 将关联对象直接合并
+   */
   mergeObject: async function () {
     return await db.collection('orders').aggregate()
       .lookup({
@@ -39,6 +43,34 @@ var functions = {
       })
       .end()
   },
+  /**
+   * 连接 orders 和 books 集合，要求两个条件：
+   * orders 的 book 字段与 books 的 title 字段相等
+   * orders 的 quantity 字段大于或等于 books 的 stock 字段
+   */
+  connectMultipleField: async function () {
+    db.collection('orders').aggregate() 
+      .lookup({
+        from: 'books',
+        let: {
+          order_book: '$book',
+          order_quantity: '$quantity',
+        },
+        pipeline: $.pipeline()
+          .match(_.expr($.and([
+            $.eq(['$title', "$$order_book"]),
+            $.gte(['$stock', '$$order_quantity'])
+          ])))
+          .project({
+            _id: 0,
+            title: 1,
+            author: 1,
+            stock: 1
+          })
+          .done(),
+        as: 'bookList',
+      })
+  }
 }
 
 
