@@ -56,5 +56,61 @@ function fetchSomeObject(ctor: SomeContructor) {
 function SomeObjectFunc(name: string) {
     this.name = name;
     console.log("my name is ", this.name)
+    // return { name: name }
 }
 // fetchSomeObject(SomeObjectFunc)
+
+// 类似 Date 对象，即可使用 new，也可以直接调用
+interface CallOrConstruct {
+    new (s: string): Date,
+    (n?: number): number;
+}
+// 但是这个具体怎么用，我还不是很清楚o
+// 
+
+/**
+ * Generic Functions
+ */
+// 泛型，定义不同类型之间的共性
+// 编译器根据上下文进行类型推断
+function firstElement<Type>(arr: Type[]): Type {
+    return arr[0];
+}
+const s = firstElement(["a", "b", "c"]);
+const n1 = firstElement([1, 2, 3])
+console.log("调用泛型的函数：", typeof s, typeof n1)
+
+// 多个类型参数的推断
+function map<Input, Output>(arr: Input[], func: (arg: Input) => Output) : Output[] {
+    return arr.map(func)
+}
+// parsed => type number[]
+const parsed = map(["1", "2", "3"], n => parseInt(n))
+console.log(parsed)
+
+// 类型约束，只需要类型的子集操作  type constraint
+function longest<Type extends { length: number }>(a: Type, b: Type) {
+    if (a.length >= b.length) {
+        return a 
+    } else {
+        return b
+    }
+}
+const longerArray = longest([1, 2], [1, 2, 3]); // number[]
+const longerString = longest("alice", "bob"); // string
+// const notOk = longest(10, 100);  
+// 这个设计真的非常不错，类似C++20的Concept，但是C++的这些特性来的太晚了
+// 而且C++已经成长为一个语法巨无霸了
+
+// Working with Constrained Values  返回T，T受约束，返回值必须为T，而不仅仅符合约束条件
+// function minimumLength<Type extends { length: number }> (
+//     obj: Type, minimum: number
+// ) : Type {
+//     return obj.length >= minimum ? obj : { length: minimum }
+// }
+// const arr = minimumLength([1, 2, 3], 6);
+// and crashes here because arrays have
+// a 'slice' method, but not the returned object!
+// console.log(arr.slice(0));
+
+// Specifying Type Arguments 手动指定类型参数
