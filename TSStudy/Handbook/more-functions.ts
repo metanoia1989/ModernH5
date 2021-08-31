@@ -114,3 +114,45 @@ const longerString = longest("alice", "bob"); // string
 // console.log(arr.slice(0));
 
 // Specifying Type Arguments 手动指定类型参数
+// 类型推断并不总能推断正确，对于 union 类型需要手动指定
+function combine<Type>(arr1: Type[], arr2: Type[]) : Type[] {
+    return arr1.concat(arr2);
+}
+// const arrC = combine([1, 2, 3], ["hello"]);  // string not assignable to type number
+const arrB = combine<string|number>([1, 2, 3], ["hello"]);
+console.log(arrB);
+
+// Guidelines for Writing Good Generic Functions 好的泛型代码编写指南
+// 使用类型约束或者很多类型参数，很少的类型推导也会导致调用出错
+// 类型参数向下 Push Type Parameters Down 
+function firstElement1<Type>(arr: Type[]) {
+    return arr[0];
+}
+function firstElement2<Type extends any[]>(arr: Type) {
+    return arr[0];
+}
+const fA = firstElement1([1, 2, 3]); // a: number 
+const fB = firstElement2([1, 2, 3]); // b: any 糟糕的推导
+// 使用更少的类型参数
+function filter1<Type>(arr: Type[], func: (arg: Type) => boolean) : Type[] {
+    return arr.filter(func);
+}
+
+function filter2<Type, Func extends (arg: Type) => boolean>(
+    arr: Type[], func: Func 
+): Type[] {
+    return arr.filter(func);
+}
+// filter2 让调用者指定额外的类型，并且Func让函数变得难以阅读
+
+
+// 类型参数应该出现两次 Type Parameters Should Appear Twice
+// Generic Type 类型参数是多个值相关的类型，如果仅用一次，就不与任何相关了
+function greetBad<Str extends string>(s: Str) {
+    console.log("Hello, " + s);
+}
+greetBad("world")
+function greetGood(s: string) {
+    console.log("Hello, " + s)
+}
+greetGood("world")
