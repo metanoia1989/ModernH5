@@ -156,3 +156,17 @@ function greetGood(s: string) {
     console.log("Hello, " + s)
 }
 greetGood("world")
+
+/**
+ * Optional Parameters 可选参数
+ */
+// TS 的可选参数使用 ? 标注
+function optionalParamter(x?: number) {
+    //....
+}
+optionalParamter()
+optionalParamter(10)
+// 模拟缺失的参数
+function optionalParamterTwo(x = 10) {
+    //....
+}
