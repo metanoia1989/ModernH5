@@ -180,3 +180,83 @@ function myForEach(arr: any[], callback: (arg: any, index?: number) => void) {
 // 回调函数中，第二个参数，索引可选
 myForEach([1, 2, 3], a => console.log(a))
 myForEach([1, 2, 3], (a, i) => console.log(a, i))
+
+
+/**
+ * Function Overloads 函数重载
+ */
+// 通过不同的 overload signatures 重载签名来调用函数
+// 可以写一些函数签名成员，然后跟着函数体
+function makeDate(timestamp: number): Date;
+function makeDate(m: number, d: number, y: number): Date;
+function makeDate(mOrTimestamp: number, d?: number, y?: number): Date {
+    if (d !== undefined && y !== undefined) {
+        return new Date(y, mOrTimestamp, d);
+    } else {
+        return new Date(mOrTimestamp);
+    }
+}
+const d1 = makeDate(12345678);
+const d2 = makeDate(5, 5, 5);
+// const d3 = makeDate(1, 3);
+
+// 重载签名需要兼容实现签名
+function fn(x: string, y: boolean): void;
+// function fn(x: boolean): void; // 不兼容，感觉这样的重载函数最后可以合并成一个，毕竟函数体也只有一个
+function fn(x: string): void {
+
+}
+
+// Writing Good Overloads
+// 遵循一些指南，可以让重载函数代码更容易调用、理解和实现
+// 返回字符串或者数组的kuandu 
+function len(s: string): number;
+function len(arr: any[]): number;
+function len(x: any) {
+    return x.length;
+}
+// len 函数可以用在字符串或者数组上，而不能是两者的联合类型上
+len("");
+len([0]);
+// len(Math.random() > 0.5 ? "hello" : [0]);
+// 由于这个函数一样特性的参数和返回值，所以可以直接写一个非重载版本
+function lenNoOverload(x: any[] | string) {
+    return x.length;
+}
+
+/**
+ * Declaring this in a Function，说实话，我到现在都没有理解 this 这个关键字
+ */
+// ts 会根据this所在函数的上下文来进行推断
+const userObj = {
+    id: 123,
+    admin: false,
+    becomeAdmin: function() {
+        this.admin = true;
+    },
+    who: function () {
+        console.log(`id=${this.id}, admin=${this.admin}`)
+    }
+}
+userObj.becomeAdmin()
+userObj.who()
+// 高级类型就是生成类型的类型，它除了可以传泛型参数外还可以支持分支、递归、取属性等操作，可以通过复杂的逻辑来生成类型
+// 高级类型支持类型编程，甚至是图灵完备的，图灵完备的意思就是说提供的语言特性可以描述所有可计算的逻辑。
+// 类型本质上是运行时变量的内存大小和可对它进行的操作，变量只赋值同类型的值就是类型安全，动态类型在源码中没有类型信息，没法保证类型安全，
+// 而静态类型则是在源码中有类型信息，可以在编译期间检查出类型的错误，保证类型安全。
+
+// ts 允许声明 this 的类型
+// 箭头函数不支持 this 类型参数，箭头函数只会访问全局的this
+interface DB {
+    filterUsers(filter: (this: User) => boolean): User[];
+}
+// const db = getDB();
+// const admins = db.filterUsers(function (this: User) {
+//     return this.admin;
+// })
+// 编程设计里有这么多精巧的知识，我都没有去了解学习，蛮悲哀的，陷入重复的码农机器
+
+
+/**
+ * Other Types to Know About 其他已知的类型
+ */
