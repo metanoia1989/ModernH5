@@ -248,7 +248,7 @@ userObj.who()
 // ts 允许声明 this 的类型
 // 箭头函数不支持 this 类型参数，箭头函数只会访问全局的this
 interface DB {
-    filterUsers(filter: (this: User) => boolean): User[];
+    // filterUsers(filter: (this: User) => boolean): User[];
 }
 // const db = getDB();
 // const admins = db.filterUsers(function (this: User) {
@@ -260,3 +260,56 @@ interface DB {
 /**
  * Other Types to Know About 其他已知的类型
  */
+// 一些其他的类型，在函数上下文中有特殊的含义
+// void 表示函数没有任何返回值，推断函数在任何时候都没有return声明
+// 或者没有通过return返回任何显式的值
+function noop() { // 推断返回值为 void，跟C有点类似哈哈
+    return; 
+}
+// JS中没有任何返回值，将隐式地返回undefined；在TS中，void和undefined不是一样的东西
+
+// object 类型能够引用任何不是原始类型的值，原始类型如 string number bigint boolean symbol null undefined
+// 跟空对象类型 {} 和 全局对象类型 Object 都不同，object is not Object. Always use object!  
+
+// JS中，函数值也是对象，有 Object.prototype 这个属性表示原型链，能够通过 instanceof Object 进行判断。
+// 能够调用 Object.keys()，函数类型也被看做是对象。 
+
+// unknown 类型能够表现任何值，类似 any 类型，但是更安全，因为不能合法地对unknown值进行任何操作。   
+function f_any(a: any) {
+    a.b(); // ok
+}
+function f_unknown(a: unknown) {
+    // a.b(); // Object is of type 'unknown'
+}
+// unknown 类型参数可以接收任意参数，并且作为返回值也可以是任意类型
+function safeParse(s: string): unknown {
+    return JSON.parse(s)
+}
+const obj_s = safeParse('{"key": "value"}');
+console.log(obj_s)
+
+
+// never 一些函数永远不返回一个值
+// The never type represents values which are never observed. 
+// 作为返回值时，意味着抛出异常或者中断程序执行
+function fail(msg: string): never {
+    throw new Error(msg);
+} 
+// never 也表示ts永远也不会达到的分支
+function fn_never(x: string | number) {
+    if (typeof x === "string") {
+        // do something
+    } else if (typeof x === "number") {
+        // do something else
+    } else {
+        x; // has type 'never'!
+    }
+}
+
+// Function 
+// 全局类型 Function，有描述属性 bind, call, apply 和其他所有函数值在js中表现一样
+// Function类型有特殊的属性，总是能被调用，调用返回 any
+// f 没有指定返回值，是危险的，默认为 any，可以显式地指定 () => void
+function doSomethingFunction(f: Function) {
+    f(1, 2, 3);
+}
