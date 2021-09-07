@@ -313,3 +313,79 @@ function fn_never(x: string | number) {
 function doSomethingFunction(f: Function) {
     f(1, 2, 3);
 }
+
+/**
+ * Rest Parameters and Arguments
+ */
+// 使用 rest 参数，允许然函数接收不定数量的参数
+function multiply(n: number, ...m: number[]) {
+    return m.map(x => n * x)
+}
+const a_num = multiply(10, 1, 2, 3, 4, 5)
+console.log("multiply(10, 1, 2, 3, 4, 5) => ", a_num)
+// ts中，rest 参数默认隐式指定为 any[]
+// 显式地指定类型，必须为 Array<T> 或者 T[]，或者一个 tuple 类型
+
+// 相反地，可以使用 ... 从数组中提取可变个参数
+const arr1 = [1, 2, 3]
+const arr2 = [4, 5, 6]
+arr1.push(...arr2)
+console.log("[1,2,3].push(...[4, 5, 6]) => ", arr1)
+// ...array 会被推断为 Array<T> 而不是多个类型的变量
+const args = [8, 5]
+// const angle = Math.atan2(...args); // A spread argument must either have a tuple type or be passed to a rest parameter.
+
+// 使用 const 上下文是最好的解决方案
+const args2 = [8, 5] as const;
+const angle2 = Math.atan2(...args2)
+
+
+/**
+ * Parameter Destructuring 参数解构
+ */
+// 使用参数解构来解压缩对象
+function sum({ a, b, c}: { a: number; b: number; c: number }) {
+    console.log(a + b + c)
+}
+type ABC = { a: number; b: number; c: number };
+function sumTo({ a, b, c}: ABC) {
+    console.log(a + b + c)
+}
+sumTo({ a: 44, b: 55, c: 66 })
+
+/**
+ * Assignability of Functions
+ */
+// 可分配的函数
+// 上下文推断的返回void并不强制没有返回值，例如 `(type vf = () => void)`
+// 具体的实现可以返回任意类型，但是会被忽略
+type voidFunc = () => void;
+const voidF1: voidFunc = () => {
+    return true;
+}
+const voidF2: voidFunc = () => true
+const voidF3: voidFunc = function () {
+    return true;
+}
+console.log("voidF1() => ", voidF1())
+console.log("voidF2() => ", voidF2())
+console.log("voidF3() => ", voidF3())
+const v1 = voidF1(), v2 = voidF2(), v3 = voidF3()
+console.log('v1=', v1, ' v2=', v2, ' v3=', v3)
+// =_= 调用的结果是都有返回值，但是类型会被忽略 
+// 因为这个原因，Array.prototype.forEach 的回调必须为void，但是可以可用push
+const src = [1, 2, 3]
+const dst = [0]
+src.forEach(el => dst.push(el))
+
+// 只有匿名函数可以这样，function 关键字定义的具名函数是不允许的
+// 但是没报错==
+function f2(): void {
+    // @ts-expect-error
+    return true;
+}
+const f3 = function (): void {
+    // @ts-expect-error
+    return true;
+};
+   
