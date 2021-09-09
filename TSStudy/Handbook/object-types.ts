@@ -72,8 +72,65 @@ function visitForBirthday(home: Home) {
     home.resident.age++
 }
 function evict(home: Home) {
-    home.resident = { // Cannot assign to 'resident' because it is a read-only property.
-        name: "Victor the Evictor",
-        age: 42
-    }
+    // home.resident = { // Cannot assign to 'resident' because it is a read-only property.
+    //     name: "Victor the Evictor",
+    //     age: 42
+    // }
 }
+
+// 只读类型可以通过别名修改
+interface Person {
+    name: string;
+    age: number;
+}
+interface ReadonlyPerson {
+    readonly name: string;
+    readonly age: number;
+}
+let writablePerson: Person = {
+    name: "Person McPersonface",
+    age: 42,
+}
+let readonlyPerson: ReadonlyPerson = writablePerson
+console.log("readonlyPerson.age->", readonlyPerson.age)
+// readonlyPerson.age++ // 并不能修改，文档是错误的
+// console.log("readonlyPerson.age->", readonlyPerson.age)
+
+// Index Signatures 有时候不知道类型的属性，但是知道属性的形状
+// 可以用这个形状来检索属性
+interface MyStringArray {
+    [index: number]: string;
+}
+const myArray: MyStringArray = ["t555", "t387", "t444"]
+const secondItem = myArray[1]; // 索引为数字，返回类型为字符串
+// 索引属性的类型必须是数字或者字符串
+
+interface AnimalGood { name: string; };
+interface Dog  extends AnimalGood { breed: string;}
+// number 和 string 不能同时作为索引类型
+interface NotOkay {
+    // [x: number]: AnimalGood;
+    [y: string]: Dog;
+}
+
+interface NumberDictionary {
+    [index: string]: number;
+    length: number;
+    // name: string; // 索引类型跟同类型属性不兼容
+}
+
+// 索引信号是联合类型属性
+interface NumberOrStringDictionary {
+    [index: string]: number | string;
+    length: number;
+    name: string;
+}
+
+// 也可以指定 readonly 给索引属性
+// 对这个有点疑惑不见，没有很懂哈哈哈
+interface ReadonlyStringArray {
+    readonly [index: number]: string
+}
+let myStringArray: ReadonlyStringArray = ["hello", "world"]
+// myStringArray[2] = "wo" // Index signature in type 'ReadonlyStringArray' only permits reading. 
+
