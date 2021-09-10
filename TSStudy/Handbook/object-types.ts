@@ -134,3 +134,95 @@ interface ReadonlyStringArray {
 let myStringArray: ReadonlyStringArray = ["hello", "world"]
 // myStringArray[2] = "wo" // Index signature in type 'ReadonlyStringArray' only permits reading. 
 
+
+/**
+ * Extending Types 扩展类型
+ */
+interface BasicAddress {
+    name?: string;
+    street: string;
+    city: string;
+    country: string;
+    postalCode: string;
+}
+// 使用 extends 来扩展接口
+interface AddressWithUnit extends BasicAddress {
+    unit: string;
+}
+// interface 可以 extends 多个
+interface Colorful {
+    color: string;
+}
+interface CircleMe {
+    radius: number;
+}
+interface ColorfulCircle extends Colorful, CircleMe {}
+let cColorCircle: ColorfulCircle = {
+    color: "red",
+    radius: 42,
+}
+
+/**
+ * Intersection Types  
+ */
+// 使用 & 来交叉已存在的多个类型   有点类似类型别名的感觉
+type AnotherColorfulCircle = Colorful & CircleMe
+function draw(circle: Colorful & CircleMe) {
+    console.log(`Color was ${circle.color}`);
+    console.log(`Radius was ${circle.radius}`)
+}
+draw({ color: "blue", radius: 42 });
+draw({ color: "red", radius: 42 });
+// { color: string; radisu: number } 跟 Colorful & CircleMe 不兼容
+// 前者类似对象字面量，有自己的属性 
+
+/**
+ * Gneric Object Type 通用对象类型，泛型
+ */
+interface Box {
+    contents: unknown;
+}
+
+let xMe: Box = {
+    contents: "Hello World"
+}
+// 检测 xMe.contents 的类型，避免发生错误
+if (typeof xMe.contents === 'string') {
+    console.log(xMe.contents.toLowerCase())
+}
+// 进行类型断言
+console.log((xMe.contents as string).toLowerCase())
+
+// 替换不同 contents 为不同的骨架类型
+interface NumberBox {
+    contents: number;
+}
+interface StringBox {
+    contents: string;
+}
+interface BooleanBox {
+    contents: boolean;
+}
+function setContents(box: StringBox, newContents: string): void;
+function setContents(box: NumberBox, newContents: string): void;
+function setContents(box: BooleanBox, newContents: string): void;
+function setContents(box: { contents: any }, newContents: any) {
+    box.contents = newContents;
+}
+// 太多 boilerplate 代码，如果要添加新的类型，就要再写一个函数签名
+// 指定一个类型参数
+interface BoxMe<Type> {
+    contents: Type;
+}
+let box: BoxMe<string> = { contents: "hello" }
+interface Apple {}
+type AppleBox = BoxMe<Apple>
+
+function setContentsGenric<Type>(box: BoxMe<Type>, newContents: Type) {
+    box.contents = newContents;
+}
+
+// 泛型代码，可以用类型别名
+type BoxTwo<Type> = {
+    contents: Type;
+}
