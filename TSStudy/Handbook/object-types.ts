@@ -226,3 +226,94 @@ function setContentsGenric<Type>(box: BoxMe<Type>, newContents: Type) {
 type BoxTwo<Type> = {
     contents: Type;
 }
+
+
+// The Array Type，泛型对象经常用于容器类型元素的排序，处理数据结构的方式可以对不同的类型复用   
+// number[] or string[] 是 Array<number>, Array<string> 的简写  
+
+function doSomethingAgain(value: Array<string>) {
+    //...
+}
+
+let myArr: string[] = ["hello", "world"];
+doSomethingAgain(myArr);
+doSomethingAgain(new Array("hello", "world"))
+
+// Array 本身就是一种泛型
+interface MyArray<Type> {
+    /**
+     * 获取数组的长度
+     */
+    length: number;
+    
+    /**
+     * 移除数组的最后一个元素，并且返回它
+     */
+    pop(): Type | undefined;
+    
+    /**
+     * 追加新的元素到数组中，返回数组的新长度   
+     *
+     * @param items 要追加的元素
+     */
+    push(...items: Type[]): number;
+}
+
+// 现代 JavaScript 也提供了其他数据结构的泛型，像 Map<K, V>, Set<T>, Promise<T>，有着Map,Set,Promise的行为表现  
+
+// The ReadonlyArray Type 不可变数组
+// ReadonlyArray 没有构造函数，但是可以用普通数组进行赋值
+function doStuff(values: ReadonlyArray<string>) {
+    const copy = values.slice()
+    console.log(`This first value is ${values[0]}`)
+    
+    // values.push("hello!"); // 不允许修改
+}
+
+doStuff(["hello", "world"])
+
+// TS 为Array<Type> 提供简写 Type[]，为ReadonlyArray<Type> 提供简写 readonly Type[]
+function doStuffAgain(values: readonly string[]) {
+    const copy = values.slice()
+    console.log(`This first value is ${values[0]}`)
+    
+    // values.push("hello!"); // 不允许修改
+}
+// readonly string[] 无法再赋值给 string[]
+
+
+// Tuple Types 
+// 是知道元素数量的可排序数组类型
+type StringNumberPair = [string, number];
+function doSomethingWithPair(pair: [string, number]) {
+    const a = pair[0]; 
+    const b = pair[1]; 
+    console.log(typeof a, typeof b)
+}
+doSomethingWithPair(["hello", 42])
+
+// pair 等同于声明了数组长度属性和指定索引的属性属性类型
+interface StringNumberPairInterface {
+    length: 2;
+    0: string;
+    1: number;
+    
+    // Other Array<string | number> members
+    slice(start?: number, end?: number): Array<string | number>;
+}
+
+// tuple 也可以声明可选类型 
+type Either2dOr3d = [ number, number, number?];
+function setCoordinate(coord: Either2dOr3d) {
+    const [x, y, z] = coord; // z -> number | undefined
+    console.log(`Provided coordinates has ${coord.length} dimensions`)
+    // property length: 2 | 3
+}
+// tuple 中也可以使用 rest elements 
+type StringNumberBooleans = [string, number, ...boolean[]]
+type StringBooleansNumber = [string, ...boolean[], number]
+type BooleansStringNumber = [...boolean[], string, number]
+// rest elemtns 的 tuple 没有 length 属性
+const a1: StringNumberBooleans = ["hello", 1];
+const b1: StringNumberBooleans = ["beautiful", 2, true]
+const c1: StringNumberBooleans = ["world", 3, true, false, true, false, true]
