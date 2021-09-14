@@ -314,6 +314,32 @@ type StringNumberBooleans = [string, number, ...boolean[]]
 type StringBooleansNumber = [string, ...boolean[], number]
 type BooleansStringNumber = [...boolean[], string, number]
 // rest elemtns 的 tuple 没有 length 属性
+// rest elements 数组，只知道类型位置，无法推断 length
 const a1: StringNumberBooleans = ["hello", 1];
 const b1: StringNumberBooleans = ["beautiful", 2, true]
 const c1: StringNumberBooleans = ["world", 3, true, false, true, false, true]
+
+// rest elements 的可能用处
+function readButtonInput(...args: [string, number, ...boolean[]]) {
+    const [ name, vaersion, ...input ] = args;
+}
+// equivalent to
+function readButtonInputAgain(name: string, version: number, ...input: boolean[]) {
+    //...
+}
+
+
+// readonly Tuple Types
+function doSomethingReadonlyTuple(pair: readonly [string, number]) {
+    // ...
+    // pair[0] = "hello"; // Cannot assign to '0' because it is a read-only property. 
+}
+// 或者断言为 const 类型，也能被推断为 readonly 属性
+let point = [3, 4] as const;
+function distanceFromOrigin([x, y]: [number, number]) {
+    return Math.sqrt(x ** 2 + y ** 2)
+}
+// Argument of type 'readonly [3, 4]' is not assignable to parameter of type '[number, number]'.
+// 只读 tuple 不能赋值给 [number, number]
+// distanceFromOrigin 预期的是一个 mutable tuple 
+// console.log(distanceFromOrigin(point))
