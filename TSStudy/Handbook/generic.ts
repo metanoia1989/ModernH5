@@ -53,3 +53,26 @@ interface GenericIdentityTypeFn<Type> {
     (arg: Type): Type;
 }
 let typeIdentity: GenericIdentityTypeFn<number> = identity;
+
+
+/**
+ * Generic Classes
+ */
+class GenericNumber<NumType> {
+    zeroValue: NumType;
+    add: (x: NumType, y: NumType) => NumType;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+myGenericNumber.zeroValue = 0;
+myGenericNumber.add = function (x, y) {
+    return x + y;
+}
+
+let stringNumeric = new GenericNumber<string>();
+stringNumeric.zeroValue = "";
+stringNumeric.add = function (x, y) {
+    return x + y;
+}
+console.log(stringNumeric.add(stringNumeric.zeroValue, "test"))
+// Generic Class 仅仅覆盖实例方法
