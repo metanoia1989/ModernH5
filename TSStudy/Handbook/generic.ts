@@ -76,3 +76,29 @@ stringNumeric.add = function (x, y) {
 }
 console.log(stringNumeric.add(stringNumeric.zeroValue, "test"))
 // Generic Class 仅仅覆盖实例方法
+
+
+/**
+ * Generic Constraints
+ */
+// 使用 interface 来约束类型
+interface Lengthwise {
+    length: number;
+}
+
+function loggingIdentityNumber<Type extends Lengthwise>(arg: Type): Type {
+    console.log(arg.length)
+    return arg
+}
+console.log(loggingIdentityNumber({ length: 10, value: 3 }))
+
+/**
+ * Using Type Parameters in Generic Constraints
+ */
+// 定义一个类型来约束另一个类型
+function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
+    return obj[key];    
+}
+let xObj = { a: 1, b: 2, c: 3, d: 4 }
+getProperty(x, "a")
+getProperty(x, "m")
