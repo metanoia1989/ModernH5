@@ -100,5 +100,10 @@ function getProperty<Type, Key extends keyof Type>(obj: Type, key: Key) {
     return obj[key];    
 }
 let xObj = { a: 1, b: 2, c: 3, d: 4 }
-getProperty(x, "a")
-getProperty(x, "m")
+getProperty(xObj, "a")
+// getProperty(xObj, "m")
+
+
+/**
+ * Using Class Types in Generics
+ */
