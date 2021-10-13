@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>达到 text-decoration: underline + padding-bottom 的效果</title>
+    <style>
+        .box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 500px;
+            height: 500px;
+        }
+        
+        span {
+            display:inline-block;
+            border-bottom:1px solid black;
+            padding-bottom:2px;
+        }
+    </style>
+</head>
+<body>
+    <div>text-decoration: underline 没有给 padding-bottom 的属性，可以使用 border-bottom + padding-bottom 来实现。</div>
+    <div class="box">
+        <p><span>Whatever text</span></p>
+    </div>
+</body>
+</html>
