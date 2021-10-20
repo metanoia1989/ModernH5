@@ -1,0 +1,12 @@
+{
+  "name": "series-execute-order",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "server": "gulp server",
+    "build": "gulp build"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
