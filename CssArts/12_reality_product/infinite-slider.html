@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无限滚动图片实现</title>
+    <style>
+        .container {
+            width:600px;  
+            height: 240px;
+            margin:20px auto;  
+            overflow: hidden;   
+            border: 1px solid red;
+            white-space: nowrap;
+        }
+        .container ul {
+            height: 100%;
+            display: inline-block;
+        }
+        .container li {
+            height: 100%;
+            display: inline-block;
+        }
+        li img {
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="container">
+		<ul id="ul1">
+			<li><img src="https://images-1251976096.cos.ap-guangzhou.myqcloud.com/knowledge-photo/logo/logo.png"></li>
+			<li><img src="https://images-1251976096.cos.ap-guangzhou.myqcloud.com/owl-photo/logo/logo.png"></li>
+            <li><img src="https://images-1251976096.cos.ap-guangzhou.myqcloud.com/wavelib/2021-10-15-today-all-rent.png"></li>
+        </ul>
+		<ul id="ul2">
+			
+		</ul>
+	</div> 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            var container = document.getElementById('container');
+            var ul1 = document.getElementById('ul1');
+            var ul2 = document.getElementById('ul2');
+            ul2.innerHTML = ul1.innerHTML;
+                    
+            function marquee() {
+                if (container.scrollLeft > ul1.scrollWidth) {
+                    container.scrollLeft = 0;
+                } else {
+                    container.scrollLeft++;
+                }
+            }
+                    
+            var timer = setInterval(marquee, 10);
+            container.onmouseover = () => clearInterval(timer);    
+            container.onmouseout = () => {
+                timer = setInterval(marquee, 10); 
+            };
+        });
+    </script>
+</body>
+</html>
