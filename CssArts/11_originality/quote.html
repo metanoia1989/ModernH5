@@ -17,6 +17,10 @@
         href="./static/RobotoMono-Bold.woff" rel="preload" type="font/woff">
     <link data-react-helmet="true" as="font" crossorigin="anonymous"
         href="./static/RobotoMono-Italic.woff" rel="preload" type="font/woff">
+    <link data-react-helmet="true" as="font" crossorigin="anonymous"
+        href="./static/CourNew.ttf" rel="preload" type="font/ttf">
+    <link data-react-helmet="true" as="font" crossorigin="anonymous"
+        href="./static/ComicSansMS3.ttf" rel="preload" type="font/ttf">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <style>
         :root {
@@ -79,6 +83,12 @@
             font-family: Roboto Mono,monospace;
             color: var(--secondary-color);
             background: var(--secondary-background);
+        }
+        .cour-new {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .comic-sans {
+            font-family: "Comic Sans MS", "Comic Sans", cursive;
         }
 
         .text-center {
@@ -168,7 +178,7 @@
         <div class="container col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
             <div class="title">渲染出像freecodecamp.org网站的引用名言那样的效果</div>
             <div class="text-center quote-partial">
-                <blockquote :style="{ textAlign: align }" class="blockquote">
+                <blockquote :style="{ textAlign: align }" :class='["blockquote", font]'>
                     <span>
                         <q v-html="html"></q>
                         <footer class="quote-author blockquote-footer text-center">
@@ -200,6 +210,19 @@
                     <input type="radio" name="align" value="right" v-model="align" >
                     <label class="radio-label">right</label><br>
                 </div>
+                <div class="input-line">
+                    <label for="content">字体：</label>
+                    <label class="radio-label" style="margin-right: 30px;">{{ font }}</label><br>
+                </div>
+                <div class="input-line">
+                    <label for="content">请选择：</label>
+                    <input type="radio" name="font" value="" v-model="font" >
+                    <label class="radio-label">default</label><br>
+                    <input type="radio" name="font" value="cour-new" v-model="font" >
+                    <label class="radio-label">Courier New</label><br>
+                    <input type="radio" name="font" value="comic-sans" v-model="font" >
+                    <label class="radio-label">Comic Sans MS</label><br>
+                </div>
             </div>
         </div>
     </div>
@@ -211,6 +234,7 @@
                 content: "'I must be brave,' she said. 'Father always wanted me to be brave. And I have a bed to sleep in, and something to eat every day. Lots of people don't have that.'",
                 author: "A Little Princess",
                 align: 'center',
+                font: 'default',
             },
             computed: {
                 html() {
