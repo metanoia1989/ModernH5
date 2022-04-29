@@ -128,11 +128,12 @@
             <div class="title">渲染出像englishclub.com网站的引用名言那样的效果</div>
             <div class="quote-partial">
                 <blockquote class="ec-quote-big" style="margin-bottom: 1em">
-                    {{ content }}
+                    <div v-html="html"></div>
                     <cite>{{ author }}</cite>
                 </blockquote>
             </div>
             <br>
+            
 
             <div class="form">
                 <div class="input-line">
