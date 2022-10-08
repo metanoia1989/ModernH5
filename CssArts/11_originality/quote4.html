@@ -175,7 +175,7 @@
             <div class="quote-partial">
                 <blockquote class="ec-quote-big" style="margin-bottom: 1em" :style="{width}">
                     <div class="sutta-title" v-if="title">{{ title }}</div>
-                    <div class="content" v-html="html"></div>
+                    <div class="content" :style="{fontSize}" v-html="html"></div>
                 </blockquote>
             </div>
             <br>
@@ -194,6 +194,10 @@
                     <label for="width">宽度：</label>
                     <input type="text" name="width" placeholder="请输入宽度" v-model="width">
                 </div>
+                <div class="input-line">
+                    <label for="width">字体大小：</label>
+                    <input type="text" name="fontSize" placeholder="请输入大小" v-model="fontSize">
+                </div>
             </div>
         </div>
     </div>
@@ -206,6 +210,7 @@
                 title: "",
                 align: 'center',
                 width: '85%',
+                fontSize: '22px',
             },
             computed: {
                 html() {
@@ -213,6 +218,8 @@
                     let tabSpace = '&nbsp;&nbsp;&nbsp;&nbsp;';
                     tabSpace = tabSpace + tabSpace;
                     content = content.replaceAll(/\t/g, tabSpace)
+                    content = content.replaceAll(/    /g, tabSpace)
+                    console.log(content)
                     return content;
                 }
             },
