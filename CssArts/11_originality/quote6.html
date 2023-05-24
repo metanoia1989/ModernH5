@@ -4,23 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ping.pe引用文字</title>
+    <title>纽约时报引用文字</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <style>
 
+        html {
+            font-size: 100%;
+        }
 
 
         body {
             font-family: Consolas, "Courier New", Courier, monospace;
             background-color:#000000;
             color:white;
-            font-family: Consolas, "Courier New", Courier, monospace;
-            font-size:14px;
-            /* font-size: 100%;
-            line-height: 1.42857143;
-            color: #333;
-            background-color: #fff; */
+        }
+
+        .quote-partial {
+            margin-bottom: 100px;
+        }
+        .ec-quote-big {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sutta-title {
+            font-family: nyt-cheltenham,georgia,'times new roman',times,serif;
+            font-size: 1.125rem;
+            line-height: 1.2em;
+            -webkit-letter-spacing: 0.01em;
+            -moz-letter-spacing: 0.01em;
+            -ms-letter-spacing: 0.01em;
+            font-style: italic;
+            letter-spacing: 0.01em;
+        }
+        .content {
+            display: inline-block;
+            font-family: nyt-franklin,helvetica,arial,sans-serif;
+            font-size: 0.75rem;
+            line-height: 1.4rem;
+            font-weight: 500;
         }
 
 
@@ -65,7 +89,7 @@
             /* font-style: italic; */
             width: 85%;
             margin: 0.7em 0 0 .3em;
-            padding: 0.35em 0 0 40px;
+            /* padding: 0.35em 0 0 40px; */
             line-height: 1.45;
             position: relative;
             /* color: #383838; */
@@ -140,7 +164,6 @@
             /* font-family: "Kalam", Helvetica, Arial, sans-serif;
             color: #4A4A4A; */
             /* font-weight: normal; */
-            margin-bottom: 4rem;
         }
     </style>
 
@@ -152,7 +175,7 @@
         <div class="container col-md-12 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
             <div class="title">渲染出像englishclub.com网站的引用名言那样的效果</div>
             <div class="quote-partial">
-                <blockquote class="ec-quote-big" style="margin-bottom: 1em" :style="{width}">
+                <blockquote class="ec-quote-big" style="margin-bottom: 1em" :style="{width, height}">
                     <h1 class="sutta-title" v-if="title">{{ title }}</h1>
                     <div class="content" :style="{fontSize}" v-html="html"></div>
                 </blockquote>
@@ -174,6 +197,10 @@
                     <input type="text" name="width" placeholder="请输入宽度" v-model="width">
                 </div>
                 <div class="input-line">
+                    <label for="height">高度：</label>
+                    <input type="text" name="height" placeholder="请输入宽度" v-model="height">
+                </div>
+                <div class="input-line">
                     <label for="width">字体大小：</label>
                     <input type="text" name="fontSize" placeholder="请输入大小" v-model="fontSize">
                 </div>
@@ -188,7 +215,8 @@
                 content: "",
                 title: "",
                 align: 'center',
-                width: '85%',
+                width: '502px',
+                height: '628px',
                 fontSize: '20px',
             },
             computed: {
