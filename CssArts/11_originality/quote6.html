@@ -165,6 +165,10 @@
             color: #4A4A4A; */
             /* font-weight: normal; */
         }
+        .date {
+            margin-top: 10px;
+            font-size: 17px;
+        }
     </style>
 
     </link>
@@ -177,7 +181,10 @@
             <div class="quote-partial">
                 <blockquote class="ec-quote-big" style="margin-bottom: 1em" :style="{width, height}">
                     <h1 class="sutta-title" v-if="title">{{ title }}</h1>
-                    <div class="content" :style="{fontSize}" v-html="html"></div>
+                    <div class="content" :style="{fontSize}">
+                        <div v-html="html"></div>
+                        <div class="date">{{ current_date }}</div>
+                    </div>
                 </blockquote>
             </div>
             <br>
@@ -204,6 +211,10 @@
                     <label for="width">字体大小：</label>
                     <input type="text" name="fontSize" placeholder="请输入大小" v-model="fontSize">
                 </div>
+                <div class="input-line">
+                    <label for="width">日期：</label>
+                    <input type="text" name="date" placeholder="请输入大小" v-model="date">
+                </div>
             </div>
         </div>
     </div>
@@ -216,8 +227,9 @@
                 title: "",
                 align: 'center',
                 width: '502px',
-                height: '628px',
-                fontSize: '20px',
+                height: '528px',
+                fontSize: '21px',
+                date: '',
             },
             computed: {
                 html() {
@@ -228,6 +240,15 @@
                     content = content.replaceAll(/    /g, tabSpace)
                     console.log(content)
                     return content;
+                },
+                current_date() {
+                    let d = new Date(); 
+                    if (this.date) {
+                        d = new Date(this.date)
+                    }
+                    let months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                    let dateString = months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+                    return dateString;
                 }
             },
         })
