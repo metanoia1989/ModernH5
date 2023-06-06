@@ -7,6 +7,7 @@
     <title>纽约时报引用文字</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/theguardian.css">
     <style>
 
         html {
@@ -160,12 +161,15 @@
             font-weight: bold;
         }
 
-        .content {
+        .content-text {
             /* font-family: "Kalam", Helvetica, Arial, sans-serif;
             color: #4A4A4A; */
             /* font-weight: normal; */
+            color: #b7b7b7;
+            font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif;
         }
         .date {
+            color: #b7b7b7;
             margin-top: 10px;
             font-size: 17px;
         }
@@ -182,7 +186,7 @@
                 <blockquote class="ec-quote-big" style="margin-bottom: 1em" :style="{width, height}">
                     <h1 class="sutta-title" v-if="title">{{ title }}</h1>
                     <div class="content" :style="{fontSize}">
-                        <div v-html="html"></div>
+                        <div class="content-text" v-html="html"></div>
                         <div class="date">{{ current_date }}</div>
                     </div>
                 </blockquote>
