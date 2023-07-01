@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南华早报引用文字</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto:wght@300;400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto:wght@400;700&display=swap">
+    <style>
+
+        html {
+            /* font-size: 100%; */
+            font-size: 14px;
+        }
+
+
+        body {
+            /* font-family: Consolas, "Courier New", Courier, monospace; */
+            font-family: Font Roboto,Roboto fallback,sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            color: #000;
+        }
+
+        .quote-partial {
+            margin-bottom: 100px;
+        }
+        .ec-quote-big {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sutta-title {
+            color: #000;
+            font-family: Merriweather,Merriweather fallback,serif;
+            font-weight: 900;
+            font-style: normal;
+            font-size: 1.714285714285714rem;
+            line-height: 2.357142857142857rem;
+            margin-bottom: 0.857142857142857rem;
+        }
+
+        .content {
+        }
+
+
+        body {
+            /* font-family: Roboto Mono, monospace; */
+            /* color: var(--secondary-color);
+            background: var(--secondary-background); */
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+
+        *:before,
+        *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        q::before {
+            content: open-quote;
+        }
+
+        q::after {
+            content: close-quote;
+        }
+
+        blockquote.ec-quote-big {
+            /* font-size: 135%; */
+            font-size: 1.1rem;
+        }
+
+        blockquote p {
+            /* font-family: Georgia, serif; */
+            margin: 0;
+        }
+
+        blockquote {
+            /* font-family: Georgia, serif; */
+            /* font-style: italic; */
+            width: 85%;
+            margin: 0.7em 0 0 .3em;
+            /* padding: 0.35em 0 0 40px; */
+            line-height: 1.45;
+            position: relative;
+            /* color: #383838; */
+        }
+
+        blockquote:before {
+            display: block;
+            padding-left: 10px;
+            content: "\201C";
+            font-size: 80px;
+            position: absolute;
+            left: -20px;
+            top: -20px;
+            color: #7a7a7a;
+            display: none;
+        }
+
+        blockquote cite {
+            /* color: #999999; */
+            font-size: medium;
+            display: block;
+            margin-top: 5px;
+        }
+
+        blockquote cite:before {
+            content: "\2014 \2009";
+        }
+
+        /* 自定义样式 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-line {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .input-line input,
+        .input-line textarea {
+            padding: 5px;
+            border-color: #f1d70a;
+            outline: none;
+            border: none;
+            height: 30px;
+        }
+
+        .input-line textarea {
+            height: 150px;
+        }
+
+        .title {
+            margin-bottom: 1.2rem;
+        }
+
+
+        /* .sutta-title {
+            display: block;
+            font-size: 2em;
+            margin-block-start: 0.67em;
+            margin-block-end: 0.67em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-weight: bold;
+        } */
+
+        .content-text {
+            /* font-family: "Kalam", Helvetica, Arial, sans-serif;
+            color: #4A4A4A; */
+            /* font-weight: normal; */
+            /* color: #b7b7b7; */
+            /* font-family: GuardianTextEgyptian,Guardian Text Egyptian Web,Georgia,serif; */
+            font-family: Merriweather,Merriweather fallback,serif;
+            font-weight: 400;
+            font-style: normal;
+            line-height: 1.857142857142857rem;
+            /* font-size: 1.142857142857143rem; */
+            color: #222;
+            /* margin-bottom: 1.857142857142857rem; */
+            word-break: break-word;
+            display: inline-block;
+            width: 100%;
+        }
+        .date {
+            color: #555;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+
+    </link>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container col-md-12 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+            <div class="title">南华早报样式引用</div>
+            <div class="quote-partial">
+                <blockquote class="ec-quote-big" style="margin-bottom: 1em" :style="{width, height}">
+                    <h1 class="sutta-title" v-if="title">{{ title }}</h1>
+                    <div class="content" :style="{fontSize}">
+                        <div class="content-text" v-html="html"></div>
+                        <div class="date">{{ current_date }}</div>
+                    </div>
+                </blockquote>
+            </div>
+            <br>
+            
+
+            <div class="form">
+                <div class="input-line">
+                    <label for="title">标题：</label>
+                    <input type="text" name="title" placeholder="请输入标题" v-model="title">
+                </div>
+                <div class="input-line">
+                    <label for="content">内容：</label>
+                    <textarea name="content" cols="30" rows="10" v-model="content"></textarea>
+                </div>
+                <div class="input-line">
+                    <label for="width">宽度：</label>
+                    <input type="text" name="width" placeholder="请输入宽度" v-model="width">
+                </div>
+                <div class="input-line">
+                    <label for="height">高度：</label>
+                    <input type="text" name="height" placeholder="请输入宽度" v-model="height">
+                </div>
+                <div class="input-line">
+                    <label for="width">字体大小：</label>
+                    <input type="text" name="fontSize" placeholder="请输入大小" v-model="fontSize">
+                </div>
+                <div class="input-line">
+                    <label for="width">日期：</label>
+                    <input type="text" name="date" placeholder="请输入大小" v-model="date">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                content: "",
+                title: "",
+                align: 'center',
+                width: '400px',
+                height: '528px',
+                fontSize: '16px',
+                date: '',
+            },
+            computed: {
+                html() {
+                    let content = this.content.replaceAll('\n', "<br/>")
+                    let tabSpace = '&nbsp;&nbsp;&nbsp;&nbsp;';
+                    tabSpace = tabSpace + tabSpace;
+                    content = content.replaceAll(/\t/g, tabSpace)
+                    content = content.replaceAll(/    /g, tabSpace)
+                    console.log(content)
+                    return content;
+                },
+                current_date() {
+                    let d = new Date(); 
+                    if (this.date) {
+                        d = new Date(this.date)
+                    }
+                    let months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+                    let dateString = months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+                    return dateString;
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
