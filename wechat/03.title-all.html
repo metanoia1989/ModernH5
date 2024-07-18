@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+/* 一级标题样式（已优化） */
+.title-level-1 {
+    background-color: #f79646; /* 背景颜色 */
+    border: 2px solid #cc5500; /* 边框颜色 */
+    border-radius: 10px; /* 圆角 */
+    padding: 10px 20px; /* 内边距 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 阴影 */
+    display: inline-block; /* 适应内容宽度 */
+}
+
+.title-level-1 h1 {
+    color: white; /* 文字颜色 */
+    font-family: 'Arial', sans-serif; /* 字体 */
+    font-weight: bold; /* 加粗 */
+    margin: 0; /* 去除默认外边距 */
+}
+
+/* 二级标题样式 */
+.title-level-2 {
+    background-color: #3daad6; /* 背景颜色 */
+    border-left: 5px solid #2e6e9e; /* 左边框颜色和宽度 */
+    padding: 8px 15px; /* 内边距 */
+    margin-top: 20px; /* 外边距上 */
+    margin-bottom: 10px; /* 外边距下 */
+    display: inline-block; /* 适应内容宽度 */
+}
+
+.title-level-2 h2 {
+    color: white; /* 文字颜色 */
+    font-family: 'Arial', sans-serif; /* 字体 */
+    font-weight: bold; /* 加粗 */
+    margin: 0; /* 去除默认外边距 */
+}
+
+/* 三级标题样式 */
+.title-level-3 {
+    background-color: #ffffff; /* 背景颜色改为白色 */
+    border: 2px solid #3daad6; /* 边框颜色改为蓝色 */
+    border-radius: 5px; /* 圆角 */
+    padding: 8px 12px; /* 内边距 */
+    margin: 20px 0; /* 外边距 */
+    text-align: center; /* 居中对齐 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影 */
+    position: relative; /* 相对定位 */
+    display: inline-block; /* 适应内容宽度 */
+}
+/* 顶部横线颜色 */
+/* .title-level-3::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 60%;
+    height: 4px;
+    background-color: #3daad6; 
+    transform: translateX(-50%);
+} */
+
+.title-level-3 h3 {
+    color: #2e6e9e; /* 文字颜色改为深蓝色 */
+    font-family: 'Arial', sans-serif; /* 字体 */
+    font-weight: bold; /* 加粗 */
+    margin: 0; /* 去除默认外边距 */
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="title-level-1">
+        <h1>一级标题，例如你想把文章的标题再写一遍</h1>
+    </div>
+    
+    <div class="title-level-2">
+        <h2>二级标题，用于设置文章下的大标题</h2>
+    </div>
+    
+    <div class="title-level-3">
+        <h3>三级标题，大标题下的子标题</h3>
+    </div>
+        
+</body>
+</html>
