@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Connected List with Centered Line</title>
+    <style>
+        ol {
+            counter-reset: list-counter; /* 初始化计数器 */
+            list-style: none; /* 移除默认编号 */
+            padding-left: 20px; /* 左侧留出空间用于线条和标志 */
+            position: relative; /* 确保伪元素相对于列表定位 */
+        }
+
+        ol::before {
+            content: '';
+            position: absolute;
+            left: 20px; /* 使线条居中于标志 */
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #ccc; /* 线条颜色 */
+        }
+        /* 原来如此，线条是外侧列表容器的伪元素生成，聪明的做法 */
+
+        li {
+            position: relative;
+            padding-left: 30px; /* 留出空间显示数字 */
+            margin-bottom: 15px; /* 列表项间距 */
+        }
+
+        li::before {
+            counter-increment: list-counter; /* 递增计数器 */
+            content: counter(list-counter);
+            position: absolute;
+            left: -10px; /* 数字位置调整以居中于线条 */
+            top: 0;
+            background-color: white; /* 数字背景色 */
+            border-radius: 50%; /* 数字背景圆形 */
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border: 2px solid #ccc; /* 数字边框 */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <ol>
+        <li>Item One</li>
+        <li>Item Two</li>
+        <li>Item Three</li>
+    </ol>
+</body>
+</html>
